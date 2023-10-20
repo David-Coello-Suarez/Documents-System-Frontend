@@ -1,9 +1,9 @@
+import { Suspense } from "react";
+import { RouterProvider } from "react-router-dom";
+import { storeRouter } from "./store";
 
+const App = () => <Suspense fallback={<div>Cargando</div>}>
+    <RouterProvider router={storeRouter} />
+</Suspense>;
 
- const App = () => {
-  return (
-    <div>App</div>
-  )
-}
-
-export default App
+export default App;
