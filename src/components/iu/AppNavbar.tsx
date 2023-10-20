@@ -11,18 +11,6 @@ const AppNavbar = () => {
       </div>
       <a
         style={{ cursor: "pointer" }}
-        id="toggle_btn"
-        className="d-none d-md-block"
-      >
-        <span
-          className="material-symbols-outlined"
-          style={{ lineHeight: "unset" }}
-        >
-          menu
-        </span>
-      </a>
-      <a
-        style={{ cursor: "pointer" }}
         id="mobile_btn"
         className="mobile_btn float-start"
         // onClick={handleSetSidebar}

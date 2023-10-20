@@ -432,7 +432,7 @@ table.table td h2 span {
 }
 .btn-primary {
   border-color: transparent;
-  background-color: #009efb;
+  background-color: #2173a6;
 }
 
 .btn-primary.active.focus,
@@ -937,7 +937,7 @@ textarea.form-control {
 .sidebar-menu ul ul a {
   display: block;
   font-size: 14px;
-  padding: 9px 10px 9px 50px;
+  padding: 9px 10px 9px 10px;
   position: relative;
 }
 .sidebar-menu ul ul {
@@ -7329,4 +7329,13 @@ table.dataTable thead > tr > td.sorting {
 
 .btn:disabled {
   cursor: not-allowed;
+}
+
+.ps-6 {
+  padding-left: 4rem !important;
+}
+
+.ps-7 {
+  padding-left: 5rem !important;
+  font-size: 13px !important;
 }
