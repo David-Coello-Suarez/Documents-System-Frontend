@@ -1,14 +1,27 @@
-import { useState } from "react"
+import { memo, useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { useAppSelector } from "../../hooks"
+import { useAppDispatch, useAppSelector } from "../../hooks"
 import SimpleBar from "simplebar-react"
 import "simplebar-react/dist/simplebar.min.css"
 import { isideba } from "../../interfaces"
+import { getSideba } from "../../controllers/sidebar"
+import { clean_submenu } from "../../reducers/sideba"
 
 const AppSidebar = () => {
+  const dispatch = useAppDispatch()
+
   const { sideba_sideba } = useAppSelector((state) => state.sideba)
 
   const path = useLocation().pathname
+
+  useEffect(() => {
+    dispatch(getSideba())
+
+    return () => {
+      dispatch(clean_submenu())
+    }
+  }, [])
+
   return (
     <div className="sidebar" id="sidebar">
       <SimpleBar
@@ -42,7 +55,7 @@ const AppSidebar = () => {
   )
 }
 
-export default AppSidebar
+export default memo(AppSidebar)
 
 interface idropdown {
   props: isideba
@@ -64,7 +77,7 @@ const DropDownMenu = ({ props }: idropdown) => {
     <>
       <li className={`submenu ${isSubmenuOpen ? "open" : ""}`}>
         <a onClick={handleClickMenu} className={isSubmenuOpen ? "subdrop" : ""}>
-          {props.sideba_sidico !== "" && <i className={props.sideba_sidico} />}
+          {props.sideba_sidico && <i className={props.sideba_sidico} />}
           <span>{props.sideba_nombre}</span>
           {props.sideba_submen.length > 0 && <span className="menu-arrow" />}
         </a>
@@ -88,7 +101,7 @@ interface ilinkpage {
 const LinkPage = ({ props }: ilinkpage) => (
   <li>
     <Link to={props.sideba_ventan}>
-      {props.sideba_sidico !== "" && <i className={props.sideba_sidico} />}
+      {props.sideba_sidico && <i className={props.sideba_sidico} />}
       <span>{props.sideba_nombre}</span>
     </Link>
   </li>
