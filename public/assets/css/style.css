@@ -702,7 +702,7 @@ textarea.form-control {
 -----------------------*/
 
 .header {
-  background-color: #009efb;
+  background-color: #71a63c;
   left: 0;
   position: fixed;
   right: 0;
@@ -854,16 +854,16 @@ textarea.form-control {
   padding: 0 20px;
 }
 .sidebar-menu li a:hover {
-  color: #009efb;
+  color: #2481a6;
   cursor: pointer;
 }
 .sidebar-menu li.active a {
-  color: #009efb;
+  color: #0d0d0d;
   background-color: #f3f3f3;
   text-decoration: none;
 }
 .menu-title {
-  color: #333;
+  color: #0d0d0d;
   font-size: 15px;
   font-weight: 500;
   padding: 12px 20px;

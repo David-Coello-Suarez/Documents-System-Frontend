@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { useAppSelector } from "../../hooks"
 import SimpleBar from "simplebar-react"
+import "simplebar-react/dist/simplebar.min.css"
 import { isideba } from "../../interfaces"
 
 const AppSidebar = () => {
@@ -10,7 +11,10 @@ const AppSidebar = () => {
   const path = useLocation().pathname
   return (
     <div className="sidebar" id="sidebar">
-      <SimpleBar className="sidebar-menu">
+      <SimpleBar
+        className="sidebar-menu"
+        style={{ maxHeight: "100%", width: "100%" }}
+      >
         <div className="sidebar-inner slimscroll">
           <div id="sidebar-menu" className="sidebar-menu">
             <ul>

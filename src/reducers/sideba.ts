@@ -5,13 +5,13 @@ const initialState = {
     {
       sideba_sideba: 1,
       sideba_nombre: "Control Despacho",
-      sideba_ventan: "dispatchControl",
+      sideba_ventan: "",
       sideba_sidico: "fa fa-th-list",
       sideba_submen: [
         {
           sideba_sideba: 2,
           sideba_nombre: "Seguridad",
-          sideba_ventan: "security",
+          sideba_ventan: "",
           sideba_sidico: "",
           sideba_submen: [
             {
@@ -94,13 +94,63 @@ const initialState = {
                 {
                   sideba_sideba: 14,
                   sideba_nombre: "Sub Series",
-                  sideba_ventan: "sbseries",
+                  sideba_ventan: "subseries",
                   sideba_sidico: "",
                   sideba_submen: [],
                 },
                 {
                   sideba_sideba: 15,
                   sideba_nombre: "Tipo Doc",
+                  sideba_ventan: "documentaryType",
+                  sideba_sidico: "",
+                  sideba_submen: [],
+                },
+              ],
+            },
+            {
+              sideba_sideba: 16,
+              sideba_nombre: "Ubicación Fisica",
+              sideba_ventan: "",
+              sideba_sidico: "",
+              sideba_submen: [
+                {
+                  sideba_sideba: 17,
+                  sideba_nombre: "Fondo Documental",
+                  sideba_ventan: "documentaryBackground",
+                  sideba_sidico: "",
+                  sideba_submen: [],
+                },
+                {
+                  sideba_sideba: 18,
+                  sideba_nombre: "Secciones",
+                  sideba_ventan: "sections",
+                  sideba_sidico: "",
+                  sideba_submen: [],
+                },
+                {
+                  sideba_sideba: 19,
+                  sideba_nombre: "Sub Secciones",
+                  sideba_ventan: "subsections",
+                  sideba_sidico: "",
+                  sideba_submen: [],
+                },
+                {
+                  sideba_sideba: 20,
+                  sideba_nombre: "Series",
+                  sideba_ventan: "series",
+                  sideba_sidico: "",
+                  sideba_submen: [],
+                },
+                {
+                  sideba_sideba: 19,
+                  sideba_nombre: "Sub Series",
+                  sideba_ventan: "subserie",
+                  sideba_sidico: "",
+                  sideba_submen: [],
+                },
+                {
+                  sideba_sideba: 20,
+                  sideba_nombre: "Tipo Documental",
                   sideba_ventan: "documentaryType",
                   sideba_sidico: "",
                   sideba_submen: [],
@@ -114,9 +164,17 @@ const initialState = {
     {
       sideba_sideba: 100,
       sideba_nombre: "Visor Documental",
-      sideba_ventan: "documentaryViewer",
-      sideba_sidico: "fa fa-share-alt",
-      sideba_submen: [],
+      sideba_ventan: "",
+      sideba_sidico: "fa fa-th-list",
+      sideba_submen: [
+        // {
+        //   sideba_sideba: 101,
+        //   sideba_nombre: "Reportes",
+        //   sideba_ventan: "physicalLocation",
+        //   sideba_sidico: "",
+        //   sideba_submen: [],
+        // },
+      ],
     },
   ],
 }
