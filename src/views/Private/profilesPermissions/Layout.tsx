@@ -1,6 +1,7 @@
 import { AddButton } from "@/components/iu"
 import RolList from "./RolList"
-import Menu from "./menuas/Menu"
+import Modulo from "./moduloPermisos/Modulo"
+import Permisos from "./moduloPermisos/Permisos"
 
 const Layout = () => {
   return (
@@ -12,7 +13,8 @@ const Layout = () => {
           <RolList />
         </div>
         <div className="col-sm-8 col-md-8 col-lg-8 col-xl-9">
-          <Menu />
+          <Modulo />
+          <Permisos />
         </div>
       </div>
     </>
