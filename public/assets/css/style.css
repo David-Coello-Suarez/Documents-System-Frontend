@@ -433,16 +433,16 @@ table.table td h2 span {
 }
 .btn-primary {
   border-color: transparent;
-  background-color: #009efb;
+  background-color: #2481a6;
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary.active,
 .btn-primary:active,
 .open > .dropdown-toggle.btn-primary {
-  background-color: #009efb;
-  border: 1px solid #009efb;
-  color: #fff;
+  background-color: #2173a6;
+  border: 1px solid #2173a6;
+  color: #ffffff;
 }
 .btn-primary.active.focus,
 .btn-primary.active:focus,

@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { Link } from "react-router-dom"
 
 const AppNavbar = () => {
@@ -29,4 +30,4 @@ const AppNavbar = () => {
   )
 }
 
-export default AppNavbar
+export default memo(AppNavbar)
