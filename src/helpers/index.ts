@@ -1,3 +1,4 @@
+import { ProfilSchema } from "./PerfilSchema"
 import { FormDocSchema } from "./fondoc"
 
-export { FormDocSchema }
+export { FormDocSchema, ProfilSchema }

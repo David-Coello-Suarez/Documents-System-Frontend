@@ -2946,6 +2946,7 @@ a.fc-event:not([href]) {
 .roles-menu > ul > li {
   display: block;
   position: relative;
+  cursor: pointer;
 }
 .roles-menu > ul > li > a {
   border-left: 3px solid transparent;
