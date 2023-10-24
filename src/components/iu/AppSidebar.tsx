@@ -5,7 +5,7 @@ import SimpleBar from "simplebar-react"
 import "simplebar-react/dist/simplebar.min.css"
 import { isideba } from "../../interfaces"
 import { getSideba } from "../../controllers/sidebar"
-import { clean_submenu } from "../../reducers/sideba"
+import { clean_sidebar } from "../../reducers/sideba"
 
 const AppSidebar = () => {
   const dispatch = useAppDispatch()
@@ -18,7 +18,7 @@ const AppSidebar = () => {
     dispatch(getSideba())
 
     return () => {
-      dispatch(clean_submenu())
+      dispatch(clean_sidebar())
     }
   }, [])
 

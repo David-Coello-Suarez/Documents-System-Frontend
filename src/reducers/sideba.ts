@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { irespuesta, isideba } from "../interfaces"
-import { getSideba } from "../controllers/sidebar"
+import { getSideba, getSidebaMenu } from "../controllers/sidebar"
 
 interface iressid extends irespuesta {
   data: {
@@ -10,13 +10,17 @@ interface iressid extends irespuesta {
 
 const initialState = {
   sideba_sideba: Array<isideba>(),
+  sideba_mensid: Array<isideba>(),
 }
 
-const SidebarSlice = createSlice({
-  name: "sidebar",
+const SidebaSlice = createSlice({
+  name: "sideba",
   initialState,
   reducers: {
-    clean_submenu: (state) => {
+    clean_sidmen: (state) => {
+      state.sideba_mensid = initialState.sideba_mensid
+    },
+    clean_sidebar: (state) => {
       state.sideba_sideba = initialState.sideba_sideba
     },
   },
@@ -33,9 +37,22 @@ const SidebarSlice = createSlice({
           }
         },
       )
+
+    builder
+      .addCase(getSidebaMenu.pending, (state) => state)
+      .addCase(
+        getSidebaMenu.fulfilled,
+        (state, { payload }: PayloadAction<iressid>) => {
+          const { estado, data } = payload
+
+          if (estado === 1) {
+            state.sideba_mensid = data.sideba
+          }
+        },
+      )
   },
 })
 
-export const SidebarReducer = SidebarSlice.reducer
+export const SidebaReducer = SidebaSlice.reducer
 
-export const { clean_submenu } = SidebarSlice.actions
+export const { clean_sidebar, clean_sidmen } = SidebaSlice.actions

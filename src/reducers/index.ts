@@ -1,9 +1,9 @@
 import { FonDocReducer } from "./fondoc"
 import { PerfilReducer } from "./perfil"
-import { SidebarReducer } from "./sideba"
+import { SidebaReducer } from "./sideba"
 
 export const reducer = {
-  sideba: SidebarReducer,
+  sideba: SidebaReducer,
   fondoc: FonDocReducer,
   perfil: PerfilReducer,
 }

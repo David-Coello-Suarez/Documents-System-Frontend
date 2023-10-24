@@ -1,5 +1,4 @@
 import { memo } from "react"
-import { Button } from "react-bootstrap"
 
 interface ibuttonaction {
   handleEdit: () => void
@@ -9,12 +8,12 @@ interface ibuttonaction {
 const ButtonAction = ({ handleEdit, handleDelete }: ibuttonaction) => {
   return (
     <div className="d-inline-flex gap-1">
-      <Button variant="outline-success" size="sm" onClick={handleEdit}>
+      <button className="btn-outline-success btn-sm" onClick={handleEdit}>
         <i className="fa fa-pencil"></i>
-      </Button>
-      <Button variant="outline-danger" size="sm" onClick={handleDelete}>
+      </button>
+      <button className="btn-outline-danger btn-sm" onClick={handleDelete}>
         <i className="fa fa-trash"></i>
-      </Button>
+      </button>
     </div>
   )
 }

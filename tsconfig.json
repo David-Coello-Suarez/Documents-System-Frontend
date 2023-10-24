@@ -18,7 +18,16 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": "./",
+    "paths": {      
+      "@/hooks/*": ["src/hooks/*"],
+      "@/components/*": ["src/components/*"],
+      "@/interfaces/*": ["src/interfaces/*"],
+      "@/controllers/*": ["src/controllers/*"],
+      "@/reducers/*": ["src/reducers/*"],
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
