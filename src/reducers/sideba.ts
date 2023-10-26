@@ -1,6 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { irespuesta, isideba } from "../interfaces"
-import { getSideba, getSidebaMenu } from "../controllers/sidebar"
+import {
+  getSideba,
+  getSidebaMenu,
+  get_permiso_modulo,
+} from "../controllers/sidebar"
+import { ResponseTypes } from "src/types"
 
 interface iressid extends irespuesta {
   data: {
@@ -11,6 +16,7 @@ interface iressid extends irespuesta {
 const initialState = {
   sideba_sideba: Array<isideba>(),
   sideba_mensid: Array<isideba>(),
+  sideba_permis: Array<ResponseTypes>(),
 }
 
 const SidebaSlice = createSlice({
@@ -50,6 +56,18 @@ const SidebaSlice = createSlice({
           }
         },
       )
+
+    builder
+      .addCase(get_permiso_modulo.pending, (state) => state)
+      .addCase(get_permiso_modulo.fulfilled, (state, { payload }) => {
+        const { estado, data } = payload
+
+        if (estado === 1) {
+          state.sideba_permis = data.sideba
+        } else {
+          state.sideba_permis = initialState.sideba_permis
+        }
+      })
   },
 })
 

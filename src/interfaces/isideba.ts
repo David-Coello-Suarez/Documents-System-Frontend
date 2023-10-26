@@ -5,4 +5,5 @@ export interface isideba {
   sideba_ventan: string
   sideba_sidico: string | null
   sideba_submen: isideba[]
+  sideba_cheper: number | null
 }

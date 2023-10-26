@@ -1,16 +1,17 @@
-import { useAppSelector } from "@/hooks/index"
+import { useEffect } from "react"
+import { useAppDispatch, useAppSelector } from "@/hooks/index"
+import { get_permisos } from "@/controllers/permis"
 
 const Permisos = () => {
-  const { sideba_mensid } = useAppSelector((state) => state.sideba)
+  const dispatch = useAppDispatch()
 
-  const permisos = [
-    "Leer",
-    "Escribir",
-    "Crear",
-    "Borrar",
-    "Importar",
-    "Exportar",
-  ]
+  useEffect(() => {
+    dispatch(get_permisos())
+  }, [])
+
+  const { permis_perall } = useAppSelector((state) => state.permis)
+
+  const { sideba_permis } = useAppSelector((state) => state.sideba)
 
   return (
     <>
@@ -18,27 +19,17 @@ const Permisos = () => {
         <thead>
           <tr>
             <th>Permiso del módulo</th>
-            {permisos.map((modper, idx) => (
-              <th className="text-center" key={idx}>
-                {modper}
+            {permis_perall.map((modper) => (
+              <th className="text-center" key={modper.permis_permis}>
+                <span className="text-capitalize">{modper.permis_nombre}</span>
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {sideba_mensid.map((sdm) => (
-            <tr key={sdm.sideba_sideba}>
-              <td>{sdm.sideba_nombre}</td>
-              {permisos.map((pm, idx) => (
-                <td className="text-center" key={idx}>
-                  <input
-                    type="checkbox"
-                    checked
-                    name={pm}
-                    value={sdm.sideba_sideba}
-                  />
-                </td>
-              ))}
+          {sideba_permis.map((sdb) => (
+            <tr>
+              <td>{sdb.sideba_nombre}</td>
             </tr>
           ))}
         </tbody>

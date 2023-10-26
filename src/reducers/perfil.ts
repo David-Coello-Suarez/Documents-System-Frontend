@@ -26,6 +26,7 @@ const ProfilSlice = createSlice({
   reducers: {
     clear_perfiles: (state) => {
       state.perfil_perfil = Array<iprofil>()
+      state.perfil_active = 0
     },
     set_pefil_active: (state, { payload }: PayloadAction<number>) => {
       state.perfil_active = payload

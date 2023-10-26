@@ -1,15 +1,7 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 import { SaveUsuari, UpdateUsuari, listar_usuario } from "@/controllers/usuari"
 import { toast } from "react-toastify"
-import { irespuesta, iusuari } from "../interfaces"
-
-interface iresusu extends irespuesta {
-  data: {
-    usuario: string
-    contrasena: string
-    usuarios: iusuari[]
-  }
-}
+import { iusuari } from "../interfaces"
 
 const initialState = {
   usuari_loadin: false,
