@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useAppSelector } from "../../../../hooks"
 import { useFormik } from "formik"
-import { ProfilSchema } from "../../../../helpers"
+import { ProfilSchema } from "../../../../validation"
 import { AddButton, ButtonSave } from "../../../../components/iu"
 
 const FormProfile = () => {

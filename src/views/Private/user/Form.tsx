@@ -4,16 +4,17 @@ import moment from "moment"
 import { useAppDispatch, useAppSelector } from "@/hooks/index"
 import { ButtonSave, InputControl } from "@/components/iu"
 import { Perfil } from "@/components/views"
-import { UsuariShema } from "@/helpers/index"
+import { UsuariShema } from "@/validation/index"
 import { iusuari } from "@/interfaces/index"
 import { SaveUsuari, UpdateUsuari } from "@/controllers/usuari"
+import { clean_form } from "@/reducers/usuari"
 
 const FormUsuari = () => {
   const dispatch = useAppDispatch()
 
   const navigate = useNavigate()
 
-  const { usuari_form } = useAppSelector((state) => state.usuari)
+  const { usuari_form, usuari_loadin } = useAppSelector((state) => state.usuari)
 
   const operationUsuari = (usuari: iusuari) => {
     const data = { usuari, navigate }
@@ -34,18 +35,21 @@ const FormUsuari = () => {
   })
 
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) =>
-    formik.setFieldValue("usuari_perfil", event.currentTarget.value)
+    formik.setFieldValue("usuari_idperf", event.currentTarget.value)
 
   const handleBack = () => {
     navigate(-1)
+    dispatch(clean_form())
   }
-  // console.log(formik.values)
+
   return (
     <>
       <div className="row">
         <div className="col-lg-8 offset-lg-2">
           <h4 className="page-title">
-            <strong>Añadir Usuario</strong>
+            <strong>{`${
+              formik.values.usuari_usuari == 0 ? "NUEVO" : "ACTUALIZAR"
+            } USUARIO`}</strong>
           </h4>
         </div>
       </div>
@@ -110,15 +114,15 @@ const FormUsuari = () => {
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="usuari_codest"
-                      id="usuari_codest_active"
+                      name="usuari_estado"
+                      id="usuari_estado_active"
                       onChange={formik.handleChange}
                       value={1}
-                      checked={Number(formik.values.usuari_codest) === 1}
+                      checked={Number(formik.values.usuari_estado) === 1}
                     />
                     <label
                       className="form-check-label"
-                      htmlFor="usuari_codest_active"
+                      htmlFor="usuari_estado_active"
                     >
                       Activo
                     </label>
@@ -127,15 +131,15 @@ const FormUsuari = () => {
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="usuari_codest"
-                      id="usuari_codest_inactive"
+                      name="usuari_estado"
+                      id="usuari_estado_inactive"
                       onChange={formik.handleChange}
                       value={0}
-                      checked={Number(formik.values.usuari_codest) === 0}
+                      checked={Number(formik.values.usuari_estado) === 0}
                     />
                     <label
                       className="form-check-label"
-                      htmlFor="usuari_codest_inactive"
+                      htmlFor="usuari_estado_inactive"
                     >
                       Inactivo
                     </label>
@@ -145,26 +149,26 @@ const FormUsuari = () => {
 
               <div className="col-sm-6">
                 <Perfil
-                  isInvalid={Boolean(formik.errors.usuari_perfil)}
-                  nameInput="usuari_perfil"
+                  isInvalid={Boolean(formik.errors.usuari_idperf)}
+                  nameInput="usuari_idperf"
                   onchangeclick={handleSelect}
-                  value={formik.values.usuari_perfil}
+                  value={formik.values.usuari_idperf}
                 />
               </div>
 
               <div className="col-sm-6">
                 <div className="form-group">
-                  <label htmlFor="usuari_tipaut">
+                  <label htmlFor="usuari_idtiau">
                     Tipo Autenticación <span className="text-danger">*</span>
                   </label>
 
                   <select
-                    name="usuari_tipaut"
-                    id="usuari_tipaut"
+                    name="usuari_idtiau"
+                    id="usuari_idtiau"
                     onChange={formik.handleChange}
-                    value={formik.values.usuari_tipaut}
+                    value={formik.values.usuari_idtiau}
                     className={`form-control ${
-                      formik.errors.usuari_tipaut && "is-invalid"
+                      formik.errors.usuari_idtiau && "is-invalid"
                     }`}
                   >
                     <option value={0}>Documents</option>
@@ -174,8 +178,10 @@ const FormUsuari = () => {
               </div>
             </div>
             <ButtonSave
-              titleSaveButton="CREAR USUARIO"
-              disabled={false}
+              titleSaveButton={`${
+                formik.values.usuari_usuari == 0 ? "NUEVO" : "ACTUALIZAR"
+              } USUARIO`}
+              disabled={usuari_loadin}
               handleBack={handleBack}
             />
           </form>

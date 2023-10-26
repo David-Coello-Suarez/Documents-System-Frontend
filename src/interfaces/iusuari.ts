@@ -3,8 +3,11 @@ export interface iusuari {
   usuari_nomusu: string
   usuari_nomape: string
   usuari_codest: number
-  usuari_tipaut: number
+  usuari_tipaut: string
   usuari_correo: string
-  usuari_direcc: number
-  usuari_perfil: number
+  usuari_direcc: string
+  usuari_idperf: number
+  usuari_perfil: string
+  usuari_estado: number
+  usuari_idtiau: number
 }

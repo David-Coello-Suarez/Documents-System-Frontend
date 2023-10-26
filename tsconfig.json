@@ -27,7 +27,7 @@
       "@/interfaces/*": ["src/interfaces/*"],
       "@/controllers/*": ["src/controllers/*"],
       "@/reducers/*": ["src/reducers/*"],
-      "@/helpers/*": ["src/helpers/*"],
+      "@/validation/*": ["src/validation/*"],
       "@/api/*": ["src/api/*"],
     }
   },

@@ -14,10 +14,10 @@ const NotData = (props: inotdata) => {
     >
       <button
         onClick={props.onclick}
-        className="align-items-center btn btn-primary btn-rounded btn-sm d-inline-flex"
+        className="align-items-center btn btn-primary btn-rounded btn-sm"
       >
         <i className="fa fa-plus" />
-        <strong className="ms-2">{props.btnMssg}</strong>
+        <strong className="m-l-5">{props.btnMssg}</strong>
       </button>
     </Empty>
   )

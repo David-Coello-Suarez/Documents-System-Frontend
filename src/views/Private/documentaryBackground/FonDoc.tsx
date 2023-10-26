@@ -2,7 +2,7 @@ import { memo } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppSelector } from "../../../hooks"
 import { useFormik } from "formik"
-import { FormDocSchema } from "../../../helpers"
+import { FormDocSchema } from "../../../validation"
 
 const FonDoc = () => {
   const navigate = useNavigate()

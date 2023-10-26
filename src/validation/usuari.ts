@@ -8,8 +8,6 @@ export const UsuariShema = yup.object<iusuari>().shape({
     .string()
     .required("Correo electrónico es requerido")
     .email(),
-  usuari_tipaut: yup
-    .string()
-    .required("Selecciona el autenticación del usuario"),
-  usuari_perfil: yup.number().min(1, "Selecciona el perfil del usuario"),
+  usuari_idtiau: yup.number().min(-1, "Selecciona el perfil del usuario"),
+  usuari_idperf: yup.number().min(1, "Selecciona el perfil del usuario"),
 })

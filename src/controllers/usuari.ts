@@ -8,10 +8,27 @@ interface isaveusuari {
   navigate: NavigateFunction
 }
 
+interface iresusu extends irespuesta {
+  data: {
+    usuario: string
+    contrasena: string
+    usuarios: iusuari[]
+  }
+}
+
+export const listar_usuario = createAsyncThunk(
+  "usuari/listar_usuario",
+  async () => {
+    const { data } = await instanciaAxios.get<iresusu>("/usuari")
+
+    return data
+  },
+)
+
 export const SaveUsuari = createAsyncThunk(
   "usuari/SaveUsuari",
   async ({ usuari }: isaveusuari) => {
-    const { data } = await instanciaAxios.post("/usuari", usuari)
+    const { data } = await instanciaAxios.post<iresusu>("/usuari", usuari)
 
     return data
   },
@@ -20,7 +37,7 @@ export const SaveUsuari = createAsyncThunk(
 export const UpdateUsuari = createAsyncThunk(
   "usuari/UpdateUsuari",
   async ({ usuari, navigate }: isaveusuari) => {
-    const { data } = await instanciaAxios.put<irespuesta>(
+    const { data } = await instanciaAxios.put<iresusu>(
       `/usuari/${usuari.usuari_usuari}`,
       usuari,
     )
