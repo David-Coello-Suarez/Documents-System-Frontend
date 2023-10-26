@@ -6,7 +6,7 @@ import Permisos from "./moduloPermisos/Permisos"
 const Layout = () => {
   return (
     <>
-      <AddButton titleWindows="Perfiles y permisos" />
+      <AddButton titleWindows="Permisos" />
 
       <div className="row">
         <div className="col-sm-4 col-md-4 col-lg-4 col-xl-3">

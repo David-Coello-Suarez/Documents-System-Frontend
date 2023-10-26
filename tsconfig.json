@@ -27,6 +27,8 @@
       "@/interfaces/*": ["src/interfaces/*"],
       "@/controllers/*": ["src/controllers/*"],
       "@/reducers/*": ["src/reducers/*"],
+      "@/helpers/*": ["src/helpers/*"],
+      "@/api/*": ["src/api/*"],
     }
   },
   "include": ["src"],

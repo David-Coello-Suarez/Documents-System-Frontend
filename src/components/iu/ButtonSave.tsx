@@ -8,8 +8,8 @@ interface ibuttonsave {
 
 const ButtonSave = ({ disabled, titleSaveButton, handleBack }: ibuttonsave) => {
   return (
-    <div className="mt-2 text-center">
-      <button
+    <div className="m-t-20 text-center">
+      {/* <button
         type="submit"
         disabled={disabled}
         className="btn btn-primary btn-rounded me-md-2 mb-2 mb-md-0"
@@ -20,6 +20,21 @@ const ButtonSave = ({ disabled, titleSaveButton, handleBack }: ibuttonsave) => {
         type="button"
         onClick={handleBack}
         className="btn btn-light btn-rounded"
+      >
+        Regresar
+      </button> */}
+
+      <button
+        type="submit"
+        disabled={disabled}
+        className="btn btn-primary submit-btn"
+      >
+        {titleSaveButton}
+      </button>
+      <button
+        type="button"
+        onClick={handleBack}
+        className="btn btn-grey m-l-5 submit-btn"
       >
         Regresar
       </button>
