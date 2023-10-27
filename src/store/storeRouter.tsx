@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom"
-import Private from "../components/layout/Private"
-import { NotFound, PrivateRouter } from "../views"
+import { Public, Private } from "@/components/layout"
+import { NotFound, PrivateRouter, PublicRouter } from "../views"
 
 const storeRouter = createBrowserRouter([
-  { path: "/", element: <Private />, children: PrivateRouter },
+  { path: "/", element: <Public />, children: PublicRouter },
+  { path: "/dash", element: <Private />, children: PrivateRouter },
   { path: "*", element: <NotFound /> },
 ])
 

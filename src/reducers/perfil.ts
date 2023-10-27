@@ -60,7 +60,7 @@ const ProfilSlice = createSlice({
 
     builder
       .addCase(get_profil_manten.pending, (state) => {
-        // state.perfil_loadin = true
+        state.perfil_loadin = true
       })
       .addCase(get_profil_manten.fulfilled, (state, { payload }) => {
         state.perfil_loadin = false

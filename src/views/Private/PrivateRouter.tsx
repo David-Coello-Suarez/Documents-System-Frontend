@@ -2,7 +2,7 @@ import { RouteObject } from "react-router-dom"
 import FonDocRouter from "./documentaryBackground"
 import ProPerRouter from "./permissions"
 import UserRouter from "./user"
-import ProfilesRouter from "./profiles/"
+import ProfilesRouter from "./profiles"
 
 const PrivateRouter: RouteObject[] = [
   { index: true, element: <h1>Home</h1> },

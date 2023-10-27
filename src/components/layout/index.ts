@@ -1,5 +1,6 @@
-import { lazy } from "react";
+import { lazy } from "react"
 
-const Private = lazy(() => import('./Private'))
+const Private = lazy(() => import("./Private"))
+const Public = lazy(() => import("./Public"))
 
-export { Private }
+export { Private, Public }

@@ -1,5 +1,6 @@
 import { memo } from "react"
 import { Link } from "react-router-dom"
+import { AppUser } from "."
 
 const AppNavbar = () => {
   return (
@@ -19,12 +20,14 @@ const AppNavbar = () => {
         <span className="material-symbols-outlined">menu</span>
       </a>
 
-      <ul className="nav user-menu float-end">
+      <ul className="nav user-menu float-right">
         <li className="nav-item dropdown">{/* <AppNotification /> */}</li>
 
         <li className="nav-item dropdown">{/* <AppMessage /> */}</li>
 
-        <li className="nav-item dropdown has-arrow">{/* <AppUser /> */}</li>
+        <li className="nav-item dropdown has-arrow">
+          <AppUser />
+        </li>
       </ul>
     </div>
   )
