@@ -1,23 +1,21 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "@/hooks/index"
-import { getSidebaMenu, postModulo } from "@/controllers/sidebar"
-import { clean_sidmen } from "@/reducers/sideba"
+import { get_modulo, post_modulo } from "@/controllers/permis"
 
 const Modulo = () => {
-  const dispath = useAppDispatch()
+  const dispatch = useAppDispatch()
 
-  const { sideba_mensid } = useAppSelector((state) => state.sideba)
   const { perfil_active } = useAppSelector((state) => state.perfil)
 
   useEffect(() => {
-    dispath(getSidebaMenu(perfil_active))
+    dispatch(get_modulo(perfil_active))
   }, [perfil_active])
 
   useEffect(() => {
-    return () => {
-      dispath(clean_sidmen())
-    }
+    return () => {}
   }, [])
+
+  const { permis_perall } = useAppSelector((state) => state.permis)
 
   return (
     <>
@@ -30,11 +28,38 @@ const Modulo = () => {
 
       <div className="m-b-30">
         <ul className="list-group">
-          {sideba_mensid.map((ms) => {
+          {permis_perall.map((pp) => {
+            const input_name = pp.sideba_nombre.replaceAll(" ", "_")
+
+            const modulo = {
+              perfil: perfil_active,
+              modulo: pp.sideba_sideba,
+            }
+
+            const handleChange = () => dispatch(post_modulo(modulo))
+
+            return (
+              <li className="list-group-item" key={pp.sideba_sideba}>
+                {pp.sideba_nombre}
+                <div className="material-switch float-right">
+                  <input
+                    id={input_name}
+                    type="checkbox"
+                    value={pp.sideba_sideba}
+                    disabled={perfil_active == 0}
+                    checked={Boolean(pp.sideba_cheper)}
+                    onClick={handleChange}
+                  />
+                  <label htmlFor={input_name} className="badge-success"></label>
+                </div>
+              </li>
+            )
+          })}
+          {/* {sideba_mensid.map((ms) => {
             const input_name = ms.sideba_nombre.replaceAll(" ", "_")
 
             const handleChange = () =>
-              dispath(
+              dispatch(
                 postModulo({ perfil: perfil_active, modulo: ms.sideba_sideba }),
               )
 
@@ -54,7 +79,7 @@ const Modulo = () => {
                 </div>
               </li>
             )
-          })}
+          })} */}
         </ul>
       </div>
     </>

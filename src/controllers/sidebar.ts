@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { instanciaAxios } from "../api"
-import { irespuesta } from "../interfaces"
 
 export const getSideba = createAsyncThunk("sidebar/getSideba", async () => {
   const respuesta = await instanciaAxios.get("/sideba")
