@@ -31,15 +31,6 @@ const AppSidebar = () => {
         <div className="sidebar-inner slimscroll">
           <div id="sidebar-menu" className="sidebar-menu">
             <ul>
-              <li className="menu-title">Principal</li>
-              <li
-                className={`${path === "/" || path == "/dash" ? "active" : ""}`}
-              >
-                <Link to={"."}>
-                  <i className="fa fa-dashboard" />
-                  <span>Dashboard</span>
-                </Link>
-              </li>
               {sideba_sideba.map((sd) =>
                 sd.sideba_submen.length === 0 ? (
                   <LinkPage key={sd.sideba_sideba} props={sd} />

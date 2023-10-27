@@ -22,25 +22,26 @@ const PermisSlice = createSlice({
 
       if (estado === 1) {
         state.permis_perall = data.sideba
-      }
+      } 
     })
 
     builder.addCase(get_permiso_modulo.fulfilled, (state, { payload }) => {
-      const { estado, data } = payload
+      const { estado,  data } = payload
 
       if (estado === 1) {
         state.permis_permod = data.sideba
       } else {
         state.permis_permod = initialState.permis_permod
+       
       }
     })
 
     builder.addCase(get_cabecera_permisos.fulfilled, (state, { payload }) => {
-      const { estado, data } = payload
+      const { estado,  data } = payload
 
       if (estado === 1) {
         state.permis_cabece = data.cabecera
-      }
+      } 
     })
   },
 })

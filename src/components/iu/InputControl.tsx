@@ -5,13 +5,21 @@ interface iinputcontrol {
   nameInput: string
   classInvalid?: boolean
   value: string
+  handleBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   required?: boolean
 }
 
 const InputControl = (inputprop: iinputcontrol) => {
-  const { titleLabel, required, nameInput, classInvalid, value, handleChange } =
-    inputprop
+  const {
+    titleLabel,
+    required,
+    nameInput,
+    classInvalid,
+    value,
+    handleChange,
+    handleBlur,
+  } = inputprop
 
   return (
     <>
@@ -21,11 +29,12 @@ const InputControl = (inputprop: iinputcontrol) => {
         </label>
         <input
           type="text"
+          value={value}
           id={nameInput}
           name={nameInput}
-          className={`form-control ${classInvalid && "is-invalid"}`}
+          onBlur={handleBlur}
           onChange={handleChange}
-          value={value}
+          className={`form-control ${classInvalid && "is-invalid"}`}
         />
       </div>
     </>
