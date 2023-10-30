@@ -1,7 +1,14 @@
-import { Outlet } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom"
 import { AppNavbar, AppSidebar } from "../iu"
+import { useAppSelector } from "@/hooks/useAppSelector"
 
 const Private = () => {
+  const { token } = useAppSelector((state) => state.loggin.usuario_loggin)
+
+  const loggout = Boolean(token.length == 0)
+
+  if (loggout) return <Navigate to={"/"} />
+
   return (
     <div className="main-wrapper">
       <AppSidebar />

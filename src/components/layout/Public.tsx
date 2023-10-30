@@ -1,6 +1,13 @@
-import { Outlet } from "react-router-dom"
+import { useAppSelector } from "@/hooks/useAppSelector"
+import { Navigate, Outlet } from "react-router-dom"
 
 const Public = () => {
+  const { token } = useAppSelector((state) => state.loggin.usuario_loggin)
+
+  const loggout = Boolean(token.length > 0)
+
+  if (loggout) return <Navigate to={"/dash"} />
+
   return (
     <>
       <div className="main-wrapper account-wrapper">

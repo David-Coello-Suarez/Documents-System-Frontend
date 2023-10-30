@@ -1,36 +1,52 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { instanciaAxios } from "../api"
-import { iprofil, irespuesta } from "../interfaces"
+import { ipagina, iprofil, irespue } from "../interfaces"
 import { NavigateFunction } from "react-router-dom"
+import { clean_form_perfil } from "../reducers/perfil"
 
-interface isaveprofile {
-  profil: iprofil
+const file = "profil",
+  rute = "perfil"
+
+interface irespro {
+  paginacion: ipagina
+  perfiles: iprofil[]
+}
+
+interface iprsaup {
+  body: iprofil
   navigate?: NavigateFunction
 }
 
-export const getProfil = createAsyncThunk("profile/getProfil", async () => {
-  const respuesta = await instanciaAxios.get("/perfil")
-
-  return respuesta.data
-})
-
-export const get_profil_manten = createAsyncThunk(
-  "profile/get_profil_manten",
-  async () => {
-    const { data } = await instanciaAxios.get<
-      irespuesta<{ perfiles: iprofil[] }>
-    >("/perfil/manten")
+export const get_perfils = createAsyncThunk(
+  `${file}/get_perfils`,
+  async (pagination: ipagina | undefined) => {
+    const { data } = await instanciaAxios.get<irespue<irespro>>(`/${rute}`, {
+      params: pagination,
+    })
 
     return data
   },
 )
 
-export const post_profile = createAsyncThunk(
-  "profil/post_profile",
-  async ({ profil, navigate }: isaveprofile) => {
-    const { data } = await instanciaAxios.post<irespuesta>(`/perfil`, profil)
+export const get_profils_active = createAsyncThunk(
+  `${file}/get_profils_active`,
+  async () => {
+    const { data } = await instanciaAxios.get<irespue<irespro>>(
+      `/${rute}/active`,
+    )
 
-    if (data.estado == 1 && navigate) {
+    return data
+  },
+)
+
+export const post_prefil = createAsyncThunk(
+  `${file}/post_prefil`,
+  async ({ body, navigate }: iprsaup, thunk) => {
+    const { data } = await instanciaAxios.post<irespue>(`/${rute}`, body)
+
+    if (data.estado === 1 && navigate) {
+      thunk.dispatch(get_perfils())
+      thunk.dispatch(clean_form_perfil())
       navigate(-1)
     }
 
@@ -38,18 +54,33 @@ export const post_profile = createAsyncThunk(
   },
 )
 
-export const put_profile = createAsyncThunk(
-  "profil/put_profile",
-  async ({ profil, navigate }: isaveprofile, thunk) => {
-    const { data } = await instanciaAxios.put<irespuesta>(
-      `/perfil/${profil.profil_profil}`,
-      profil,
+export const put_perfil = createAsyncThunk(
+  `${file}/put_perfil`,
+  async ({ body, navigate }: iprsaup, thunk) => {
+    const { data } = await instanciaAxios.put<irespue>(
+      `/${rute}/${body.profil_profil}`,
+      body,
     )
 
-    if (data.estado == 1 && navigate) {
+    if (data.estado === 1 && navigate) {
       navigate(-1)
-    } else {
-      thunk.dispatch(get_profil_manten())
+    }
+    thunk.dispatch(get_perfils())
+    thunk.dispatch(clean_form_perfil())
+
+    return data
+  },
+)
+
+export const delete_perfil = createAsyncThunk(
+  `${file}/delete_perfil`,
+  async ({ body }: iprsaup, thunk) => {
+    const { data } = await instanciaAxios.delete<irespue>(
+      `/${rute}/${body.profil_profil}`,
+    )
+
+    if (data.estado === 1) {
+      thunk.dispatch(get_perfils())
     }
 
     return data

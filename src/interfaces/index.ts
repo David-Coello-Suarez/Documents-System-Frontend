@@ -1,18 +1,20 @@
 import { iprofil } from "./iprofil"
-import { ipaginacion } from "./ipaginacion"
+import { ipagina } from "./ipagina"
 import { ifondoc } from "./ifondoc"
-import { irespuesta } from "./irespuesta"
+import { irespue } from "./irespue"
 import { isideba } from "./isideba"
 import { iusuari } from "./iusuari"
 import { iperall, ipermis } from "./ipermis"
+import { iloggin } from "./iloggin"
 
 export type {
   ipermis,
   isideba,
-  irespuesta,
+  irespue,
   ifondoc,
-  ipaginacion,
+  ipagina,
   iprofil,
   iusuari,
   iperall,
+  iloggin,
 }

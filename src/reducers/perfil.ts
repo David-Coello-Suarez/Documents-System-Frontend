@@ -1,38 +1,39 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { toast } from "react-toastify"
+import { toast, Id } from "react-toastify"
 import { iprofil } from "./../interfaces/iprofil"
 import {
-  getProfil,
-  get_profil_manten,
-  post_profile,
-  put_profile,
+  delete_perfil,
+  get_perfils,
+  get_profils_active,
+  post_prefil,
+  put_perfil,
 } from "../controllers/profil"
-import { irespuesta } from "../interfaces"
-
-interface irespro extends irespuesta {
-  data: {
-    perfiles: iprofil[]
-  }
-}
 
 const initialState = {
-  perfil_loadin: false,
-  perfil_perfil: Array<iprofil>(),
+  loading_loading: false,
+  perfils_perfils: Array<iprofil>(),
+  perfils_paginat: { pagina: 0, limite: 0, totalItems: 0, totalPaginas: 0 },
   perfil_active: 0,
   perfil_state: {
     profil_profil: 0,
     profil_nampro: "",
-    profil_status: 1,
+    profil_abbrev: "",
+    profil_status: "1",
   },
 }
+
+let countr_toastId: Id
 
 const ProfilSlice = createSlice({
   name: "perfil",
   initialState,
   reducers: {
     clear_perfiles: (state) => {
-      state.perfil_perfil = Array<iprofil>()
+      state.perfils_perfils = Array<iprofil>()
       state.perfil_active = 0
+    },
+    clean_form_perfil: (state) => {
+      state.perfil_state = initialState.perfil_state
     },
     set_pefil_active: (state, { payload }: PayloadAction<number>) => {
       state.perfil_active = payload
@@ -43,66 +44,106 @@ const ProfilSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(getProfil.pending, (_) => {
-        toast.loading("Cargando listado de perfiles")
+      .addCase(get_perfils.pending, (state) => {
+        state.loading_loading = true
       })
-      .addCase(
-        getProfil.fulfilled,
-        (state, { payload }: PayloadAction<irespro>) => {
-          toast.dismiss()
-          const { data, estado } = payload
+      .addCase(get_perfils.fulfilled, (state, { payload }) => {
+        state.loading_loading = false
 
-          if (estado === 1) {
-            state.perfil_perfil = data.perfiles
-          }
-        },
-      )
+        const { estado, data } = payload
 
-    builder
-      .addCase(get_profil_manten.pending, (state) => {
-        state.perfil_loadin = true
-      })
-      .addCase(get_profil_manten.fulfilled, (state, { payload }) => {
-        state.perfil_loadin = false
-        const { data, estado } = payload
-
-        if (estado == 1) {
-          state.perfil_perfil = data.perfiles
+        if (estado === 1) {
+          state.perfils_perfils = data.perfiles
+          state.perfils_paginat = data.paginacion
+        } else {
+          state.perfils_perfils = initialState.perfils_perfils
+          state.perfils_paginat = initialState.perfils_paginat
         }
       })
 
     builder
-      .addCase(post_profile.pending, (_) => {
-        toast.loading("Creando perfil....")
+      .addCase(get_profils_active.pending, (state) => {
+        state.loading_loading = true
       })
-      .addCase(
-        post_profile.fulfilled,
-        (state, { payload }: PayloadAction<irespro>) => {
-          toast.dismiss()
-          const { data, mensaje, estado } = payload
+      .addCase(get_profils_active.fulfilled, (state, { payload }) => {
+        state.loading_loading = false
 
-          if (estado === 1) {
-            toast.success(mensaje)
-            state.perfil_perfil = data.perfiles
-          } else {
-            toast.info(mensaje)
-          }
-        },
-      )
-
-    builder
-      .addCase(put_profile.pending, (_) => {
-        toast.loading("Actualizando perfil....")
-      })
-      .addCase(put_profile.fulfilled, (state, { payload }) => {
-        toast.dismiss()
-        const { data, mensaje, estado } = payload
+        const { estado, data } = payload
 
         if (estado === 1) {
-          toast.success(mensaje)
-          state.perfil_perfil = data.perfiles
+          state.perfils_perfils = data.perfiles
+        }
+      })
+
+    builder
+      .addCase(post_prefil.pending, () => {
+        countr_toastId = toast.loading("Creando perfil....")
+      })
+      .addCase(post_prefil.fulfilled, (_, { payload }) => {
+        const { estado, mensaje } = payload
+
+        if (estado === 1) {
+          toast.update(countr_toastId, {
+            render: mensaje,
+            type: "success",
+            isLoading: false,
+            autoClose: 3000,
+          })
         } else {
-          toast.info(mensaje)
+          toast.update(countr_toastId, {
+            render: mensaje,
+            type: "warning",
+            isLoading: false,
+            autoClose: 3000,
+          })
+        }
+      })
+
+    builder
+      .addCase(put_perfil.pending, () => {
+        countr_toastId = toast.loading("Actualizando perfil....")
+      })
+      .addCase(put_perfil.fulfilled, (_, { payload }) => {
+        const { estado, mensaje } = payload
+
+        if (estado === 1) {
+          toast.update(countr_toastId, {
+            render: mensaje,
+            type: "success",
+            isLoading: false,
+            autoClose: 3000,
+          })
+        } else {
+          toast.update(countr_toastId, {
+            render: mensaje,
+            type: "warning",
+            isLoading: false,
+            autoClose: 3000,
+          })
+        }
+      })
+
+    builder
+      .addCase(delete_perfil.pending, () => {
+        countr_toastId = toast.loading("Eliminando perfil....")
+      })
+      .addCase(delete_perfil.fulfilled, (_, { payload }) => {
+        const { estado, mensaje } = payload
+
+        if (estado === 1) {
+          toast.update(countr_toastId, {
+            render: mensaje,
+            type: "success",
+            isLoading: false,
+            autoClose: 3000,
+          })
+        } else {
+          toast.update(countr_toastId, {
+            render: mensaje,
+            type: "warning",
+            isLoading: false,
+            autoClose: 3000,
+          })
         }
       })
   },
@@ -110,5 +151,9 @@ const ProfilSlice = createSlice({
 
 export const PerfilReducer = ProfilSlice.reducer
 
-export const { set_perfil, set_pefil_active, clear_perfiles } =
-  ProfilSlice.actions
+export const {
+  set_perfil,
+  set_pefil_active,
+  clear_perfiles,
+  clean_form_perfil,
+} = ProfilSlice.actions

@@ -7,8 +7,8 @@ const AppNavbar = () => {
     <div className="header">
       <div className="header-left">
         <Link to={"."} className="logo">
-          <img src="/assets/img/logo.png" width="35" height="35" />{" "}
-          <span>G.D.</span>
+          <img src="/assets/img/logo_ico.png" width="35" height="35" />{" "}
+          <span>Documents</span>
         </Link>
       </div>
       <a
@@ -17,7 +17,7 @@ const AppNavbar = () => {
         className="mobile_btn float-start"
         // onClick={handleSetSidebar}
       >
-        <span className="material-symbols-outlined">menu</span>
+        <i className="fa fa-list-ul" />
       </a>
 
       <ul className="nav user-menu float-right">

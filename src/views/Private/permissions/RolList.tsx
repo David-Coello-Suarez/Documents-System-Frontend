@@ -21,7 +21,7 @@ const RolList = () => {
 
   return (
     <>
-      <Link to={"/profiles/add"} className="btn btn-primary btn-block w-100">
+      <Link to={"../profiles/add"} className="btn btn-primary btn-block w-100">
         <i className="fa fa-plus m-r-5"></i>
         Añadir Perfil
       </Link>

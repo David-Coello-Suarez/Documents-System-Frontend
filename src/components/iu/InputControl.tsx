@@ -3,11 +3,12 @@ import { memo } from "react"
 interface iinputcontrol {
   titleLabel: string
   nameInput: string
-  classInvalid?: boolean
+  classInvalid?: string
   value: string
   handleBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   required?: boolean
+  type?: boolean
 }
 
 const InputControl = (inputprop: iinputcontrol) => {
@@ -19,6 +20,7 @@ const InputControl = (inputprop: iinputcontrol) => {
     value,
     handleChange,
     handleBlur,
+    type,
   } = inputprop
 
   return (
@@ -28,14 +30,17 @@ const InputControl = (inputprop: iinputcontrol) => {
           {titleLabel} {required && <span className="text-danger">*</span>}
         </label>
         <input
-          type="text"
+          type={type ? "password" : "text"}
           value={value}
           id={nameInput}
           name={nameInput}
           onBlur={handleBlur}
           onChange={handleChange}
-          className={`form-control ${classInvalid && "is-invalid"}`}
+          className={`form-control ${Boolean(classInvalid) && "is-invalid"}`}
         />
+        {Boolean(classInvalid) && (
+          <small className="text-danger">{classInvalid}</small>
+        )}
       </div>
     </>
   )

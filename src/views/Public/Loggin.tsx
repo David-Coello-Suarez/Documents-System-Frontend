@@ -1,22 +1,63 @@
 import { Link } from "react-router-dom"
+import { useFormik } from "formik"
+import * as yup from "yup"
+import { InputControl } from "@/components/iu"
+import { useAppSelector } from "@/hooks/useAppSelector"
+import { iusuari } from "@/interfaces/iusuari"
+import { useAppDispatch } from "@/hooks/useAppDispatch"
+import { post_loggin } from "@/controllers/loggin"
 
 const Loggin = () => {
+  const dispatch = useAppDispatch()
+  const { forusu } = useAppSelector((state) => state.loggin)
+
+  const validationSchema = yup.object<iusuari>().shape({
+    nombreusuario: yup.string().required("Nombre usuario es requerido"),
+    contrasena: yup.string().required("Contraseña es requerido"),
+  })
+
+  const loggin_api = (formusuario: {
+    nombreusuario: string
+    contrasena: string
+  }) => dispatch(post_loggin(formusuario))
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: forusu,
+    validationSchema,
+    validateOnChange: false,
+    onSubmit: loggin_api,
+  })
+
   return (
     <>
-      <form className="form-signin">
+      <form className="form-signin" onSubmit={formik.handleSubmit}>
         <div className="account-logo">
           <Link to={"/"}>
             <img src="assets/img/logo.png" />
           </Link>
         </div>
-        <div className="form-group">
-          <label>Nombre de usuario</label>
-          <input type="text" autoFocus className="form-control" />
-        </div>
-        <div className="form-group">
-          <label>Contraseña</label>
-          <input type="password" className="form-control" />
-        </div>
+
+        <InputControl
+          required
+          nameInput="nombreusuario"
+          titleLabel="Nombre de usuario"
+          handleBlur={formik.handleBlur}
+          handleChange={formik.handleChange}
+          value={formik.values.nombreusuario}
+          classInvalid={Boolean(formik.errors.nombreusuario)}
+        />
+
+        <InputControl
+          required
+          type
+          nameInput="contrasena"
+          titleLabel="Contraseña"
+          handleBlur={formik.handleBlur}
+          handleChange={formik.handleChange}
+          value={formik.values.contrasena}
+          classInvalid={Boolean(formik.errors.contrasena)}
+        />
         {/* <div className="form-group text-right">
           <a href="forgot-password.html">Forgot your password?</a>
         </div> */}

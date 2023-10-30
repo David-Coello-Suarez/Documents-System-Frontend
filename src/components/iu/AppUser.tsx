@@ -1,6 +1,15 @@
 import { memo } from "react"
+import { useAppDispatch } from "@/hooks/index"
+import { clean_usuari } from "@/reducers/loggin"
 
 const AppUser = () => {
+  const dispatch = useAppDispatch()
+
+  const handleLogOut = () => {
+    dispatch(clean_usuari())
+    localStorage.clear()
+  }
+
   return (
     <>
       <a
@@ -29,7 +38,9 @@ const AppUser = () => {
         <a className="dropdown-item" href="settings.html">
           Settings
         </a> */}
-        <a className="dropdown-item">Cerrar Sesion</a>
+        <a className="dropdown-item" onClick={handleLogOut}>
+          Cerrar Sesion
+        </a>
       </div>
     </>
   )

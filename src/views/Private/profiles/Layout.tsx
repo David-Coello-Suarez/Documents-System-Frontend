@@ -1,9 +1,10 @@
 import { useEffect } from "react"
-import { AddButton } from "@/components/iu"
 import { useNavigate } from "react-router-dom"
-import Listado from "./Listado"
-import { useAppDispatch } from "@/hooks/index"
-import { get_profil_manten } from "@/controllers/profil"
+import { useAppDispatch } from "../../../hooks"
+import { get_perfils } from "../../../controllers/profil"
+import { clear_perfiles } from "../../../reducers/perfil"
+import { AddButton } from "../../../components/iu"
+import Perfil from "./Perfil"
 
 const Layout = () => {
   const dispatch = useAppDispatch()
@@ -12,7 +13,11 @@ const Layout = () => {
   const handleAddProflie = () => navigate("add")
 
   useEffect(() => {
-    dispatch(get_profil_manten())
+    dispatch(get_perfils())
+
+    return () => {
+      dispatch(clear_perfiles())
+    }
   }, [dispatch])
 
   return (
@@ -23,7 +28,7 @@ const Layout = () => {
         msgButton="Añadir nuevo perfil"
       />
 
-      <Listado handleClickAdd={handleAddProflie} />
+      <Perfil handleClickAdd={handleAddProflie} />
     </>
   )
 }

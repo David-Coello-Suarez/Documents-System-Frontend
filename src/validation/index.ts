@@ -1,5 +1,7 @@
-import { ProfilSchema } from "./PerfilSchema"
-import { FormDocSchema } from "./fondoc"
-import { UsuariShema } from "./usuari"
+import * as yup from "yup"
+import { iprofil } from "../interfaces"
 
-export { FormDocSchema, ProfilSchema, UsuariShema }
+export const ProfilSchema = yup.object<iprofil>().shape({
+  profil_abbrev: yup.string().required("Abreviatura es requerido"),
+  profil_nampro: yup.string().required("Nombre es requerido"),
+})

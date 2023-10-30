@@ -1,10 +1,11 @@
-import { ButtonSave, InputControl } from "@/components/iu"
 import { useNavigate } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "@/hooks/index"
-import { clean_form } from "@/reducers/usuari"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { iprofil } from "../../../interfaces"
+import { post_prefil, put_perfil } from "../../../controllers/profil"
 import { useFormik } from "formik"
-import { iprofil } from "@/interfaces/iprofil"
-import { post_profile, put_profile } from "@/controllers/profil"
+import { clean_form_perfil } from "../../../reducers/perfil"
+import { ButtonSave, InputControl } from "../../../components/iu"
+import { ProfilSchema } from "../../../validation"
 
 const Form = () => {
   const navigate = useNavigate()
@@ -14,25 +15,26 @@ const Form = () => {
   const { perfil_state } = useAppSelector((state) => state.perfil)
 
   const operation_profile = (profil: iprofil) => {
-    const data = { profil, navigate }
+    const data = { body: profil, navigate }
 
     if (profil.profil_profil === 0) {
-      dispatch(post_profile(data))
+      dispatch(post_prefil(data))
     } else {
-      dispatch(put_profile(data))
+      dispatch(put_perfil(data))
     }
   }
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: perfil_state,
+    validationSchema: ProfilSchema,
     validateOnChange: false,
     onSubmit: operation_profile,
   })
 
   const handleBack = () => {
     navigate(-1)
-    dispatch(clean_form())
+    dispatch(clean_form_perfil())
   }
 
   return (
@@ -50,12 +52,22 @@ const Form = () => {
           <form onSubmit={formik.handleSubmit}>
             <InputControl
               required
+              titleLabel="Abreviatura perfil"
+              nameInput={"profil_abbrev"}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              value={formik.values.profil_abbrev}
+              classInvalid={formik.errors.profil_abbrev}
+            />
+
+            <InputControl
+              required
               titleLabel="Nombre perfil"
               nameInput={"profil_nampro"}
               handleBlur={formik.handleBlur}
               handleChange={formik.handleChange}
               value={formik.values.profil_nampro}
-              classInvalid={Boolean(formik.errors.profil_nampro)}
+              classInvalid={formik.errors.profil_nampro}
             />
 
             <ButtonSave

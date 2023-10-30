@@ -1,4 +1,5 @@
 import { FonDocReducer } from "./fondoc"
+import { LogginReducer } from "./loggin"
 import { PerfilReducer } from "./perfil"
 import { PermisReducer } from "./permis"
 import { SidebaReducer } from "./sideba"
@@ -10,4 +11,5 @@ export const reducer = {
   perfil: PerfilReducer,
   usuari: UsuariReducer,
   permis: PermisReducer,
+  loggin: LogginReducer,
 }
