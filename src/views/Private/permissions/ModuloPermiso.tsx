@@ -4,12 +4,17 @@ import {
   get_permis_cabece,
   post_modulo_permis,
 } from "../../../controllers/permis"
+import { clean_permiso_modulo } from "../../../reducers/permis"
 
 const ModuloPermiso = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(get_permis_cabece())
+
+    return () => {
+      dispatch(clean_permiso_modulo())
+    }
   }, [dispatch])
 
   const { perfil_active } = useAppSelector((state) => state.perfil)

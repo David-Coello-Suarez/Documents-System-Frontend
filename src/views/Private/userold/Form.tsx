@@ -1,16 +1,15 @@
 import { useNavigate } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { post_usuari, put_usuari } from "../../../controllers/usuari"
-import { iusuari } from "../../../interfaces"
 import { useFormik } from "formik"
-import { ButtonSave, InputControl } from "../../../components/iu"
 import moment from "moment"
-import { useEffect } from "react"
-import { clean_form_usuari } from "../../../reducers/usuari"
-import { UsuarioSchema } from "../../../validation"
-import { Perfil } from "../../../components/views"
+import { useAppDispatch, useAppSelector } from "@/hooks/index"
+import { ButtonSave, InputControl } from "@/components/iu"
+import { Perfil } from "@/components/views"
+import { UsuariShema } from "@/validation/index"
+import { iusuari } from "@/interfaces/index"
+import { SaveUsuari, UpdateUsuari } from "@/controllers/usuari"
+import { clean_form } from "@/reducers/usuari"
 
-const Form = () => {
+const FormUsuari = () => {
   const dispatch = useAppDispatch()
 
   const navigate = useNavigate()
@@ -18,33 +17,30 @@ const Form = () => {
   const { usuari_form, usuari_loadin } = useAppSelector((state) => state.usuari)
 
   const operationUsuari = (usuari: iusuari) => {
-    const data = { body: usuari, navigate }
+    const data = { usuari, navigate }
 
     if (usuari.usuari_usuari == 0) {
-      dispatch(post_usuari(data))
+      dispatch(SaveUsuari(data))
     } else {
-      dispatch(put_usuari(data))
+      dispatch(UpdateUsuari(data))
     }
   }
 
-  useEffect(() => {
-    return () => {
-      dispatch(clean_form_usuari())
-    }
-  }, [dispatch])
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: usuari_form,
+    validationSchema: UsuariShema,
+    validateOnChange: false,
+    onSubmit: operationUsuari,
+  })
 
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) =>
-    setFieldValue("usuari_idperf", event.currentTarget.value)
+    formik.setFieldValue("usuari_idperf", event.currentTarget.value)
 
-  const handleBack = () => navigate(-1)
-
-  const { errors, values, setFieldValue, handleSubmit, handleChange } =
-    useFormik({
-      enableReinitialize: true,
-      initialValues: usuari_form,
-      validationSchema: UsuarioSchema,
-      onSubmit: operationUsuari,
-    })
+  const handleBack = () => {
+    navigate(-1)
+    dispatch(clean_form())
+  }
 
   return (
     <>
@@ -52,7 +48,7 @@ const Form = () => {
         <div className="col-lg-8 offset-lg-2">
           <h4 className="page-title">
             <strong>{`${
-              values.usuari_usuari == 0 ? "NUEVO" : "ACTUALIZAR"
+              formik.values.usuari_usuari == 0 ? "NUEVO" : "ACTUALIZAR"
             } USUARIO`}</strong>
           </h4>
         </div>
@@ -60,16 +56,16 @@ const Form = () => {
 
       <div className="row">
         <div className="col-lg-8 offset-lg-2">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             <div className="row">
               <div className="col-sm-12">
                 <InputControl
                   required
                   nameInput={"usuari_nomape"}
                   titleLabel="Apellidos y nombres"
-                  handleChange={handleChange}
-                  value={values.usuari_nomape}
-                  classInvalid={errors.usuari_nomape}
+                  handleChange={formik.handleChange}
+                  value={formik.values.usuari_nomape}
+                  classInvalid={Boolean(formik.errors.usuari_nomape)}
                 />
               </div>
 
@@ -78,9 +74,9 @@ const Form = () => {
                   required
                   nameInput={"usuari_nomusu"}
                   titleLabel="Nombre de usuario"
-                  handleChange={handleChange}
-                  value={values.usuari_nomusu}
-                  classInvalid={errors.usuari_nomusu}
+                  handleChange={formik.handleChange}
+                  value={formik.values.usuari_nomusu}
+                  classInvalid={Boolean(formik.errors.usuari_nomusu)}
                 />
               </div>
 
@@ -89,9 +85,9 @@ const Form = () => {
                   required
                   nameInput={"usuari_correo"}
                   titleLabel="Correo electrónico"
-                  handleChange={handleChange}
-                  value={values.usuari_correo}
-                  classInvalid={errors.usuari_correo}
+                  handleChange={formik.handleChange}
+                  value={formik.values.usuari_correo}
+                  classInvalid={Boolean(formik.errors.usuari_correo)}
                 />
               </div>
 
@@ -120,9 +116,9 @@ const Form = () => {
                       type="radio"
                       name="usuari_estado"
                       id="usuari_estado_active"
-                      onChange={handleChange}
+                      onChange={formik.handleChange}
                       value={1}
-                      checked={Number(values.usuari_estado) === 1}
+                      checked={Number(formik.values.usuari_estado) === 1}
                     />
                     <label
                       className="form-check-label"
@@ -137,9 +133,9 @@ const Form = () => {
                       type="radio"
                       name="usuari_estado"
                       id="usuari_estado_inactive"
-                      onChange={handleChange}
+                      onChange={formik.handleChange}
                       value={0}
-                      checked={Number(values.usuari_estado) === 0}
+                      checked={Number(formik.values.usuari_estado) === 0}
                     />
                     <label
                       className="form-check-label"
@@ -153,10 +149,10 @@ const Form = () => {
 
               <div className="col-sm-6">
                 <Perfil
-                  isInvalid={errors.usuari_idperf}
+                  isInvalid={Boolean(formik.errors.usuari_idperf)}
                   nameInput="usuari_idperf"
                   onchangeclick={handleSelect}
-                  value={values.usuari_idperf}
+                  value={formik.values.usuari_idperf}
                 />
               </div>
 
@@ -169,11 +165,10 @@ const Form = () => {
                   <select
                     name="usuari_idtiau"
                     id="usuari_idtiau"
-                    onChange={handleChange}
-                    value={values.usuari_idtiau}
-                    defaultValue={"0"}
+                    onChange={formik.handleChange}
+                    value={formik.values.usuari_idtiau}
                     className={`form-control ${
-                      errors.usuari_idtiau && "is-invalid"
+                      formik.errors.usuari_idtiau && "is-invalid"
                     }`}
                   >
                     <option value={0}>Documents</option>
@@ -184,7 +179,7 @@ const Form = () => {
             </div>
             <ButtonSave
               titleSaveButton={`${
-                values.usuari_usuari == 0 ? "NUEVO" : "ACTUALIZAR"
+                formik.values.usuari_usuari == 0 ? "NUEVO" : "ACTUALIZAR"
               } USUARIO`}
               disabled={usuari_loadin}
               handleBack={handleBack}
@@ -196,4 +191,4 @@ const Form = () => {
   )
 }
 
-export default Form
+export default FormUsuari

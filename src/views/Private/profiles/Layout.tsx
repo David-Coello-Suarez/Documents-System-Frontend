@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch } from "../../../hooks"
 import { get_perfils } from "../../../controllers/profil"
-import { clear_perfiles } from "../../../reducers/perfil"
+import { clean_perfiles } from "../../../reducers/perfil"
 import { AddButton } from "../../../components/iu"
 import Perfil from "./Perfil"
 
@@ -16,7 +16,7 @@ const Layout = () => {
     dispatch(get_perfils())
 
     return () => {
-      dispatch(clear_perfiles())
+      dispatch(clean_perfiles())
     }
   }, [dispatch])
 

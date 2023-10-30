@@ -18,11 +18,11 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
-    // ,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["jquery", "bootstrap"]
 
     // "baseUrl": "./",
-    // "paths": {      
+    // "paths": {
     //   "@/hooks/*": ["src/hooks/*"],
     //   "@/components/*": ["src/components/*"],
     //   "@/interfaces/*": ["src/interfaces/*"],

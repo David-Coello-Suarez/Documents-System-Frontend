@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { get_profils_active } from "../../../controllers/profil"
-import { clear_perfiles, set_pefil_active } from "../../../reducers/perfil"
+import { clean_perfiles, set_pefil_active } from "../../../reducers/perfil"
 
 const PerfilLista = () => {
   const dispatch = useAppDispatch()
@@ -11,7 +11,7 @@ const PerfilLista = () => {
     dispatch(get_profils_active())
 
     return () => {
-      dispatch(clear_perfiles())
+      dispatch(clean_perfiles())
     }
   }, [dispatch])
 

@@ -9,5 +9,5 @@ export interface iusuari {
   usuari_idperf: number
   usuari_perfil: string
   usuari_estado: number
-  usuari_idtiau: number
+  usuari_idtiau: string
 }

@@ -22,6 +22,9 @@ const PermisSlice = createSlice({
     clean_modulo: (state) => {
       state.modulo_modulo = initialState.modulo_modulo
     },
+    clean_permiso_modulo: (state) => {
+      state.permis_modulo = initialState.permis_modulo
+    },
   },
   extraReducers(builder) {
     builder
@@ -81,4 +84,4 @@ const PermisSlice = createSlice({
 
 export const PermisReducer = PermisSlice.reducer
 
-export const { clean_modulo } = PermisSlice.actions
+export const { clean_modulo, clean_permiso_modulo } = PermisSlice.actions
