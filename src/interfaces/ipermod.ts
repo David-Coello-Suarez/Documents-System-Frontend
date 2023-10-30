@@ -1,8 +1,4 @@
-export interface ipermis {
-  sideba: iperall[]
-}
-
-export interface iperall {
+export interface ipermod {
   sideba_sideba: number
   sideba_nombre: string
   sideba_cheper: number

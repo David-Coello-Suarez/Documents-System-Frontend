@@ -1,20 +1,31 @@
-import { AddButton } from "@/components/iu"
-import RolList from "./RolList"
-import Modulo from "./moduloPermisos/Modulo"
-import Permisos from "./moduloPermisos/Permisos"
+import { useEffect } from "react"
+import { AddButton } from "../../../components/iu"
+import { useAppDispatch } from "../../../hooks"
+import ModuloAcceso from "./ModuloAcceso"
+import PerfilLista from "./PerfilLista"
+import { clean_perfil_active } from "../../../reducers/perfil"
+import ModuloPermiso from "./ModuloPermiso"
 
 const Layout = () => {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    return () => {
+      dispatch(clean_perfil_active())
+    }
+  }, [dispatch])
+
   return (
     <>
-      <AddButton titleWindows="Permisos" />
+      <AddButton titleWindows="Perfiles y permisos" />
 
       <div className="row">
         <div className="col-sm-4 col-md-4 col-lg-4 col-xl-3">
-          <RolList />
+          <PerfilLista />
         </div>
         <div className="col-sm-8 col-md-8 col-lg-8 col-xl-9">
-          <Modulo />
-          <Permisos />
+          <ModuloAcceso />
+          <ModuloPermiso />
         </div>
       </div>
     </>

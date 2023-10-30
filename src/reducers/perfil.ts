@@ -28,9 +28,11 @@ const ProfilSlice = createSlice({
   name: "perfil",
   initialState,
   reducers: {
+    clean_perfil_active: (state) => {
+      state.perfil_active = 0
+    },
     clear_perfiles: (state) => {
       state.perfils_perfils = Array<iprofil>()
-      state.perfil_active = 0
     },
     clean_form_perfil: (state) => {
       state.perfil_state = initialState.perfil_state
@@ -156,4 +158,5 @@ export const {
   set_pefil_active,
   clear_perfiles,
   clean_form_perfil,
+  clean_perfil_active,
 } = ProfilSlice.actions

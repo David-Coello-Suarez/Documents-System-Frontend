@@ -7,10 +7,6 @@ import { clear_perfiles, set_pefil_active } from "../../../reducers/perfil"
 const RolList = () => {
   const dispatch = useAppDispatch()
 
-  const { perfil_perfil, perfil_active } = useAppSelector(
-    (state) => state.perfil,
-  )
-
   useEffect(() => {
     dispatch(getProfil())
 

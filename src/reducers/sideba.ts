@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { irespuesta, isideba } from "../interfaces"
+import { irespue, isideba } from "../interfaces"
 import { getSideba } from "../controllers/sidebar"
 
-interface iressid extends irespuesta {
+interface iressid extends irespue {
   data: {
     sideba: isideba[]
   }
