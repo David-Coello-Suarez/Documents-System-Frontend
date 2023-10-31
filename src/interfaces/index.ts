@@ -6,6 +6,7 @@ import { isideba } from "./isideba"
 import { iusuari } from "./iusuari"
 import { ipermod } from "./ipermod"
 import { iloggin } from "./iloggin"
+import { isectio } from "./isectio"
 
 export type {
   ipermod,
@@ -16,4 +17,5 @@ export type {
   iprofil,
   iusuari,
   iloggin,
+  isectio,
 }

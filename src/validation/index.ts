@@ -1,5 +1,5 @@
 import * as yup from "yup"
-import { iprofil, iusuari } from "../interfaces"
+import { ifondoc, iprofil, iusuari } from "../interfaces"
 
 export const ProfilSchema = yup.object<iprofil>().shape({
   profil_abbrev: yup.string().required("Abreviatura es requerido"),
@@ -14,4 +14,14 @@ export const UsuarioSchema = yup.object<iusuari>().shape({
     .required("Correo electrónico es requerido")
     .email("Formato de email incorrecto"),
   usuari_idperf: yup.number().min(1, "Debe seleccionar un perfil"),
+})
+
+export const FonDocSchema = yup.object<ifondoc>().shape({
+  fondoc_abrevi: yup.string().required("Abreviatura es requerido"),
+  fondoc_nombre: yup.string().required("Nombre es requerido"),
+})
+
+export const SectioSchema = yup.object<ifondoc>().shape({
+  sectio_abbrev: yup.string().required("Abreviatura es requerido"),
+  sectio_nombre: yup.string().required("Nombre es requerido"),
 })

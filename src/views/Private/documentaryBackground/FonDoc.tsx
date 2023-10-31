@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { useFormik } from "formik"
 import { ButtonSave, InputControl } from "../../../components/iu"
 import { clean_fondoc_form } from "../../../reducers/fondoc"
-// import { FormDocSchema } from "../../../validation"
+import { FonDocSchema } from "../../../validation"
 
 const FonDoc = () => {
   const dispatch = useAppDispatch()
@@ -22,7 +22,7 @@ const FonDoc = () => {
 
   const formik = useFormik({
     enableReinitialize: true,
-    // validationSchema: FormDocSchema,
+    validationSchema: FonDocSchema,
     initialValues: fondoc_state,
     onSubmit: console.log,
     validateOnChange: false,
