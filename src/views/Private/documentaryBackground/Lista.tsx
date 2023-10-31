@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { Table, Switch } from "antd"
+import { Table, Switch, Pagination } from "antd"
 import type { ColumnsType } from "antd/es/table"
 import { NotData } from "../../../components/views"
 import { ButtonAction } from "../../../components/iu/"
@@ -23,7 +23,6 @@ const Lista = ({ handleClickAdd }: ilista) => {
   }
 
   const columns: ColumnsType<ifondoc> = [
-    { title: "#", render: (_, _x, idx) => idx + 1 },
     {
       title: "Abreviatura",
       dataIndex: "fondoc_abrevi",
@@ -39,13 +38,34 @@ const Lista = ({ handleClickAdd }: ilista) => {
     {
       title: "Estado",
       dataIndex: "fondoc_estado",
-      render: (value) => (
-        <Switch
-          checkedChildren={"Activo"}
-          unCheckedChildren={"Inactivo"}
-          checked={value == "A"}
-        />
-      ),
+      className: "text-center",
+      render: (_x, record) => {
+        const value_estatus = Number(record.fondoc_estado) === 1
+
+        const handleChecked = () => {
+          const body = Object.assign({}, record)
+
+          value_estatus
+            ? (body.fondoc_estado = "0")
+            : (body.fondoc_estado = "1")
+
+          // dispatch(put_perfil({ body }))
+        }
+
+        const classStyle = value_estatus ? "bg-success" : "bg-warning"
+
+        return (
+          <Switch
+            checkedChildren={<i className="fa fa-check" aria-hidden="true" />}
+            unCheckedChildren={
+              <i className="fa fa-exclamation" aria-hidden="true" />
+            }
+            className={classStyle}
+            onChange={handleChecked}
+            checked={value_estatus}
+          />
+        )
+      },
     },
     {
       title: "Acciones",
@@ -58,11 +78,13 @@ const Lista = ({ handleClickAdd }: ilista) => {
       <div className="row">
         <div className="col-md-12">
           <Table<ifondoc>
-            dataSource={fondoc_fondoc}
-            columns={columns}
-            showSorterTooltip={false}
-            size="small"
             bordered
+            size="small"
+            columns={columns}
+            className="m-b-20"
+            pagination={false}
+            dataSource={fondoc_fondoc}
+            showSorterTooltip={false}
             rowKey={(fondoc) => fondoc.fondoc_fondoc}
             locale={{
               emptyText: (
@@ -73,6 +95,27 @@ const Lista = ({ handleClickAdd }: ilista) => {
               ),
             }}
           />
+
+          {fondoc_fondoc.length > 0 && (
+            <>
+              <Pagination
+                // onChange={(pagina, limite) =>
+                //   dispatch(get_perfils({ ...perfils_paginat, pagina, limite }))
+                // }
+                responsive
+                className="text-center"
+                total={100}
+                showSizeChanger
+                showTotal={(total, range) =>
+                  `Mostrando del ${range[0]} a ${range[1]} de ${total} items`
+                }
+                defaultPageSize={10}
+                defaultCurrent={1}
+                pageSizeOptions={[10, 50, 100]}
+                size="small"
+              />
+            </>
+          )}
         </div>
       </div>
     </>

@@ -36,9 +36,12 @@ const FonDocSlice = createSlice({
     set_fondoc: (state, { payload }: PayloadAction<ifondoc>) => {
       state.fondoc_state = payload
     },
+    clean_fondoc_form: (state) => {
+      state.fondoc_state = initialState.fondoc_state
+    },
   },
 })
 
 export const FonDocReducer = FonDocSlice.reducer
 
-export const { set_fondoc } = FonDocSlice.actions
+export const { set_fondoc, clean_fondoc_form } = FonDocSlice.actions
