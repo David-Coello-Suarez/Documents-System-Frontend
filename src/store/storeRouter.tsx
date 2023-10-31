@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom"
-import { Public, Private } from "@/components/layout"
 import { NotFound, PrivateRouter, PublicRouter } from "../views"
+import { Private, Public } from "../components/layout"
 
 const storeRouter = createBrowserRouter([
   { path: "/", element: <Public />, children: PublicRouter },

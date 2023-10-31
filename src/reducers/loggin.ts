@@ -1,6 +1,6 @@
-import { post_loggin } from "@/controllers/loggin"
 import { createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
+import { post_loggin } from "../controllers/loggin"
 
 const initialState = {
   consultando: false,
