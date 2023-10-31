@@ -1,5 +1,5 @@
 import * as yup from "yup"
-import { ifondoc, iprofil, iusuari } from "../interfaces"
+import { ifondoc, iprofil, isubsec, iusuari } from "../interfaces"
 
 export const ProfilSchema = yup.object<iprofil>().shape({
   profil_abbrev: yup.string().required("Abreviatura es requerido"),
@@ -25,4 +25,10 @@ export const SectioSchema = yup.object<ifondoc>().shape({
   fondoc_fondoc: yup.number().min(1, "Selecciona fondo documental"),
   sectio_abbrev: yup.string().required("Abreviatura es requerido"),
   sectio_nombre: yup.string().required("Nombre es requerido"),
+})
+
+export const SubsecSchema = yup.object<isubsec>().shape({
+  sectio_sectio: yup.number().min(1, "Selecciona secciión"),
+  subsec_abrevv: yup.string().required("Abreviatura es requerido"),
+  subsec_nombre: yup.string().required("Nombre es requerido"),
 })

@@ -41,7 +41,7 @@ const FonDocSlice = createSlice({
       state.fondoc_state = initialState.fondoc_state
     },
     clean_fondocs: (state) => {
-      state.fondoc_fondoc = initialState.fondoc_fondoc
+      state.fondocs_fondocs = initialState.fondocs_fondocs
     },
   },
 })
