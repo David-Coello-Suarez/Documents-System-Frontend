@@ -9,6 +9,7 @@ import { iloggin } from "./iloggin"
 import { isectio } from "./isectio"
 import { isubsec } from "./isubsec"
 import { iseries } from "./iseries"
+import { isubser } from "./isubser"
 
 export type {
   ipermod,
@@ -22,4 +23,5 @@ export type {
   isectio,
   isubsec,
   iseries,
+  isubser
 }

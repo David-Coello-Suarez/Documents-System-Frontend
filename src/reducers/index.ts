@@ -6,6 +6,7 @@ import { SectioReducer } from "./sectio"
 import { SeriesReducer } from "./series"
 import { SidebaReducer } from "./sideba"
 import { SubsecReducer } from "./subsec"
+import { SubserReducer } from "./subser"
 import { UsuariReducer } from "./usuari"
 
 export const reducer = {
@@ -18,4 +19,5 @@ export const reducer = {
   sectio: SectioReducer,
   subsec: SubsecReducer,
   series: SeriesReducer,
+  subser: SubserReducer,
 }

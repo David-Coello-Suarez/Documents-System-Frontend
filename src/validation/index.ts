@@ -34,3 +34,5 @@ export const SubsecSchema = yup.object<isubsec>().shape({
 })
 
 export const SeriesSchema = yup.object<iseries>().shape({})
+
+export const SubserSchema = yup.object<isubsec>().shape({})
