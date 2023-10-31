@@ -8,6 +8,7 @@ import { ipermod } from "./ipermod"
 import { iloggin } from "./iloggin"
 import { isectio } from "./isectio"
 import { isubsec } from "./isubsec"
+import { iseries } from "./iseries"
 
 export type {
   ipermod,
@@ -20,4 +21,5 @@ export type {
   iloggin,
   isectio,
   isubsec,
+  iseries,
 }

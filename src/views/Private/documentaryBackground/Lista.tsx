@@ -15,7 +15,7 @@ const Lista = ({ handleClickAdd }: ilista) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { fondoc_fondoc } = useAppSelector((state) => state.fondoc)
+  const { fondocs_fondocs } = useAppSelector((state) => state.fondoc)
 
   const handleEdit = (item: ifondoc) => {
     navigate(`edit/${item.fondoc_fondoc}`)
@@ -83,7 +83,7 @@ const Lista = ({ handleClickAdd }: ilista) => {
             columns={columns}
             className="m-b-20"
             pagination={false}
-            dataSource={fondoc_fondoc}
+            dataSource={fondocs_fondocs}
             showSorterTooltip={false}
             rowKey={(fondoc) => fondoc.fondoc_fondoc}
             locale={{
@@ -96,7 +96,7 @@ const Lista = ({ handleClickAdd }: ilista) => {
             }}
           />
 
-          {fondoc_fondoc.length > 0 && (
+          {fondocs_fondocs.length > 0 && (
             <>
               <Pagination
                 // onChange={(pagina, limite) =>

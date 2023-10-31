@@ -5,6 +5,7 @@ import UserRouter from "./user"
 import ProfilesRouter from "./profiles"
 import SectionsRouter from "./sections"
 import SubsecRouter from "./subsections"
+import SerieRouter from "./series"
 
 const PrivateRouter: RouteObject[] = [
   { index: true, element: <h1>Home</h1> },
@@ -14,6 +15,7 @@ const PrivateRouter: RouteObject[] = [
   { path: "profiles", children: ProfilesRouter },
   { path: "sections", children: SectionsRouter },
   { path: "subsections", children: SubsecRouter },
+  { path: "series", children: SerieRouter },
 ]
 
 export default PrivateRouter
