@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { AddButton } from "../../../components/iu"
+import { AddButton } from "../../../components/views"
 import { useAppDispatch } from "../../../hooks"
 import ModuloAcceso from "./ModuloAcceso"
 import PerfilLista from "./PerfilLista"

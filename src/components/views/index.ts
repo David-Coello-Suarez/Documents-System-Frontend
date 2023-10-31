@@ -2,5 +2,9 @@ import { lazy } from "react"
 
 const NotData = lazy(() => import("./NotData"))
 const Perfil = lazy(() => import("./Perfil"))
+const Sectio = lazy(() => import("../../views/Private/sections/FonDocActive"))
+const AddButton = lazy(() => import("./AddButton"))
+const InputControl = lazy(() => import("./InputControl"))
+const SelectBox = lazy(() => import("./SelectBox"))
 
-export { NotData, Perfil }
+export { NotData, Perfil, Sectio, AddButton, SelectBox, InputControl }

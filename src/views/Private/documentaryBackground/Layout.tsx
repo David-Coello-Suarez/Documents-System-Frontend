@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { AddButton } from "../../../components/iu"
+import { AddButton } from "../../../components/views"
 import Lista from "./Lista"
 
 const Layout = () => {

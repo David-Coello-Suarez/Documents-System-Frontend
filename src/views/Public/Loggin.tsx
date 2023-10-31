@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom"
 import { useFormik } from "formik"
 import * as yup from "yup"
-import { InputControl } from "@/components/iu"
-import { useAppSelector } from "@/hooks/useAppSelector"
-import { iusuari } from "@/interfaces/iusuari"
-import { useAppDispatch } from "@/hooks/useAppDispatch"
-import { post_loggin } from "@/controllers/loggin"
+import { useAppDispatch, useAppSelector } from "../../hooks"
+import { iusuari } from "../../interfaces"
+import { post_loggin } from "../../controllers/loggin"
+import { InputControl } from "../../components/views"
 
 const Loggin = () => {
   const dispatch = useAppDispatch()
@@ -45,7 +44,7 @@ const Loggin = () => {
           handleBlur={formik.handleBlur}
           handleChange={formik.handleChange}
           value={formik.values.nombreusuario}
-          classInvalid={Boolean(formik.errors.nombreusuario)}
+          classInvalid={formik.errors.nombreusuario}
         />
 
         <InputControl
@@ -56,7 +55,7 @@ const Loggin = () => {
           handleBlur={formik.handleBlur}
           handleChange={formik.handleChange}
           value={formik.values.contrasena}
-          classInvalid={Boolean(formik.errors.contrasena)}
+          classInvalid={formik.errors.contrasena}
         />
         {/* <div className="form-group text-right">
           <a href="forgot-password.html">Forgot your password?</a>

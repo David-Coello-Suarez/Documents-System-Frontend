@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { AddButton } from "../../../components/iu"
+import { AddButton } from "../../../components/views"
 import { useAppDispatch } from "../../../hooks"
 import { get_usuaris } from "../../../controllers/usuari"
 import { clean_usuaris } from "../../../reducers/usuari"

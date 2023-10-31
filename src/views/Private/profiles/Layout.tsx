@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useAppDispatch } from "../../../hooks"
 import { get_perfils } from "../../../controllers/profil"
 import { clean_perfiles } from "../../../reducers/perfil"
-import { AddButton } from "../../../components/iu"
+import { AddButton } from "../../../components/views"
 import Perfil from "./Perfil"
 
 const Layout = () => {

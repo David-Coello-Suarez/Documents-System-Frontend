@@ -4,7 +4,9 @@ import { useFormik } from "formik"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { SectioSchema } from "../../../validation"
 import { clean_form_sectio } from "../../../reducers/sectio"
-import { ButtonSave, InputControl } from "../../../components/iu"
+import { InputControl } from "../../../components/views"
+import { ButtonSave } from "../../../components/iu"
+import FonDocActive from "./FonDocActive"
 
 const Form = () => {
   const navigate = useNavigate()
@@ -44,6 +46,14 @@ const Form = () => {
       <div className="row">
         <div className="col-lg-8 offset-lg-2">
           <form onSubmit={handleSubmit}>
+            <FonDocActive
+              nameSelect={"fondoc_fondoc"}
+              handleChange={console.log}
+              value={0}
+              displayLabel={"Fondo Documental"}
+              classInvalid={errors.fondoc_fondoc}
+            />
+
             <InputControl
               required
               titleLabel="Nombre sección"
@@ -68,7 +78,7 @@ const Form = () => {
               titleSaveButton={`${
                 values.sectio_sectio === 0 ? "CREAR" : "Actualizar"
               } Sección`}
-              disabled={false}
+              disabled={loadin_loadin}
               handleBack={handleBack}
             />
           </form>

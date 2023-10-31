@@ -6,6 +6,7 @@ const initialState = {
   loadin_loadin: false,
   sectios_sectios: Array<isectio>(),
   sectio_sectio: {
+    fondoc_fondoc: 0,
     sectio_sectio: 0,
     sectio_nombre: "",
     sectio_abbrev: "",

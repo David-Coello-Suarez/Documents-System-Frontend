@@ -2,9 +2,10 @@ import { memo, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { useFormik } from "formik"
-import { ButtonSave, InputControl } from "../../../components/iu"
 import { clean_fondoc_form } from "../../../reducers/fondoc"
 import { FonDocSchema } from "../../../validation"
+import { ButtonSave } from "../../../components/iu"
+import { InputControl } from "../../../components/views"
 
 const FonDoc = () => {
   const dispatch = useAppDispatch()

@@ -22,6 +22,7 @@ export const FonDocSchema = yup.object<ifondoc>().shape({
 })
 
 export const SectioSchema = yup.object<ifondoc>().shape({
+  fondoc_fondoc: yup.number().min(1, "Selecciona fondo documental"),
   sectio_abbrev: yup.string().required("Abreviatura es requerido"),
   sectio_nombre: yup.string().required("Nombre es requerido"),
 })

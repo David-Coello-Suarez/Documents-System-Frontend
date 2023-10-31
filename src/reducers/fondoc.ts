@@ -2,7 +2,8 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { ifondoc } from "../interfaces"
 
 const initialState = {
-  fondoc_fondoc: [
+  loadin_loadin: false,
+  fondocs_fondocs: [
     {
       fondoc_fondoc: 1,
       fondoc_abrevi: "ADD 1",
@@ -39,9 +40,13 @@ const FonDocSlice = createSlice({
     clean_fondoc_form: (state) => {
       state.fondoc_state = initialState.fondoc_state
     },
+    clean_fondocs: (state) => {
+      state.fondoc_fondoc = initialState.fondoc_fondoc
+    },
   },
 })
 
 export const FonDocReducer = FonDocSlice.reducer
 
-export const { set_fondoc, clean_fondoc_form } = FonDocSlice.actions
+export const { set_fondoc, clean_fondocs, clean_fondoc_form } =
+  FonDocSlice.actions

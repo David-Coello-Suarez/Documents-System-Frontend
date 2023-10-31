@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import Sections from "./Sections"
-import { AddButton } from "../../../components/iu"
+import { AddButton } from "../../../components/views"
 
 const Layout = () => {
   const navigate = useNavigate()

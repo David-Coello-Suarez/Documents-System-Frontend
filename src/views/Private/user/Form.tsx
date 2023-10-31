@@ -3,12 +3,12 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { post_usuari, put_usuari } from "../../../controllers/usuari"
 import { iusuari } from "../../../interfaces"
 import { useFormik } from "formik"
-import { ButtonSave, InputControl } from "../../../components/iu"
 import moment from "moment"
 import { useEffect } from "react"
 import { clean_form_usuari } from "../../../reducers/usuari"
 import { UsuarioSchema } from "../../../validation"
-import { Perfil } from "../../../components/views"
+import { InputControl, Perfil } from "../../../components/views"
+import { ButtonSave } from "../../../components/iu"
 
 const Form = () => {
   const dispatch = useAppDispatch()
