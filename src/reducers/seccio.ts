@@ -1,72 +1,73 @@
 import { PayloadAction, createSlice, isRejected } from "@reduxjs/toolkit"
 import { toast, Id } from "react-toastify"
+import { iseccio } from "../interfaces"
 import {
-  delete_fondoc,
-  get_fondoc_active,
-  get_fondocs,
-  post_fondoc,
-  put_fondoc,
-} from "../controllers/fondoc"
-import { ifondoc } from "../interfaces"
+  delete_seccio,
+  get_seccio_active,
+  get_seccios,
+  post_seccio,
+  put_seccio,
+} from "../controllers/seccio"
 
 const initialState = {
   loadin_loadin: false,
-  fondocs_fondocs: Array<ifondoc>(),
-  fondoc_paginat: { pagina: 0, limite: 0, totalItems: 0, totalPaginas: 0 },
-  fondoc_state: {
+  seccios_seccios: Array<iseccio>(),
+  seccio_paginat: { pagina: 0, limite: 0, totalItems: 0, totalPaginas: 0 },
+  seccio_seccio: {
     fondoc_fondoc: 0,
     fondoc_nombre: "",
-    fondoc_descri: "",
-    fondoc_status: 1,
+
+    seccio_seccio: 0,
+    seccio_nombre: "",
+    seccio_abrevi: "",
+    seccio_status: 1,
   },
 }
 
 let toastId: Id
 
-const FonDocSlice = createSlice({
-  name: "fondoc",
+const SeccioSlice = createSlice({
+  name: "sectio",
   initialState,
   reducers: {
-    set_fondoc: (state, { payload }: PayloadAction<ifondoc>) => {
-      state.fondoc_state = payload
+    clean_seccios: (state) => {
+      state.seccios_seccios = initialState.seccios_seccios
     },
-    clean_fondoc_form: (state) => {
-      state.fondoc_state = initialState.fondoc_state
+    set_form_seccio: (state, { payload }: PayloadAction<iseccio>) => {
+      state.seccio_seccio = payload
     },
-    clean_fondocs: (state) => {
-      state.fondocs_fondocs = initialState.fondocs_fondocs
+    clean_form_seccio: (state) => {
+      state.seccio_seccio = initialState.seccio_seccio
     },
   },
   extraReducers(builder) {
     builder
-      .addCase(get_fondocs.pending, (state) => {
+      .addCase(get_seccios.pending, (state) => {
         state.loadin_loadin = true
       })
-      .addCase(get_fondocs.fulfilled, (state, { payload }) => {
+      .addCase(get_seccios.fulfilled, (state, { payload }) => {
         state.loadin_loadin = false
 
         const { estado, data } = payload
 
         if (estado === 1) {
-          state.fondocs_fondocs = data.fondocs
-          state.fondoc_paginat = data.paginacion
+          state.seccios_seccios = data.seccios
+          state.seccio_paginat = data.paginacion
         } else {
-          state.fondocs_fondocs = initialState.fondocs_fondocs
-          state.fondoc_paginat = initialState.fondoc_paginat
+          state.seccios_seccios = initialState.seccios_seccios
+          state.seccio_paginat = initialState.seccio_paginat
         }
       })
 
-      .addCase(get_fondoc_active.pending, () => {
-        toastId = toast.loading(
-          "Obteniendo Fondos Documentales Disponibles.....",
-        )
+      .addCase(get_seccio_active.pending, () => {
+        toastId = toast.loading("Obteniendo Secciones Disponibles.....")
       })
-      .addCase(get_fondoc_active.fulfilled, (state, { payload }) => {
+      .addCase(get_seccio_active.fulfilled, (state, { payload }) => {
         const { estado, mensaje, data } = payload
 
         if (estado === 1) {
           toast.dismiss(toastId)
-          state.fondocs_fondocs = data.fondocs
+          state.seccios_seccios = data.seccios
         } else {
           toast.update(toastId, {
             render: mensaje,
@@ -77,10 +78,10 @@ const FonDocSlice = createSlice({
         }
       })
 
-      .addCase(post_fondoc.pending, () => {
-        toastId = toast.loading("Creando Fondo Documental....")
+      .addCase(post_seccio.pending, () => {
+        toastId = toast.loading("Creando Sección....")
       })
-      .addCase(post_fondoc.fulfilled, (_, { payload }) => {
+      .addCase(post_seccio.fulfilled, (_, { payload }) => {
         const { estado, mensaje } = payload
 
         if (estado === 1) {
@@ -100,10 +101,10 @@ const FonDocSlice = createSlice({
         }
       })
 
-      .addCase(put_fondoc.pending, () => {
-        toastId = toast.loading("Actualizando Fondo Documental....")
+      .addCase(put_seccio.pending, () => {
+        toastId = toast.loading("Actualizando Sección....")
       })
-      .addCase(put_fondoc.fulfilled, (_, { payload }) => {
+      .addCase(put_seccio.fulfilled, (_, { payload }) => {
         const { estado, mensaje } = payload
 
         if (estado === 1) {
@@ -123,10 +124,10 @@ const FonDocSlice = createSlice({
         }
       })
 
-      .addCase(delete_fondoc.pending, () => {
-        toastId = toast.loading("Eliminando Fondo Documental....")
+      .addCase(delete_seccio.pending, () => {
+        toastId = toast.loading("Eliminando Sección....")
       })
-      .addCase(delete_fondoc.fulfilled, (_, { payload }) => {
+      .addCase(delete_seccio.fulfilled, (_, { payload }) => {
         const { estado, mensaje } = payload
 
         if (estado === 1) {
@@ -158,7 +159,7 @@ const FonDocSlice = createSlice({
   },
 })
 
-export const FonDocReducer = FonDocSlice.reducer
+export const SeccioReducer = SeccioSlice.reducer
 
-export const { set_fondoc, clean_fondocs, clean_fondoc_form } =
-  FonDocSlice.actions
+export const { clean_seccios, set_form_seccio, clean_form_seccio } =
+  SeccioSlice.actions

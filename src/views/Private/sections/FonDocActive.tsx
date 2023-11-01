@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { clean_fondocs } from "../../../reducers/fondoc"
 import { SelectBox } from "../../../components/views"
+import { get_fondoc_active } from "../../../controllers/fondoc"
 
 interface isectio {
   nameSelect: string
@@ -15,7 +16,7 @@ const FonDocActive = (element: isectio) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    // dispatch(get_countrs_active())
+    dispatch(get_fondoc_active())
 
     return () => {
       dispatch(clean_fondocs())

@@ -2,7 +2,7 @@ import { FonDocReducer } from "./fondoc"
 import { LogginReducer } from "./loggin"
 import { PerfilReducer } from "./perfil"
 import { PermisReducer } from "./permis"
-import { SectioReducer } from "./sectio"
+import { SeccioReducer } from "./seccio"
 import { SeriesReducer } from "./series"
 import { SidebaReducer } from "./sideba"
 import { SubsecReducer } from "./subsec"
@@ -16,7 +16,7 @@ export const reducer = {
   usuari: UsuariReducer,
   permis: PermisReducer,
   loggin: LogginReducer,
-  sectio: SectioReducer,
+  seccio: SeccioReducer,
   subsec: SubsecReducer,
   series: SeriesReducer,
   subser: SubserReducer,

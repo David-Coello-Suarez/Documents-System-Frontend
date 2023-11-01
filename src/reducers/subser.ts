@@ -17,7 +17,7 @@ const initialState = {
   },
 }
 
-// let countr_toastId: Id
+// let toastId: Id
 
 const SubserSlice = createSlice({
   name: "series",

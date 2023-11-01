@@ -6,10 +6,10 @@ import { isideba } from "./isideba"
 import { iusuari } from "./iusuari"
 import { ipermod } from "./ipermod"
 import { iloggin } from "./iloggin"
-import { isectio } from "./isectio"
 import { isubsec } from "./isubsec"
 import { iseries } from "./iseries"
 import { isubser } from "./isubser"
+import { iseccio } from "./iseccio"
 
 export type {
   ipermod,
@@ -20,8 +20,8 @@ export type {
   iprofil,
   iusuari,
   iloggin,
-  isectio,
   isubsec,
   iseries,
-  isubser
+  isubser,
+  iseccio,
 }

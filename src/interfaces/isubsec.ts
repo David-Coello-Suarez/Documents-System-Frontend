@@ -1,8 +1,11 @@
 export interface isubsec {
-  sectio_sectio: number
-  sectio_nombre: string
+  fondoc_fondoc: number
+  fondoc_nombre: number
+
+  seccio_seccio: number
+  seccio_nombre: string
+
   subsec_subsec: number
   subsec_nombre: string
-  subsec_abrevv: string
-  subsec_status: number
+  subsec_status: string
 }

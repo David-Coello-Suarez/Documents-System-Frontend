@@ -1,10 +1,14 @@
-import { Switch, Table } from "antd"
-import { NotData } from "../../../components/views"
-import { ColumnsType } from "antd/es/table"
-import { isectio } from "../../../interfaces"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { useNavigate } from "react-router-dom"
-import { set_form_sectio } from "../../../reducers/sectio"
+import { NotData } from "../../../components/views"
+import { ColumnsType, Switch, Table, Pagination } from "../../../components/iu"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { iseccio } from "../../../interfaces"
+import { set_form_seccio } from "../../../reducers/seccio"
+import {
+  delete_seccio,
+  get_seccios,
+  put_seccio,
+} from "../../../controllers/seccio"
 
 interface isections {
   handleClickAdd: () => void
@@ -14,31 +18,38 @@ const Sections = ({ handleClickAdd }: isections) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { loadin_loadin, sectios_sectios } = useAppSelector(
-    (state) => state.sectio,
+  const { loadin_loadin, seccios_seccios, seccio_paginat } = useAppSelector(
+    (state) => state.seccio,
   )
 
-  const handleEdita = (sectio: isectio) => {
-    dispatch(set_form_sectio(sectio))
-    navigate(`edit/${sectio.sectio_sectio}`)
+  const { totalItems, limite, pagina } = seccio_paginat
+
+  const handleEdita = (seccio: iseccio) => {
+    dispatch(set_form_seccio(seccio))
+    navigate(`edit/${seccio.seccio_seccio}`)
   }
 
-  const columns: ColumnsType<isectio> = [
-    { title: "Sección", dataIndex: "sectio_nombre" },
-    { title: "Abreviatura", dataIndex: "sectio_abbrev" },
+  const handleDelete = (body: iseccio) => {
+    dispatch(delete_seccio({ body }))
+  }
+
+  const columns: ColumnsType<iseccio> = [
+    { title: "Fondo Doc.", dataIndex: "fondoc_nombre" },
+    { title: "Sección", dataIndex: "seccio_nombre" },
+    { title: "Abreviatura", dataIndex: "seccio_abrevi" },
     {
       title: "Estado",
-      dataIndex: "sectio_status",
+      dataIndex: "seccio_status",
       className: "text-center",
       render: (_x, record) => {
-        const value_estatus = Number(record.sectio_status) === 1
+        const value_estatus = Number(record.seccio_status) === 1
 
         const handleChecked = () => {
           const body = Object.assign({}, record)
 
-          value_estatus ? (body.sectio_status = 0) : (body.sectio_status = 1)
+          value_estatus ? (body.seccio_status = 2) : (body.seccio_status = 1)
 
-          //   dispatch(put_perfil({ body }))
+          dispatch(put_seccio({ body }))
         }
 
         const classStyle = value_estatus ? "bg-success" : "bg-warning"
@@ -69,7 +80,7 @@ const Sections = ({ handleClickAdd }: isections) => {
           </button>
           <button
             className="btn btn-outline-danger btn-sm"
-            // onClick={() => handleDelete(record)}
+            onClick={() => handleDelete(record)}
           >
             <i className="fa fa-trash" />
           </button>
@@ -82,15 +93,15 @@ const Sections = ({ handleClickAdd }: isections) => {
     <>
       <div className="row">
         <div className="col-md-12">
-          <Table
+          <Table<iseccio>
             bordered
             size="small"
             columns={columns}
             className="m-b-20"
             pagination={false}
             loading={loadin_loadin}
-            dataSource={sectios_sectios}
-            rowKey={(sectio) => sectio.sectio_sectio}
+            dataSource={seccios_seccios}
+            rowKey={(seccio) => seccio.seccio_seccio}
             locale={{
               emptyText: (
                 <NotData
@@ -100,6 +111,27 @@ const Sections = ({ handleClickAdd }: isections) => {
               ),
             }}
           />
+
+          {seccios_seccios.length > 0 && (
+            <>
+              <Pagination
+                onChange={(pagina, limite) =>
+                  dispatch(get_seccios({ ...seccio_paginat, pagina, limite }))
+                }
+                responsive
+                className="text-center"
+                total={totalItems}
+                showSizeChanger
+                showTotal={(total, range) =>
+                  `Mostrando del ${range[0]} a ${range[1]} de ${total} items`
+                }
+                defaultPageSize={limite}
+                defaultCurrent={pagina}
+                pageSizeOptions={[10, 50, 100]}
+                size="small"
+              />
+            </>
+          )}
         </div>
       </div>
     </>

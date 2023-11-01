@@ -22,7 +22,7 @@ const initialState = {
   },
 }
 
-let countr_toastId: Id
+let toastId: Id
 
 const ProfilSlice = createSlice({
   name: "perfil",
@@ -79,20 +79,20 @@ const ProfilSlice = createSlice({
 
     builder
       .addCase(post_prefil.pending, () => {
-        countr_toastId = toast.loading("Creando perfil....")
+        toastId = toast.loading("Creando perfil....")
       })
       .addCase(post_prefil.fulfilled, (_, { payload }) => {
         const { estado, mensaje } = payload
 
         if (estado === 1) {
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "success",
             isLoading: false,
             autoClose: 3000,
           })
         } else {
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "warning",
             isLoading: false,
@@ -103,20 +103,20 @@ const ProfilSlice = createSlice({
 
     builder
       .addCase(put_perfil.pending, () => {
-        countr_toastId = toast.loading("Actualizando perfil....")
+        toastId = toast.loading("Actualizando perfil....")
       })
       .addCase(put_perfil.fulfilled, (_, { payload }) => {
         const { estado, mensaje } = payload
 
         if (estado === 1) {
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "success",
             isLoading: false,
             autoClose: 3000,
           })
         } else {
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "warning",
             isLoading: false,
@@ -127,20 +127,20 @@ const ProfilSlice = createSlice({
 
     builder
       .addCase(delete_perfil.pending, () => {
-        countr_toastId = toast.loading("Eliminando perfil....")
+        toastId = toast.loading("Eliminando perfil....")
       })
       .addCase(delete_perfil.fulfilled, (_, { payload }) => {
         const { estado, mensaje } = payload
 
         if (estado === 1) {
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "success",
             isLoading: false,
             autoClose: 3000,
           })
         } else {
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "warning",
             isLoading: false,

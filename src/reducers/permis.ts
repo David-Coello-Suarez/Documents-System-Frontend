@@ -13,7 +13,7 @@ const initialState = {
   permis_modulo: Array<ipermod>(),
 }
 
-let countr_toastId: Id
+let toastId: Id
 
 const PermisSlice = createSlice({
   name: "permis",
@@ -34,7 +34,7 @@ const PermisSlice = createSlice({
         if (estado === 1) {
           state.modulo_modulo = data.sideba
         } else {
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "warning",
             isLoading: false,
@@ -49,7 +49,7 @@ const PermisSlice = createSlice({
         if (estado === 1) {
           state.permis_cabece = data.cabecera
         } else {
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "warning",
             isLoading: false,
@@ -65,7 +65,7 @@ const PermisSlice = createSlice({
           state.permis_modulo = data.sideba
         } else {
           state.permis_modulo = initialState.permis_modulo
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "warning",
             isLoading: false,

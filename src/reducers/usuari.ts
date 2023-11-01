@@ -31,7 +31,7 @@ const initialState = {
   },
 }
 
-let countr_toastId: Id
+let toastId: Id
 
 const UsuariSlice = createSlice({
   name: "usuari",
@@ -72,20 +72,20 @@ const UsuariSlice = createSlice({
       })
 
       .addCase(put_usuari.pending, () => {
-        countr_toastId = toast.loading("Actualizando usuario....")
+        toastId = toast.loading("Actualizando usuario....")
       })
       .addCase(put_usuari.fulfilled, (_, { payload }) => {
         const { estado, mensaje } = payload
 
         if (estado === 1) {
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "success",
             isLoading: false,
             autoClose: 2000,
           })
         } else {
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "warning",
             isLoading: false,
@@ -95,7 +95,7 @@ const UsuariSlice = createSlice({
       })
 
       .addCase(post_usuari.pending, () => {
-        countr_toastId = toast.loading("Creando usuario....")
+        toastId = toast.loading("Creando usuario....")
       })
       .addCase(post_usuari.fulfilled, (state, { payload }) => {
         const { estado, mensaje, data } = payload
@@ -104,14 +104,14 @@ const UsuariSlice = createSlice({
           state.usuari_creado = data.usuario_creado
           state.usuari_opemod.isOpen = true
 
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "success",
             isLoading: false,
             autoClose: 3000,
           })
         } else {
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "warning",
             isLoading: false,
@@ -121,20 +121,20 @@ const UsuariSlice = createSlice({
       })
 
       .addCase(delete_usuari.pending, () => {
-        countr_toastId = toast.loading("Creando usuario....")
+        toastId = toast.loading("Creando usuario....")
       })
       .addCase(delete_usuari.fulfilled, (_, { payload }) => {
         const { estado, mensaje } = payload
 
         if (estado === 1) {
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "success",
             isLoading: false,
             autoClose: 3000,
           })
         } else {
-          toast.update(countr_toastId, {
+          toast.update(toastId, {
             render: mensaje,
             type: "warning",
             isLoading: false,
@@ -144,7 +144,7 @@ const UsuariSlice = createSlice({
       })
 
       .addMatcher(isRejected, () => {
-        toast.update(countr_toastId, {
+        toast.update(toastId, {
           render:
             "Se a producido un error. Ponte en contacto con el administrador",
           type: "error",

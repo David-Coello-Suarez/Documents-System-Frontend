@@ -3,34 +3,53 @@ import { useNavigate } from "react-router-dom"
 import { useFormik } from "formik"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { SectioSchema } from "../../../validation"
-import { clean_form_sectio } from "../../../reducers/sectio"
 import { InputControl } from "../../../components/views"
 import { ButtonSave } from "../../../components/iu"
 import FonDocActive from "./FonDocActive"
+import { clean_form_seccio } from "../../../reducers/seccio"
+import { iseccio } from "../../../interfaces"
+import { post_seccio, put_seccio } from "../../../controllers/seccio"
 
 const Form = () => {
   const navigate = useNavigate()
 
   const dispatch = useAppDispatch()
 
-  const { loadin_loadin, sectio_sectio } = useAppSelector(
-    (state) => state.sectio,
+  const { loadin_loadin, seccio_seccio } = useAppSelector(
+    (state) => state.seccio,
   )
 
   useEffect(() => {
     return () => {
-      dispatch(clean_form_sectio())
+      dispatch(clean_form_seccio())
     }
   }, [dispatch])
 
+  const handleSave = (body: iseccio) => {
+    const data = { body, navigate }
+
+    if (body.seccio_seccio === 0) {
+      dispatch(post_seccio(data))
+    } else {
+      dispatch(put_seccio(data))
+    }
+  }
+
   const handleBack = () => navigate(-1)
 
-  const { errors, values, handleBlur, handleChange, handleSubmit } = useFormik({
+  const {
+    errors,
+    values,
+    setFieldValue,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = useFormik({
     enableReinitialize: true,
-    initialValues: sectio_sectio,
+    initialValues: seccio_seccio,
     validationSchema: SectioSchema,
     validateOnChange: false,
-    onSubmit: console.log,
+    onSubmit: handleSave,
   })
 
   return (
@@ -38,7 +57,7 @@ const Form = () => {
       <div className="row">
         <div className="col-lg-8 offset-lg-2">
           <h4 className="page-title text-uppercase">
-            {values.sectio_sectio === 0 ? "Añadir" : "Actualizar"} Sección
+            {values.seccio_seccio === 0 ? "Añadir" : "Actualizar"} Sección
           </h4>
         </div>
       </div>
@@ -48,8 +67,8 @@ const Form = () => {
           <form onSubmit={handleSubmit}>
             <FonDocActive
               nameSelect={"fondoc_fondoc"}
-              handleChange={console.log}
-              value={0}
+              handleChange={(fondoc) => setFieldValue("fondoc_fondoc", fondoc)}
+              value={values.fondoc_fondoc}
               displayLabel={"Fondo Documental"}
               classInvalid={errors.fondoc_fondoc}
             />
@@ -57,26 +76,26 @@ const Form = () => {
             <InputControl
               required
               titleLabel="Nombre sección"
-              nameInput={"sectio_nombre"}
+              nameInput={"seccio_nombre"}
               handleBlur={handleBlur}
               handleChange={handleChange}
-              value={values.sectio_nombre}
-              classInvalid={errors.sectio_nombre}
+              value={values.seccio_nombre}
+              classInvalid={errors.seccio_nombre}
             />
 
             <InputControl
               required
               titleLabel="Abreviatura sección"
-              nameInput={"sectio_abbrev"}
+              nameInput={"seccio_abrevi"}
               handleBlur={handleBlur}
               handleChange={handleChange}
-              value={values.sectio_abbrev}
-              classInvalid={errors.sectio_abbrev}
+              value={values.seccio_abrevi}
+              classInvalid={errors.seccio_abrevi}
             />
 
             <ButtonSave
               titleSaveButton={`${
-                values.sectio_sectio === 0 ? "CREAR" : "Actualizar"
+                values.seccio_seccio === 0 ? "CREAR" : "Actualizar"
               } Sección`}
               disabled={loadin_loadin}
               handleBack={handleBack}
