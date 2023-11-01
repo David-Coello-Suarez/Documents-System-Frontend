@@ -29,9 +29,12 @@ export const get_seccios = createAsyncThunk(
 
 export const get_seccio_active = createAsyncThunk(
   `${file}/get_seccio_active`,
-  async () => {
+  async (fondoc: number) => {
     const { data } = await instanciaAxios.get<irespue<iressu>>(
       `/${rute}/active`,
+      {
+        params: { fondoc },
+      },
     )
 
     return data
@@ -62,6 +65,7 @@ export const put_seccio = createAsyncThunk(
       navigate(-1)
     }
 
+    console.log(data)
     thunk.dispatch(get_seccios())
 
     return data

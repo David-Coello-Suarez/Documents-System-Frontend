@@ -6,6 +6,9 @@ import { clean_form_subsec } from "../../../reducers/subsec"
 import { SubsecSchema } from "../../../validation"
 import InputControl from "../../../components/views/InputControl"
 import { ButtonSave } from "../../../components/iu"
+import { FondocActive, SeccioActive } from "../../../components/uiBoxSelect/"
+import { isubsec } from "../../../interfaces"
+import { post_subsec, put_subsec } from "../../../controllers/subsec"
 
 const Form = () => {
   const navigate = useNavigate()
@@ -22,14 +25,31 @@ const Form = () => {
     }
   }, [dispatch])
 
+  const handleSave = (body: isubsec) => {
+    const data = { body, navigate }
+
+    if (body.subsec_subsec === 0) {
+      dispatch(post_subsec(data))
+    } else {
+      dispatch(put_subsec(data))
+    }
+  }
+
   const handleBack = () => navigate(-1)
 
-  const { errors, values, handleBlur, handleChange, handleSubmit } = useFormik({
+  const {
+    errors,
+    values,
+    setFieldValue,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = useFormik({
     enableReinitialize: true,
     initialValues: subsec_subsec,
     validationSchema: SubsecSchema,
     validateOnChange: false,
-    onSubmit: console.log,
+    onSubmit: handleSave,
   })
 
   return (
@@ -46,13 +66,31 @@ const Form = () => {
       <div className="row">
         <div className="col-lg-8 offset-lg-2">
           <form onSubmit={handleSubmit}>
-            {/* <FonDocActive
-              nameSelect={"fondoc_fondoc"}
-              handleChange={console.log}
-              value={0}
-              displayLabel={"Fondo Documental"}
-              classInvalid={errors.fondoc_fondoc}
-            /> */}
+            <div className="row">
+              <div className="col-md-6">
+                <FondocActive
+                  nameSelect={"fondoc_fondoc"}
+                  handleChange={(fondoc) =>
+                    setFieldValue("fondoc_fondoc", fondoc)
+                  }
+                  value={values.fondoc_fondoc}
+                  displayLabel={"Fondo Documental"}
+                  classInvalid={errors.fondoc_fondoc}
+                />
+              </div>
+              <div className="col-md-6">
+                <SeccioActive
+                  displayLabel={"Sección"}
+                  nameSelect={"seccio_seccio"}
+                  value={values.seccio_seccio}
+                  classInvalid={errors.seccio_seccio}
+                  refreshValue={values.fondoc_fondoc}
+                  handleChange={(seccio) =>
+                    setFieldValue("seccio_seccio", seccio)
+                  }
+                />
+              </div>
+            </div>
 
             <InputControl
               required
@@ -64,19 +102,9 @@ const Form = () => {
               classInvalid={errors.subsec_nombre}
             />
 
-            <InputControl
-              required
-              titleLabel="Abreviatura subsección"
-              nameInput={"subsec_abrevv"}
-              handleBlur={handleBlur}
-              handleChange={handleChange}
-              value={values.subsec_abrevv}
-              classInvalid={errors.subsec_abrevv}
-            />
-
             <ButtonSave
               titleSaveButton={`${
-                values.sectio_sectio === 0 ? "CREAR" : "Actualizar"
+                values.subsec_subsec === 0 ? "CREAR" : "Actualizar"
               } Subsección`}
               disabled={loadin_loadin}
               handleBack={handleBack}

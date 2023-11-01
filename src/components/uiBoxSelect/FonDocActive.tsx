@@ -1,8 +1,8 @@
 import { useEffect } from "react"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { clean_fondocs } from "../../../reducers/fondoc"
-import { SelectBox } from "../../../components/views"
-import { get_fondoc_active } from "../../../controllers/fondoc"
+import { useAppDispatch, useAppSelector } from "../../hooks"
+import { clean_fondocs } from "../../reducers/fondoc"
+import { SelectBox } from "../views"
+import { get_fondoc_active } from "../../controllers/fondoc"
 
 interface isectio {
   nameSelect: string

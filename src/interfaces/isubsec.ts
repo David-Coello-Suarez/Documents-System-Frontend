@@ -7,5 +7,5 @@ export interface isubsec {
 
   subsec_subsec: number
   subsec_nombre: string
-  subsec_status: string
+  subsec_status: number
 }

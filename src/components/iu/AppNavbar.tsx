@@ -21,10 +21,6 @@ const AppNavbar = () => {
       </a>
 
       <ul className="nav user-menu float-right">
-        <li className="nav-item dropdown">{/* <AppNotification /> */}</li>
-
-        <li className="nav-item dropdown">{/* <AppMessage /> */}</li>
-
         <li className="nav-item dropdown has-arrow">
           <AppUser />
         </li>

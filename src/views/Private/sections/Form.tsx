@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { SectioSchema } from "../../../validation"
 import { InputControl } from "../../../components/views"
 import { ButtonSave } from "../../../components/iu"
-import FonDocActive from "./FonDocActive"
+import { FondocActive } from "../../../components/uiBoxSelect"
 import { clean_form_seccio } from "../../../reducers/seccio"
 import { iseccio } from "../../../interfaces"
 import { post_seccio, put_seccio } from "../../../controllers/seccio"
@@ -65,7 +65,7 @@ const Form = () => {
       <div className="row">
         <div className="col-lg-8 offset-lg-2">
           <form onSubmit={handleSubmit}>
-            <FonDocActive
+            <FondocActive
               nameSelect={"fondoc_fondoc"}
               handleChange={(fondoc) => setFieldValue("fondoc_fondoc", fondoc)}
               value={values.fondoc_fondoc}

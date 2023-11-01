@@ -28,8 +28,8 @@ export const SectioSchema = yup.object<ifondoc>().shape({
 })
 
 export const SubsecSchema = yup.object<isubsec>().shape({
-  sectio_sectio: yup.number().min(1, "Selecciona secciión"),
-  subsec_abrevv: yup.string().required("Abreviatura es requerido"),
+  fondoc_fondoc: yup.number().min(1, "Selecciona un fondo documental"),
+  seccio_seccio: yup.number().min(1, "Selecciona seción"),
   subsec_nombre: yup.string().required("Nombre es requerido"),
 })
 
