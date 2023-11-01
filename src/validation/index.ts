@@ -17,7 +17,7 @@ export const UsuarioSchema = yup.object<iusuari>().shape({
 })
 
 export const FonDocSchema = yup.object<ifondoc>().shape({
-  fondoc_abrevi: yup.string().required("Abreviatura es requerido"),
+  fondoc_descri: yup.string().required("Descripción es requerido"),
   fondoc_nombre: yup.string().required("Nombre es requerido"),
 })
 

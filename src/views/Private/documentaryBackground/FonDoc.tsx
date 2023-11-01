@@ -6,6 +6,8 @@ import { clean_fondoc_form } from "../../../reducers/fondoc"
 import { FonDocSchema } from "../../../validation"
 import { ButtonSave } from "../../../components/iu"
 import { InputControl } from "../../../components/views"
+import { ifondoc } from "../../../interfaces"
+import { post_fondoc, put_fondoc } from "../../../controllers/fondoc"
 
 const FonDoc = () => {
   const dispatch = useAppDispatch()
@@ -14,6 +16,16 @@ const FonDoc = () => {
   const handleBack = () => navigate(-1)
 
   const { fondoc_state } = useAppSelector((state) => state.fondoc)
+
+  const handleSave = (body: ifondoc) => {
+    const data = { body, navigate }
+
+    if (body.fondoc_fondoc === 0) {
+      dispatch(post_fondoc(data))
+    } else {
+      dispatch(put_fondoc(data))
+    }
+  }
 
   useEffect(() => {
     return () => {
@@ -25,7 +37,7 @@ const FonDoc = () => {
     enableReinitialize: true,
     validationSchema: FonDocSchema,
     initialValues: fondoc_state,
-    onSubmit: console.log,
+    onSubmit: handleSave,
     validateOnChange: false,
   })
 
@@ -43,29 +55,25 @@ const FonDoc = () => {
       <div className="row">
         <div className="col-lg-8 offset-lg-2">
           <form onSubmit={formik.handleSubmit}>
-            <div className="form-group mb-2">
-              <InputControl
-                required
-                titleLabel="Abreviatura"
-                nameInput={"fondoc_abrevi"}
-                handleBlur={formik.handleBlur}
-                handleChange={formik.handleChange}
-                value={formik.values.fondoc_abrevi}
-                classInvalid={formik.errors.fondoc_abrevi}
-              />
-            </div>
+            <InputControl
+              required
+              titleLabel="Nombre"
+              nameInput={"fondoc_nombre"}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              value={formik.values.fondoc_nombre}
+              classInvalid={formik.errors.fondoc_nombre}
+            />
 
-            <div className="form-group mb-2">
-              <InputControl
-                required
-                titleLabel="Nombre"
-                nameInput={"fondoc_nombre"}
-                handleBlur={formik.handleBlur}
-                handleChange={formik.handleChange}
-                value={formik.values.fondoc_nombre}
-                classInvalid={formik.errors.fondoc_nombre}
-              />
-            </div>
+            <InputControl
+              required
+              titleLabel="Abreviatura"
+              nameInput={"fondoc_descri"}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              value={formik.values.fondoc_descri}
+              classInvalid={formik.errors.fondoc_descri}
+            />
 
             <ButtonSave
               titleSaveButton={`${
