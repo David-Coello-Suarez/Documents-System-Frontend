@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom"
 import { AppNavbar, AppSidebar } from "../iu"
-import { useAppSelector } from "@/hooks/useAppSelector"
+import { useAppSelector } from "../../hooks"
 
 const Private = () => {
   const { token } = useAppSelector((state) => state.loggin.usuario_loggin)

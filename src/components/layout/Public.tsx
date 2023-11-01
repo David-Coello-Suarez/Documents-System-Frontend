@@ -1,5 +1,5 @@
-import { useAppSelector } from "@/hooks/useAppSelector"
 import { Navigate, Outlet } from "react-router-dom"
+import { useAppSelector } from "../../hooks"
 
 const Public = () => {
   const { token } = useAppSelector((state) => state.loggin.usuario_loggin)

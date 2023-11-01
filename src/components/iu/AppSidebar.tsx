@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import SimpleBar from "simplebar-react"
 import "simplebar-react/dist/simplebar.min.css"
@@ -11,8 +11,6 @@ const AppSidebar = () => {
   const dispatch = useAppDispatch()
 
   const { sideba_sideba } = useAppSelector((state) => state.sideba)
-
-  const path = useLocation().pathname
 
   useEffect(() => {
     dispatch(getSideba())

@@ -4,8 +4,9 @@ import { iprofil } from "../../../interfaces"
 import { post_prefil, put_perfil } from "../../../controllers/profil"
 import { useFormik } from "formik"
 import { clean_form_perfil } from "../../../reducers/perfil"
-import { AddButton } from "../../../components/views"
+import { InputControl } from "../../../components/views"
 import { ProfilSchema } from "../../../validation"
+import { ButtonSave } from "../../../components/iu"
 
 const Form = () => {
   const navigate = useNavigate()
