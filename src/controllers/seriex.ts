@@ -29,9 +29,12 @@ export const get_seriexs = createAsyncThunk(
 
 export const get_seriexs_active = createAsyncThunk(
   `${file}/get_seriexs_active`,
-  async () => {
+  async (subsec_subsec: number) => {
     const { data } = await instanciaAxios.get<irespue<iresser>>(
       `/${rute}/active`,
+      {
+        params: { subsec_subsec },
+      },
     )
 
     return data
@@ -61,7 +64,7 @@ export const put_seriex = createAsyncThunk(
     if (data.estado === 1 && navigate) {
       navigate(-1)
     }
-    
+
     thunk.dispatch(get_seriexs())
 
     return data

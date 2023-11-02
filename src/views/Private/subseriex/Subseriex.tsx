@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom"
-import { Table, Switch } from "antd"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { set_form_subser } from "../../../reducers/subser"
-import { ColumnsType } from "antd/es/table"
 import { NotData } from "../../../components/views"
+import { ColumnsType, Switch, Table } from "../../../components/iu"
+import { delete_subser, put_subser } from "../../../controllers/subser"
 import { isubser } from "../../../interfaces"
 
 interface iseriesc {
@@ -11,7 +11,7 @@ interface iseriesc {
   btnMsg: string
 }
 
-const Subseries = ({ handleClickAdd, btnMsg }: iseriesc) => {
+const Subseriex = ({ handleClickAdd, btnMsg }: iseriesc) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -21,28 +21,54 @@ const Subseries = ({ handleClickAdd, btnMsg }: iseriesc) => {
 
   const handleEdita = (subser: isubser) => {
     dispatch(set_form_subser(subser))
-    navigate(`edit/${subser.series_series}`)
+    navigate(`edit/${subser.subser_subser}`)
+  }
+
+  const handleDelete = (body: isubser) => {
+    dispatch(delete_subser({ body }))
   }
 
   const columns: ColumnsType<isubser> = [
-    { title: "Fondo Documental", dataIndex: "fondoc_nombre" },
-    { title: "Sección", dataIndex: "sectio_nombre" },
-    { title: "Sub Sección", dataIndex: "subsec_nombre" },
-    { title: "Serie", dataIndex: "series_nombre" },
-    { title: "Sub Serie", dataIndex: "subseri_nombre" },
+    {
+      ellipsis: true,
+      title: "Fondo Documental",
+      dataIndex: "fondoc_nombre",
+      sorter: (a, b) => a.fondoc_nombre.length - b.fondoc_nombre.length,
+    },
+    {
+      title: "Sección",
+      dataIndex: "seccio_nombre",
+      sorter: (a, b) => a.seccio_nombre.length - b.seccio_nombre.length,
+    },
+    {
+      title: "Sub Sección",
+      dataIndex: "subsec_nombre",
+      sorter: (a, b) => a.subsec_nombre.length - b.subsec_nombre.length,
+    },
+    {
+      title: "Serie",
+      dataIndex: "seriex_nombre",
+      sorter: (a, b) => a.seriex_nombre.length - b.seriex_nombre.length,
+    },
+    {
+      title: "Sub Serie",
+      dataIndex: "subser_nombre",
+      sorter: (a, b) => a.subser_nombre.length - b.subser_nombre.length,
+    },
     {
       title: "Estado",
-      dataIndex: "series_status",
       className: "text-center",
+      dataIndex: "subser_status",
+      sorter: (a, b) => a.subser_status - b.subser_status,
       render: (_x, record) => {
-        const value_estatus = Number(record.subseri_status) === 1
+        const value_estatus = Number(record.subser_status) === 1
 
         const handleChecked = () => {
           const body = Object.assign({}, record)
 
-          value_estatus ? (body.subseri_status = 0) : (body.subseri_status = 1)
+          value_estatus ? (body.subser_status = 2) : (body.subser_status = 1)
 
-          //   dispatch(put_perfil({ body }))
+          dispatch(put_subser({ body }))
         }
 
         const classStyle = value_estatus ? "bg-success" : "bg-warning"
@@ -73,7 +99,7 @@ const Subseries = ({ handleClickAdd, btnMsg }: iseriesc) => {
           </button>
           <button
             className="btn btn-outline-danger btn-sm"
-            // onClick={() => handleDelete(record)}
+            onClick={() => handleDelete(record)}
           >
             <i className="fa fa-trash" />
           </button>
@@ -94,8 +120,11 @@ const Subseries = ({ handleClickAdd, btnMsg }: iseriesc) => {
             pagination={false}
             loading={loadin_loadin}
             dataSource={subsers_subsers}
+            sortDirections={["ascend", "descend", "ascend"]}
             rowKey={(subser) => subser.subser_subser}
             locale={{
+              triggerDesc: "Click para ordernar desendentemente",
+              triggerAsc: "Click para ordernar asendentemente",
               emptyText: <NotData onclick={handleClickAdd} btnMssg={btnMsg} />,
             }}
           />
@@ -105,4 +134,4 @@ const Subseries = ({ handleClickAdd, btnMsg }: iseriesc) => {
   )
 }
 
-export default Subseries
+export default Subseriex

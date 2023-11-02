@@ -1,5 +1,12 @@
 import * as yup from "yup"
-import { ifondoc, iprofil, iseriex, isubsec, iusuari } from "../interfaces"
+import {
+  ifondoc,
+  iprofil,
+  iseriex,
+  isubsec,
+  isubser,
+  iusuari,
+} from "../interfaces"
 
 export const ProfilSchema = yup.object<iprofil>().shape({
   profil_abbrev: yup.string().required("Abreviatura es requerido"),
@@ -40,4 +47,13 @@ export const SeriexSchema = yup.object<iseriex>().shape({
 
   seriex_nombre: yup.string().required("Abreviatura es requerido"),
   seriex_abrevi: yup.string().required("Nombre es requerido"),
+})
+
+export const SubserSchema = yup.object<isubser>().shape({
+  fondoc_fondoc: yup.number().min(1, "Selecciona un fondo documental"),
+  seccio_seccio: yup.number().min(1, "Selecciona una seción"),
+  subsec_subsec: yup.number().min(1, "Selecciona una sub seción"),
+  seriex_seriex: yup.number().min(1, "Selecciona una serie"),
+
+  subser_nombre: yup.string().required("Nombre es requerido"),
 })

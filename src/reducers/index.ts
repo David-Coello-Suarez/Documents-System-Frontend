@@ -3,7 +3,6 @@ import { LogginReducer } from "./loggin"
 import { PerfilReducer } from "./perfil"
 import { PermisReducer } from "./permis"
 import { SeccioReducer } from "./seccio"
-import { SeriesReducer } from "./series"
 import { SeriexReducer } from "./seriex"
 import { SidebaReducer } from "./sideba"
 import { SubsecReducer } from "./subsec"
@@ -19,7 +18,6 @@ export const reducer = {
   loggin: LogginReducer,
   seccio: SeccioReducer,
   subsec: SubsecReducer,
-  series: SeriesReducer,
-  subser: SubserReducer,
   seriex: SeriexReducer,
+  subser: SubserReducer,
 }
