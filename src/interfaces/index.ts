@@ -7,9 +7,9 @@ import { iusuari } from "./iusuari"
 import { ipermod } from "./ipermod"
 import { iloggin } from "./iloggin"
 import { isubsec } from "./isubsec"
-import { iseries } from "./iseries"
 import { isubser } from "./isubser"
 import { iseccio } from "./iseccio"
+import { iseriex } from "./iseriex"
 
 export type {
   ipermod,
@@ -21,7 +21,7 @@ export type {
   iusuari,
   iloggin,
   isubsec,
-  iseries,
   isubser,
   iseccio,
+  iseriex,
 }

@@ -8,7 +8,7 @@ const file = "subsec",
 
 interface iressu {
   paginacion: ipagina
-  subseccs: isubsec[]
+  subsecs: isubsec[]
 }
 
 interface isusaup {
@@ -29,9 +29,10 @@ export const get_subsecs = createAsyncThunk(
 
 export const get_subsec_active = createAsyncThunk(
   `${file}/get_subsec_active`,
-  async () => {
+  async (seccio_seccio: number | undefined) => {
     const { data } = await instanciaAxios.get<irespue<iressu>>(
       `/${rute}/active`,
+      { params: { seccio_seccio } },
     )
 
     return data

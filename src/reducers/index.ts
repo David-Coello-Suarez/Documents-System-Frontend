@@ -4,6 +4,7 @@ import { PerfilReducer } from "./perfil"
 import { PermisReducer } from "./permis"
 import { SeccioReducer } from "./seccio"
 import { SeriesReducer } from "./series"
+import { SeriexReducer } from "./seriex"
 import { SidebaReducer } from "./sideba"
 import { SubsecReducer } from "./subsec"
 import { SubserReducer } from "./subser"
@@ -20,4 +21,5 @@ export const reducer = {
   subsec: SubsecReducer,
   series: SeriesReducer,
   subser: SubserReducer,
+  seriex: SeriexReducer,
 }

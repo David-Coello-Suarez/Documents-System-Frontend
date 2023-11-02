@@ -1,41 +1,41 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { get_seccio_active } from "../../controllers/seccio"
-import { clean_seccios } from "../../reducers/seccio"
+import { get_subsec_active } from "../../controllers/subsec"
+import { clean_subsecs } from "../../reducers/subsec"
 import { SelectBox } from "../views"
 
-interface iseccio {
+interface isubsec {
   nameSelect: string
-  handleChange: (seccio: number) => void
+  handleChange: (subsec: number) => void
   classInvalid?: string | undefined
   value: number
   displayLabel?: string
   refreshValue: number
 }
 
-const SeccioActive = (element: iseccio) => {
+const SubsecActive = (element: isubsec) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (element.refreshValue) {
-      dispatch(get_seccio_active(element.refreshValue))
+    if (element.refreshValue > 0) {
+      dispatch(get_subsec_active(element.refreshValue))
     }
 
     return () => {
-      dispatch(clean_seccios())
+      dispatch(clean_subsecs())
     }
   }, [dispatch, element.refreshValue])
 
-  const { loadin_loadin, seccios_seccios } = useAppSelector(
-    (state) => state.seccio,
+  const { loadin_loadin, subsecs_subsecs } = useAppSelector(
+    (state) => state.subsec,
   )
 
-  const categories = seccios_seccios.map((seccio) => ({
-    value: seccio.seccio_seccio.toString(),
-    label: seccio.seccio_nombre,
+  const categories = subsecs_subsecs.map((subsec) => ({
+    value: subsec.subsec_subsec.toString(),
+    label: subsec.subsec_nombre.toUpperCase(),
   }))
 
-  categories.unshift({ value: "0", label: "Selecciona" })
+  categories.unshift({ value: "0", label: "SELECCIONA" })
 
   const handleSelectChange = (
     selected: { value: string; label: string } | null,
@@ -55,7 +55,7 @@ const SeccioActive = (element: iseccio) => {
         name={element.nameSelect}
         isLoading={loadin_loadin}
         onChange={handleSelectChange}
-        isDisabled={seccios_seccios.length === 0}
+        isDisabled={subsecs_subsecs.length === 0}
         value={categories.filter((cp) => Number(cp.value) === element.value)}
       />
       {Boolean(element.classInvalid) && (
@@ -65,4 +65,4 @@ const SeccioActive = (element: iseccio) => {
   )
 }
 
-export default SeccioActive
+export default SubsecActive
