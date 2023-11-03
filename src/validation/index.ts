@@ -7,6 +7,7 @@ import {
   iseriex,
   isubsec,
   isubser,
+  iubicac,
   iusuari,
 } from "../interfaces"
 
@@ -67,4 +68,22 @@ export const LocaliSchema = yup.object<ilocali>().shape({
 export const SectorSchema = yup.object<isector>().shape({
   locali_locali: yup.number().min(1, "Selecciona una localidad"),
   sector_nombre: yup.string().required("Descripción es requerido"),
+})
+
+export const SubsctSchema = yup.object<isector>().shape({
+  locali_locali: yup.number().min(1, "Selecciona una localidad"),
+  subsct_nombre: yup.string().required("Descripción es requerido"),
+  sector_sector: yup.number().min(1, "Selecciona un sector"),
+})
+
+export const UbicacSchema = yup.object<iubicac>().shape({
+  locali_locali: yup.number().min(1, "Selecciona una localidad"),
+  sector_sector: yup.number().min(1, "Selecciona un sector"),
+  subsct_subsct: yup.number().min(1, "Selecciona un sub sector"),
+  ubicac_descri: yup.string().required("Descripción es requerido"),
+  ubicac_numdiv: yup
+    .number()
+    .typeError("El valor de comensales tiene que ser numérico")
+    .positive("Solo valores positivos")
+    .min(1, "Debe ser mayor que cero"),
 })

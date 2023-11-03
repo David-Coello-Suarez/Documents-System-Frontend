@@ -29,11 +29,11 @@ export const get_subscts = createAsyncThunk(
 
 export const get_subscts_active = createAsyncThunk(
   `${file}/get_subscts_active`,
-  async (sector_sector: number) => {
+  async (subsct_subsct: number) => {
     const { data } = await instanciaAxios.get<irespue<iressub>>(
       `/${rute}/active`,
       {
-        params: { sector_sector },
+        params: { subsct_subsct },
       },
     )
 
@@ -56,12 +56,13 @@ export const put_subsct = createAsyncThunk(
   `${file}/put_subsct`,
   async ({ body, navigate }: lscsaup, thunk) => {
     const { data } = await instanciaAxios.put<irespue>(`/${rute}`, body, {
-      params: { sector_sector: body.sector_sector },
+      params: { subsct_subsct: body.subsct_subsct },
     })
 
     if (data.estado === 1 && navigate) navigate(-1)
 
-    if (data.estado === 1) thunk.dispatch(get_subscts())
+    if (data.estado === 1 && navigate == undefined)
+      thunk.dispatch(get_subscts())
 
     return data
   },
@@ -71,7 +72,7 @@ export const delete_subsct = createAsyncThunk(
   `${file}/delete_subsct`,
   async ({ body }: lscsaup, thunk) => {
     const { data } = await instanciaAxios.delete<irespue>(`/${rute}`, {
-      params: { sector_sector: body.sector_sector },
+      params: { subsct_subsct: body.subsct_subsct },
     })
 
     if (data.estado === 1) thunk.dispatch(get_subscts())
