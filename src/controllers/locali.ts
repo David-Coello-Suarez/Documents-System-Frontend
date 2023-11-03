@@ -29,12 +29,9 @@ export const get_localis = createAsyncThunk(
 
 export const get_localis_active = createAsyncThunk(
   `${file}/get_localis_active`,
-  async (seriex_seriex: number) => {
+  async () => {
     const { data } = await instanciaAxios.get<irespue<iresloc>>(
       `/${rute}/active`,
-      {
-        params: { seriex_seriex },
-      },
     )
 
     return data

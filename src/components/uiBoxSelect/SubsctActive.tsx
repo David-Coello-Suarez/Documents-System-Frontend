@@ -1,30 +1,29 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { get_seriexs_active } from "../../controllers/seriex"
-import { clean_seriexs } from "../../reducers/seriex"
-import { SelectBox } from "../views"
 import { icompon } from "../../interfaces"
+import { get_subscts_active } from "../../controllers/subsct"
+import { SelectBox } from "../views"
+import { clean_subscts } from "../../reducers/subsct"
 
-const SeriexActive = (element: icompon) => {
+const SubsctActive = (element: icompon) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (element.refreshValue > 0) {
-      dispatch(get_seriexs_active(element.refreshValue))
-    }
+    if (element.refreshValue > 0)
+      dispatch(get_subscts_active(element.refreshValue))
 
     return () => {
-      dispatch(clean_seriexs())
+      dispatch(clean_subscts())
     }
   }, [dispatch, element.refreshValue])
 
-  const { loadin_loadin, seriexs_seriexs } = useAppSelector(
-    (state) => state.seriex,
+  const { loadin_loadin, subscts_subscts } = useAppSelector(
+    (state) => state.subsct,
   )
 
-  const categories = seriexs_seriexs.map((seriex) => ({
-    value: seriex.seriex_seriex.toString(),
-    label: seriex.seriex_nombre.toUpperCase(),
+  const categories = subscts_subscts.map((subsct) => ({
+    value: subsct.subsct_subsct.toString(),
+    label: subsct.subsct_nombre.toUpperCase(),
   }))
 
   categories.unshift({ value: "0", label: "SELECCIONA" })
@@ -47,7 +46,7 @@ const SeriexActive = (element: icompon) => {
         name={element.nameSelect}
         isLoading={loadin_loadin}
         onChange={handleSelectChange}
-        isDisabled={seriexs_seriexs.length === 0}
+        isDisabled={subscts_subscts.length === 0}
         value={categories.filter((cp) => Number(cp.value) === element.value)}
       />
       {Boolean(element.classInvalid) && (
@@ -57,4 +56,4 @@ const SeriexActive = (element: icompon) => {
   )
 }
 
-export default SeriexActive
+export default SubsctActive

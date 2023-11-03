@@ -3,6 +3,7 @@ import {
   ifondoc,
   ilocali,
   iprofil,
+  isector,
   iseriex,
   isubsec,
   isubser,
@@ -61,4 +62,9 @@ export const SubserSchema = yup.object<isubser>().shape({
 
 export const LocaliSchema = yup.object<ilocali>().shape({
   locali_descri: yup.string().required("Descripción es requerido"),
+})
+
+export const SectorSchema = yup.object<isector>().shape({
+  locali_locali: yup.number().min(1, "Selecciona una localidad"),
+  sector_nombre: yup.string().required("Descripción es requerido"),
 })

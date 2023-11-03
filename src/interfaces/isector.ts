@@ -4,7 +4,7 @@ export interface isector {
 
   sector_sector: number
   sector_nombre: string
-  sector_status: string
+  sector_status: number
 
   sector_usucre: string
   sector_feccre: string

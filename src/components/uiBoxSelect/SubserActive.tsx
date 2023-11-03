@@ -1,30 +1,30 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { get_seriexs_active } from "../../controllers/seriex"
-import { clean_seriexs } from "../../reducers/seriex"
+import { get_subsers_active } from "../../controllers/subser"
+import { clean_subsecs } from "../../reducers/subsec"
 import { SelectBox } from "../views"
 import { icompon } from "../../interfaces"
 
-const SeriexActive = (element: icompon) => {
+const SubserActive = (element: icompon) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (element.refreshValue > 0) {
-      dispatch(get_seriexs_active(element.refreshValue))
+      dispatch(get_subsers_active(element.refreshValue))
     }
 
     return () => {
-      dispatch(clean_seriexs())
+      dispatch(clean_subsecs())
     }
   }, [dispatch, element.refreshValue])
 
-  const { loadin_loadin, seriexs_seriexs } = useAppSelector(
-    (state) => state.seriex,
+  const { loadin_loadin, subsers_subsers } = useAppSelector(
+    (state) => state.subser,
   )
 
-  const categories = seriexs_seriexs.map((seriex) => ({
-    value: seriex.seriex_seriex.toString(),
-    label: seriex.seriex_nombre.toUpperCase(),
+  const categories = subsers_subsers.map((subser) => ({
+    value: subser.subser_subser.toString(),
+    label: subser.subser_nombre.toUpperCase(),
   }))
 
   categories.unshift({ value: "0", label: "SELECCIONA" })
@@ -47,7 +47,7 @@ const SeriexActive = (element: icompon) => {
         name={element.nameSelect}
         isLoading={loadin_loadin}
         onChange={handleSelectChange}
-        isDisabled={seriexs_seriexs.length === 0}
+        isDisabled={subsers_subsers.length === 0}
         value={categories.filter((cp) => Number(cp.value) === element.value)}
       />
       {Boolean(element.classInvalid) && (
@@ -57,4 +57,4 @@ const SeriexActive = (element: icompon) => {
   )
 }
 
-export default SeriexActive
+export default SubserActive

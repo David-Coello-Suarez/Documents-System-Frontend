@@ -1,30 +1,30 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { get_seriexs_active } from "../../controllers/seriex"
-import { clean_seriexs } from "../../reducers/seriex"
-import { SelectBox } from "../views"
 import { icompon } from "../../interfaces"
+import { get_ubicacs_active } from "../../controllers/ubicac"
+import { clean_ubicacs } from "../../reducers/ubicac"
+import { SelectBox } from "../views"
 
-const SeriexActive = (element: icompon) => {
+const Ubicac = (element: icompon) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (element.refreshValue > 0) {
-      dispatch(get_seriexs_active(element.refreshValue))
+      dispatch(get_ubicacs_active(element.refreshValue))
     }
 
     return () => {
-      dispatch(clean_seriexs())
+      dispatch(clean_ubicacs())
     }
   }, [dispatch, element.refreshValue])
 
-  const { loadin_loadin, seriexs_seriexs } = useAppSelector(
-    (state) => state.seriex,
+  const { loadin_loadin, ubicacs_ubicacs } = useAppSelector(
+    (state) => state.ubicac,
   )
 
-  const categories = seriexs_seriexs.map((seriex) => ({
-    value: seriex.seriex_seriex.toString(),
-    label: seriex.seriex_nombre.toUpperCase(),
+  const categories = ubicacs_ubicacs.map((ubicac) => ({
+    value: ubicac.ubicac_ubicac.toString(),
+    label: ubicac.ubicac_descri.toUpperCase(),
   }))
 
   categories.unshift({ value: "0", label: "SELECCIONA" })
@@ -47,7 +47,7 @@ const SeriexActive = (element: icompon) => {
         name={element.nameSelect}
         isLoading={loadin_loadin}
         onChange={handleSelectChange}
-        isDisabled={seriexs_seriexs.length === 0}
+        isDisabled={ubicacs_ubicacs.length === 0}
         value={categories.filter((cp) => Number(cp.value) === element.value)}
       />
       {Boolean(element.classInvalid) && (
@@ -57,4 +57,4 @@ const SeriexActive = (element: icompon) => {
   )
 }
 
-export default SeriexActive
+export default Ubicac

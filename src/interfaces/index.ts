@@ -14,8 +14,10 @@ import { ilocali } from "./ilocali"
 import { isector } from "./isector"
 import { isubsct } from "./isubsct"
 import { iubicac } from "./iubicac"
+import { icompon } from "./icompon"
 
 export type {
+  icompon,
   ipermod,
   isideba,
   irespue,

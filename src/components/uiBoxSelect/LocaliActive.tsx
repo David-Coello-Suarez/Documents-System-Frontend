@@ -1,30 +1,28 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
-import { get_seriexs_active } from "../../controllers/seriex"
-import { clean_seriexs } from "../../reducers/seriex"
+import { get_localis_active } from "../../controllers/locali"
+import { clean_localis } from "../../reducers/locali"
 import { SelectBox } from "../views"
 import { icompon } from "../../interfaces"
 
-const SeriexActive = (element: icompon) => {
+const LocaliActive = (element: icompon) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (element.refreshValue > 0) {
-      dispatch(get_seriexs_active(element.refreshValue))
-    }
+    dispatch(get_localis_active())
 
     return () => {
-      dispatch(clean_seriexs())
+      dispatch(clean_localis())
     }
-  }, [dispatch, element.refreshValue])
+  }, [dispatch])
 
-  const { loadin_loadin, seriexs_seriexs } = useAppSelector(
-    (state) => state.seriex,
+  const { loadin_loadin, localis_localis } = useAppSelector(
+    (state) => state.locali,
   )
 
-  const categories = seriexs_seriexs.map((seriex) => ({
-    value: seriex.seriex_seriex.toString(),
-    label: seriex.seriex_nombre.toUpperCase(),
+  const categories = localis_localis.map((locali) => ({
+    value: locali.locali_locali.toString(),
+    label: locali.locali_descri.toUpperCase(),
   }))
 
   categories.unshift({ value: "0", label: "SELECCIONA" })
@@ -47,7 +45,7 @@ const SeriexActive = (element: icompon) => {
         name={element.nameSelect}
         isLoading={loadin_loadin}
         onChange={handleSelectChange}
-        isDisabled={seriexs_seriexs.length === 0}
+        isDisabled={localis_localis.length === 0}
         value={categories.filter((cp) => Number(cp.value) === element.value)}
       />
       {Boolean(element.classInvalid) && (
@@ -57,4 +55,4 @@ const SeriexActive = (element: icompon) => {
   )
 }
 
-export default SeriexActive
+export default LocaliActive
