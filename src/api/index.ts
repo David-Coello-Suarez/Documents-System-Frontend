@@ -8,6 +8,16 @@ export const instanciaAxios = axios.create({
 
   headers: {
     "Content-Type": "application/json; charset=UTF-8",
-    "x-token": localStorage.getItem("token") || "",
   },
 })
+
+instanciaAxios.interceptors.request.use(
+  (config) => {
+    config.headers["x-token"] = localStorage.getItem("token") || ""
+
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  },
+)

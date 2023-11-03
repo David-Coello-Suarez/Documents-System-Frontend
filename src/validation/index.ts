@@ -1,6 +1,7 @@
 import * as yup from "yup"
 import {
   ifondoc,
+  ilocali,
   iprofil,
   iseriex,
   isubsec,
@@ -56,4 +57,8 @@ export const SubserSchema = yup.object<isubser>().shape({
   seriex_seriex: yup.number().min(1, "Selecciona una serie"),
 
   subser_nombre: yup.string().required("Nombre es requerido"),
+})
+
+export const LocaliSchema = yup.object<ilocali>().shape({
+  locali_descri: yup.string().required("Descripción es requerido"),
 })

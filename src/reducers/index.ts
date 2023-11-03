@@ -1,4 +1,5 @@
 import { FonDocReducer } from "./fondoc"
+import { LocaliReducer } from "./locali"
 import { LogginReducer } from "./loggin"
 import { PerfilReducer } from "./perfil"
 import { PermisReducer } from "./permis"
@@ -20,4 +21,5 @@ export const reducer = {
   subsec: SubsecReducer,
   seriex: SeriexReducer,
   subser: SubserReducer,
+  locali: LocaliReducer,
 }

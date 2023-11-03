@@ -10,6 +10,10 @@ import { isubsec } from "./isubsec"
 import { isubser } from "./isubser"
 import { iseccio } from "./iseccio"
 import { iseriex } from "./iseriex"
+import { ilocali } from "./ilocali"
+import { isector } from "./isector"
+import { isubsct } from "./isubsct"
+import { iubicac } from "./iubicac"
 
 export type {
   ipermod,
@@ -24,4 +28,8 @@ export type {
   isubser,
   iseccio,
   iseriex,
+  ilocali,
+  isector,
+  isubsct,
+  iubicac
 }
