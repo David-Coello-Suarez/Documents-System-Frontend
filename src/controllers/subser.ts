@@ -61,11 +61,15 @@ export const put_subser = createAsyncThunk(
       params: { subser_subser: body.subser_subser },
     })
 
-    if (data.estado === 1 && navigate) {
-      navigate(-1)
-    }
+    if (data.estado) {
+      if (data.estado === 1 && navigate) {
+        navigate(-1)
+      }
 
-    thunk.dispatch(get_subsers())
+      if (data.estado === 1) {
+        thunk.dispatch(get_subsers())
+      }
+    }
 
     return data
   },

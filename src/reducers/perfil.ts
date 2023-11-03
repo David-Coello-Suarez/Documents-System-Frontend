@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice, isRejected } from "@reduxjs/toolkit"
 import { toast, Id } from "react-toastify"
 import { iprofil } from "./../interfaces/iprofil"
 import {
@@ -63,7 +63,6 @@ const ProfilSlice = createSlice({
         }
       })
 
-    builder
       .addCase(get_profils_active.pending, (state) => {
         state.loading_loading = true
       })
@@ -77,7 +76,6 @@ const ProfilSlice = createSlice({
         }
       })
 
-    builder
       .addCase(post_prefil.pending, () => {
         toastId = toast.loading("Creando perfil....")
       })
@@ -101,7 +99,6 @@ const ProfilSlice = createSlice({
         }
       })
 
-    builder
       .addCase(put_perfil.pending, () => {
         toastId = toast.loading("Actualizando perfil....")
       })
@@ -125,7 +122,6 @@ const ProfilSlice = createSlice({
         }
       })
 
-    builder
       .addCase(delete_perfil.pending, () => {
         toastId = toast.loading("Eliminando perfil....")
       })
@@ -143,6 +139,18 @@ const ProfilSlice = createSlice({
           toast.update(toastId, {
             render: mensaje,
             type: "warning",
+            isLoading: false,
+            autoClose: 3000,
+          })
+        }
+      })
+
+      .addMatcher(isRejected, () => {
+        if (!toast.isActive(toastId)) {
+          toast.update(toastId, {
+            render:
+              "Se a producido un error. Ponte en contacto con el administrador1",
+            type: "error",
             isLoading: false,
             autoClose: 3000,
           })

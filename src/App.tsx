@@ -7,7 +7,11 @@ import "react-toastify/dist/ReactToastify.css"
 
 const App = () => (
   <>
-    <ToastContainer />
+    <ToastContainer
+      position="bottom-right"
+      autoClose={5000}
+      theme="colored"
+    />
     <Suspense fallback={<div>Cargando</div>}>
       <Provider store={storeReducer}>
         <RouterProvider router={storeRouter} />

@@ -144,13 +144,15 @@ const UsuariSlice = createSlice({
       })
 
       .addMatcher(isRejected, () => {
-        toast.update(toastId, {
-          render:
-            "Se a producido un error. Ponte en contacto con el administrador",
-          type: "error",
-          isLoading: false,
-          autoClose: 3000,
-        })
+        if (!toast.isActive(toastId)) {
+          toast.update(toastId, {
+            render:
+              "Se a producido un error. Ponte en contacto con el administrador1",
+            type: "error",
+            isLoading: false,
+            autoClose: 3000,
+          })
+        }
       })
   },
 })

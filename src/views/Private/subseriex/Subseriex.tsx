@@ -2,8 +2,12 @@ import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { set_form_subser } from "../../../reducers/subser"
 import { NotData } from "../../../components/views"
-import { ColumnsType, Switch, Table } from "../../../components/iu"
-import { delete_subser, put_subser } from "../../../controllers/subser"
+import { ColumnsType, Pagination, Switch, Table } from "../../../components/iu"
+import {
+  delete_subser,
+  get_subsers,
+  put_subser,
+} from "../../../controllers/subser"
 import { isubser } from "../../../interfaces"
 
 interface iseriesc {
@@ -15,7 +19,7 @@ const Subseriex = ({ handleClickAdd, btnMsg }: iseriesc) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { loadin_loadin, subsers_subsers } = useAppSelector(
+  const { loadin_loadin, subsers_subsers, subser_pagina } = useAppSelector(
     (state) => state.subser,
   )
 
@@ -27,6 +31,8 @@ const Subseriex = ({ handleClickAdd, btnMsg }: iseriesc) => {
   const handleDelete = (body: isubser) => {
     dispatch(delete_subser({ body }))
   }
+
+  const { limite, pagina, totalItems } = subser_pagina
 
   const columns: ColumnsType<isubser> = [
     {
@@ -128,6 +134,27 @@ const Subseriex = ({ handleClickAdd, btnMsg }: iseriesc) => {
               emptyText: <NotData onclick={handleClickAdd} btnMssg={btnMsg} />,
             }}
           />
+
+          {subsers_subsers.length > 0 && (
+            <>
+              <Pagination
+                onChange={(pagina, limite) =>
+                  dispatch(get_subsers({ ...subser_pagina, pagina, limite }))
+                }
+                responsive
+                className="text-center"
+                total={totalItems}
+                showSizeChanger
+                showTotal={(total, range) =>
+                  `Mostrando del ${range[0]} a ${range[1]} de ${total} items`
+                }
+                defaultPageSize={limite}
+                defaultCurrent={pagina}
+                pageSizeOptions={[10, 50, 100]}
+                size="small"
+              />
+            </>
+          )}
         </div>
       </div>
     </>

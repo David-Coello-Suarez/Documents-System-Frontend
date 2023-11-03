@@ -81,6 +81,7 @@ const SubserSlice = createSlice({
           state.subsers_subsers = data.subsers
         } else {
           toast.update(toastId, {
+            theme: "colored",
             render: mensaje,
             type: "warning",
             isLoading: false,
@@ -151,15 +152,18 @@ const SubserSlice = createSlice({
         }
       })
 
-      .addMatcher(isRejected, () => {
+      .addMatcher(isRejected, (state) => {
+        state.loadin_loadin = false
 
-        toast.update(toastId, {
-          render:
-            "Se a producido un error. Ponte en contacto con el administrador",
-          type: "error",
-          isLoading: false,
-          autoClose: 3000,
-        })
+        if (!toast.isActive(toastId)) {
+          toast.update(toastId, {
+            render:
+              "Se a producido un error. Ponte en contacto con el administrador1",
+            type: "error",
+            isLoading: false,
+            autoClose: 3000,
+          })
+        }
       })
   },
 })

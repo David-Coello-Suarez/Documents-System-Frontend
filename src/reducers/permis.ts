@@ -75,9 +75,15 @@ const PermisSlice = createSlice({
       })
 
       .addMatcher(isRejected, () => {
-        toast.error(
-          "Se a producido un error. Ponte en contacto con el administrador",
-        )
+        if (!toast.isActive(toastId)) {
+          toast.update(toastId, {
+            render:
+              "Se a producido un error. Ponte en contacto con el administrador1",
+            type: "error",
+            isLoading: false,
+            autoClose: 3000,
+          })
+        }
       })
   },
 })

@@ -146,11 +146,11 @@ const SeriexSlice = createSlice({
         }
       })
 
-      .addMatcher(isRejected, (_, { payload }) => {
-        console.log(payload)
+      .addMatcher(isRejected, (state) => {
+        state.loadin_loadin = false
         toast.update(toastId, {
           render:
-            "Se a producido un error. Ponte en contacto con el administrador 1",
+            "Se a producido un error. Ponte en contacto con el administrador",
           type: "error",
           isLoading: false,
           autoClose: 3000,

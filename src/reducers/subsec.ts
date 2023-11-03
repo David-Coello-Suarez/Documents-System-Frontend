@@ -151,14 +151,18 @@ const SubsecSlice = createSlice({
         }
       })
 
-      .addMatcher(isRejected, () => {
-        toast.update(toastId, {
-          render:
-            "Se a producido un error. Ponte en contacto con el administrador 1",
-          type: "error",
-          isLoading: false,
-          autoClose: 3000,
-        })
+      .addMatcher(isRejected, (state) => {
+        state.loadin_loadin = false
+
+        if (!toast.isActive(toastId)) {
+          toast.update(toastId, {
+            render:
+              "Se a producido un error. Ponte en contacto con el administrador1",
+            type: "error",
+            isLoading: false,
+            autoClose: 3000,
+          })
+        }
       })
   },
 })
