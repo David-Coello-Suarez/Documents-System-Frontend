@@ -11,6 +11,8 @@ const SectorActive = lazy(() => import("./SectorActive"))
 const SubsctActive = lazy(() => import("./SubsctActive"))
 const UbicacActive = lazy(() => import("./UbicacActive"))
 
+const TipdocActive = lazy(() => import("./TipdocActive"))
+
 export {
   // CLASIFICACION DOC.
   FondocActive,
@@ -24,4 +26,5 @@ export {
   SectorActive,
   SubsctActive,
   UbicacActive,
+  TipdocActive,
 }

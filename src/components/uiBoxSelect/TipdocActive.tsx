@@ -1,30 +1,28 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
+import { get_tipdocs_active } from "../../controllers/tipdoc"
+import { clean_tipdocs } from "../../reducers/tipdoc"
 import { icompon } from "../../interfaces"
-import { get_ubicacs_active } from "../../controllers/ubicac"
-import { clean_ubicacs } from "../../reducers/ubicac"
 import { SelectBox } from "../views"
 
-const Ubicac = (element: icompon) => {
+const TipdocActive = (element: icompon) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (Number(element.refreshValue) > 0) {
-      dispatch(get_ubicacs_active(Number(element.refreshValue)))
-    }
+    dispatch(get_tipdocs_active())
 
     return () => {
-      dispatch(clean_ubicacs())
+      dispatch(clean_tipdocs())
     }
-  }, [dispatch, element.refreshValue])
+  }, [dispatch])
 
-  const { loadin_loadin, ubicacs_ubicacs } = useAppSelector(
-    (state) => state.ubicac,
+  const { loadin_loadin, tipdocs_tipdocs } = useAppSelector(
+    (state) => state.tipdoc,
   )
 
-  const categories = ubicacs_ubicacs.map((ubicac) => ({
-    value: ubicac.ubicac_ubicac.toString(),
-    label: ubicac.ubicac_descri.toUpperCase(),
+  const categories = tipdocs_tipdocs.map((tipdoc) => ({
+    value: tipdoc.tipdoc_tipdoc.toString(),
+    label: tipdoc.tipdoc_descri.toUpperCase(),
   }))
 
   categories.unshift({ value: "0", label: "SELECCIONA" })
@@ -47,7 +45,7 @@ const Ubicac = (element: icompon) => {
         name={element.nameSelect}
         isLoading={loadin_loadin}
         onChange={handleSelectChange}
-        isDisabled={ubicacs_ubicacs.length === 0}
+        isDisabled={tipdocs_tipdocs.length === 0}
         value={categories.filter((cp) => Number(cp.value) === element.value)}
       />
       {Boolean(element.classInvalid) && (
@@ -56,5 +54,4 @@ const Ubicac = (element: icompon) => {
     </div>
   )
 }
-
-export default Ubicac
+export default TipdocActive
