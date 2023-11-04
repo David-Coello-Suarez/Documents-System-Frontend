@@ -4,7 +4,7 @@ interface iinputcontrol {
   titleLabel: string
   nameInput: string
   classInvalid?: string
-  value: string
+  value: string | number
   handleBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   required?: boolean

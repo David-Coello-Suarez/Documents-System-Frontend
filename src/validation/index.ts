@@ -7,6 +7,7 @@ import {
   iseriex,
   isubsec,
   isubser,
+  itipdoc,
   iubicac,
   iusuari,
 } from "../interfaces"
@@ -59,6 +60,15 @@ export const SubserSchema = yup.object<isubser>().shape({
   seriex_seriex: yup.number().min(1, "Selecciona una serie"),
 
   subser_nombre: yup.string().required("Nombre es requerido"),
+})
+
+export const TipdocSchema = yup.object<itipdoc>().shape({
+  tipdoc_descri: yup.string().required("Descripción es requerido"),
+  tipdoc_numcon: yup
+    .number()
+    .typeError("Solo valores númericos")
+    .positive("Solo valores positivos")
+    .min(1, "Debe ser mayor que cero"),
 })
 
 export const LocaliSchema = yup.object<ilocali>().shape({

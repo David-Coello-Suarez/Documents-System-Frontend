@@ -48,7 +48,7 @@ const Form = () => {
     validationSchema: SubsctSchema,
     onSubmit: handleSave,
   })
-  console.log(errors)
+
   return (
     <>
       <div className="row">

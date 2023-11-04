@@ -29,11 +29,11 @@ export const get_subscts = createAsyncThunk(
 
 export const get_subscts_active = createAsyncThunk(
   `${file}/get_subscts_active`,
-  async (subsct_subsct: number) => {
+  async (sector_sector: number) => {
     const { data } = await instanciaAxios.get<irespue<iressub>>(
       `/${rute}/active`,
       {
-        params: { subsct_subsct },
+        params: { sector_sector },
       },
     )
 

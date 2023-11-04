@@ -11,6 +11,7 @@ import LocaliRouter from "./physicalLocation"
 import SectorReducer from "./sector"
 import SubsctRouter from "./subsector"
 import LocatiReducer from "./location"
+import TipdocRouter from "./documentaryType"
 
 const PrivateRouter: RouteObject[] = [
   { index: true, element: <h1>Home</h1> },
@@ -26,6 +27,7 @@ const PrivateRouter: RouteObject[] = [
   { path: "sector", children: SectorReducer },
   { path: "subsector", children: SubsctRouter },
   { path: "location", children: LocatiReducer },
+  { path: "documentaryType", children: TipdocRouter },
 ]
 
 export default PrivateRouter

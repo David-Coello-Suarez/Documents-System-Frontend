@@ -10,6 +10,7 @@ import { SidebaReducer } from "./sideba"
 import { SubsctReducer } from "./subsct"
 import { SubsecReducer } from "./subsec"
 import { SubserReducer } from "./subser"
+import { TipdocReducer } from "./tipdoc"
 import { UbicacReducer } from "./ubicac"
 import { UsuariReducer } from "./usuari"
 
@@ -28,4 +29,5 @@ export const reducer = {
   sector: SectorReducer,
   subsct: SubsctReducer,
   ubicac: UbicacReducer,
+  tipdoc: TipdocReducer,
 }
