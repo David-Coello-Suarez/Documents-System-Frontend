@@ -83,7 +83,7 @@ export const UbicacSchema = yup.object<iubicac>().shape({
   ubicac_descri: yup.string().required("Descripción es requerido"),
   ubicac_numdiv: yup
     .number()
-    .typeError("El valor de comensales tiene que ser numérico")
+    .typeError("Solo valores númericos")
     .positive("Solo valores positivos")
     .min(1, "Debe ser mayor que cero"),
 })

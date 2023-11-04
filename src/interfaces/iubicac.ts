@@ -1,6 +1,6 @@
 export interface iubicac {
   locali_locali: number
-  locali_descri: string
+  locali_nombre: string
 
   sector_sector: number
   sector_nombre: string

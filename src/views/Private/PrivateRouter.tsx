@@ -10,6 +10,7 @@ import SubserRouter from "./subseriex"
 import LocaliRouter from "./physicalLocation"
 import SectorReducer from "./sector"
 import SubsctRouter from "./subsector"
+import LocatiReducer from "./location"
 
 const PrivateRouter: RouteObject[] = [
   { index: true, element: <h1>Home</h1> },
@@ -24,6 +25,7 @@ const PrivateRouter: RouteObject[] = [
   { path: "physicalLocation", children: LocaliRouter },
   { path: "sector", children: SectorReducer },
   { path: "subsector", children: SubsctRouter },
+  { path: "location", children: LocatiReducer },
 ]
 
 export default PrivateRouter

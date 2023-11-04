@@ -15,7 +15,7 @@ const initialState = {
   ubicac_pagina: { pagina: 0, limite: 0, totalItems: 0, totalPaginas: 0 },
   ubicac_ubicac: {
     locali_locali: 0,
-    locali_descri: "",
+    locali_nombre: "",
 
     sector_sector: 0,
     sector_nombre: "",

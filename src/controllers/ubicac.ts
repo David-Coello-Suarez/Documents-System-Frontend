@@ -56,7 +56,7 @@ export const put_ubicac = createAsyncThunk(
   `${file}/put_ubicac`,
   async ({ body, navigate }: iubsaup, thunk) => {
     const { data } = await instanciaAxios.put<irespue>(`/${rute}`, body, {
-      params: { sector_sector: body.sector_sector },
+      params: { ubicac_ubicac: body.ubicac_ubicac },
     })
 
     if (data.estado === 1 && navigate) navigate(-1)
@@ -71,7 +71,7 @@ export const delete_ubicac = createAsyncThunk(
   `${file}/delete_ubicac`,
   async ({ body }: iubsaup, thunk) => {
     const { data } = await instanciaAxios.delete<irespue>(`/${rute}`, {
-      params: { sector_sector: body.sector_sector },
+      params: { ubicac_ubicac: body.ubicac_ubicac },
     })
 
     if (data.estado === 1) thunk.dispatch(get_ubicacs())
