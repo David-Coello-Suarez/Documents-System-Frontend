@@ -9,8 +9,8 @@ const SubsctActive = (element: icompon) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (element.refreshValue > 0)
-      dispatch(get_subscts_active(element.refreshValue))
+    if (Number(element.refreshValue) > 0)
+      dispatch(get_subscts_active(Number(element.refreshValue)))
 
     return () => {
       dispatch(clean_subscts())
@@ -33,7 +33,7 @@ const SubsctActive = (element: icompon) => {
   ) => element.handleChange(Number(selected?.value))
 
   return (
-    <div className="form-group">
+    <div className="form-group mb-0">
       {element.displayLabel && (
         <label htmlFor={element.nameSelect}>
           {element.displayLabel} <span className="text-danger">*</span>

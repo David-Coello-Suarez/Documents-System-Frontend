@@ -12,6 +12,7 @@ import SectorReducer from "./sector"
 import SubsctRouter from "./subsector"
 import LocatiReducer from "./location"
 import TipdocRouter from "./documentaryType"
+import IncboxRouter from "./incomeBoxes"
 
 const PrivateRouter: RouteObject[] = [
   { index: true, element: <h1>Home</h1> },
@@ -28,6 +29,7 @@ const PrivateRouter: RouteObject[] = [
   { path: "subsector", children: SubsctRouter },
   { path: "location", children: LocatiReducer },
   { path: "documentaryType", children: TipdocRouter },
+  { path: "incomeBoxes", children: IncboxRouter },
 ]
 
 export default PrivateRouter

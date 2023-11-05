@@ -52,7 +52,7 @@ const Form = () => {
     validationSchema: UbicacSchema,
     onSubmit: handleSave,
   })
-  console.log(errors)
+  
   return (
     <>
       <div className="row">

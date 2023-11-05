@@ -34,7 +34,7 @@ const Ubicac = (element: icompon) => {
   ) => element.handleChange(Number(selected?.value))
 
   return (
-    <div className="form-group">
+    <div className="form-group mb-0">
       {element.displayLabel && (
         <label htmlFor={element.nameSelect}>
           {element.displayLabel} <span className="text-danger">*</span>

@@ -1,6 +1,7 @@
 import * as yup from "yup"
 import {
   ifondoc,
+  iingcaj,
   ilocali,
   iprofil,
   isector,
@@ -96,4 +97,32 @@ export const UbicacSchema = yup.object<iubicac>().shape({
     .typeError("Solo valores númericos")
     .positive("Solo valores positivos")
     .min(1, "Debe ser mayor que cero"),
+})
+
+export const IngcajSchema = yup.object<iingcaj>().shape({
+  tipdoc_tipdoc: yup.number().min(1, "Selecciona un tipo de documento"),
+  fondoc_fondoc: yup.number().min(1, "Selecciona un fondo documental"),
+  seccio_seccio: yup.number().min(1, "Selecciona una seción"),
+  subsec_subsec: yup.number().min(1, "Selecciona una sub seción"),
+  seriex_seriex: yup.number().min(1, "Selecciona una serie"),
+  subser_subser: yup.number().min(1, "Selecciona una sub serie"),
+
+  locali_locali: yup.number().min(1, "Selecciona una localidad"),
+  sector_sector: yup.number().min(1, "Selecciona un sector"),
+  subsct_subsct: yup.number().min(1, "Selecciona un sub sector"),
+  ubicac_ubicac: yup.number().min(1, "Selecciona una ubicación"),
+  ingcaj_aniing: yup
+    .number()
+    .typeError("Solo valores númericos")
+    .positive("Solo valores positivos")
+    .min(1, "Debe ser mayor que cero"),
+
+  ingcaj_codrif: yup.string().required("Código RFID es requerido"),
+  ingcaj_genau: yup.boolean(),
+  tipser_tipser: yup.string().required("Campo requerido"),
+  ingcaj_codcaj: yup.string().when("ingcaj_genau", {
+    is: false,
+    otherwise: (schema) => schema.required("Código es requerido"),
+  }),
+
 })

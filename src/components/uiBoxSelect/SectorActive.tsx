@@ -9,8 +9,8 @@ const SectorActive = (element: icompon) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (element.refreshValue > 0) {
-      dispatch(get_sectors_active(element.refreshValue))
+    if (Number(element.refreshValue) > 0) {
+      dispatch(get_sectors_active(Number(element.refreshValue)))
     }
 
     return () => {
@@ -34,7 +34,7 @@ const SectorActive = (element: icompon) => {
   ) => element.handleChange(Number(selected?.value))
 
   return (
-    <div className="form-group">
+    <div className="form-group mb-0">
       {element.displayLabel && (
         <label htmlFor={element.nameSelect}>
           {element.displayLabel} <span className="text-danger">*</span>

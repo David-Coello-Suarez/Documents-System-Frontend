@@ -65,7 +65,6 @@ export const put_seccio = createAsyncThunk(
       navigate(-1)
     }
 
-    console.log(data)
     thunk.dispatch(get_seccios())
 
     return data

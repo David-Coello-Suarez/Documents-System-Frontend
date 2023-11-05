@@ -3,6 +3,10 @@ import { Link } from "react-router-dom"
 import { AppUser } from "."
 
 const AppNavbar = () => {
+  const handleClick = () => {
+    document.getElementsByTagName("body")[0]?.classList.toggle("mini-sidebar")
+  }
+
   return (
     <div className="header">
       <div className="header-left">
@@ -11,6 +15,9 @@ const AppNavbar = () => {
           <span>Documents</span>
         </Link>
       </div>
+      <a id="toggle_btn" style={{ cursor: "pointer" }} onClick={handleClick}>
+        <i className="fa fa-bars"></i>
+      </a>
       <a
         style={{ cursor: "pointer" }}
         id="mobile_btn"

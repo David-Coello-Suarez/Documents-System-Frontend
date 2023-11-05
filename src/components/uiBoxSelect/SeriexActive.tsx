@@ -9,8 +9,8 @@ const SeriexActive = (element: icompon) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (element.refreshValue > 0) {
-      dispatch(get_seriexs_active(element.refreshValue))
+    if (Number(element.refreshValue) > 0) {
+      dispatch(get_seriexs_active(Number(element.refreshValue)))
     }
 
     return () => {

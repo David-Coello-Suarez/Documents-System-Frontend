@@ -49,7 +49,7 @@ const Loggin = () => {
 
         <InputControl
           required
-          type
+          // type={}
           nameInput="contrasena"
           titleLabel="Contraseña"
           handleBlur={formik.handleBlur}

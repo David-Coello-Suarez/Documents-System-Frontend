@@ -16,6 +16,7 @@ import { isubsct } from "./isubsct"
 import { iubicac } from "./iubicac"
 import { icompon } from "./icompon"
 import { itipdoc } from "./itipdoc"
+import { iingcaj } from "./iingcaj"
 
 export type {
   icompon,
@@ -35,5 +36,6 @@ export type {
   isector,
   isubsct,
   iubicac,
-  itipdoc
+  itipdoc,
+  iingcaj,
 }

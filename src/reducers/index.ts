@@ -1,4 +1,5 @@
 import { FonDocReducer } from "./fondoc"
+import { IngcajReducer } from "./ingcaj"
 import { LocaliReducer } from "./locali"
 import { LogginReducer } from "./loggin"
 import { PerfilReducer } from "./perfil"
@@ -30,4 +31,5 @@ export const reducer = {
   subsct: SubsctReducer,
   ubicac: UbicacReducer,
   tipdoc: TipdocReducer,
+  ingcaj: IngcajReducer,
 }

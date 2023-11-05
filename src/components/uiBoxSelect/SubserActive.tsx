@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks"
 import { get_subsers_active } from "../../controllers/subser"
-import { clean_subsecs } from "../../reducers/subsec"
+import { clean_subsers } from "../../reducers/subser"
 import { SelectBox } from "../views"
 import { icompon } from "../../interfaces"
 
@@ -9,12 +9,12 @@ const SubserActive = (element: icompon) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (element.refreshValue > 0) {
-      dispatch(get_subsers_active(element.refreshValue))
+    if (Number(element.refreshValue) > 0) {
+      dispatch(get_subsers_active(Number(element.refreshValue)))
     }
 
     return () => {
-      dispatch(clean_subsecs())
+      dispatch(clean_subsers())
     }
   }, [dispatch, element.refreshValue])
 
@@ -34,7 +34,7 @@ const SubserActive = (element: icompon) => {
   ) => element.handleChange(Number(selected?.value))
 
   return (
-    <div className="form-group">
+    <div className="form-group mb-0">
       {element.displayLabel && (
         <label htmlFor={element.nameSelect}>
           {element.displayLabel} <span className="text-danger">*</span>

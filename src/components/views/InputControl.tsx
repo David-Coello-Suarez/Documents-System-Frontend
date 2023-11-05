@@ -8,7 +8,8 @@ interface iinputcontrol {
   handleBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   required?: boolean
-  type?: boolean
+  type?: "text" | "password" | "date" | "datetime-local" | "number" | "checkbox"
+  readonly?: boolean
 }
 
 const InputControl = (inputprop: iinputcontrol) => {
@@ -20,23 +21,27 @@ const InputControl = (inputprop: iinputcontrol) => {
     value,
     handleChange,
     handleBlur,
-    type,
+    type = "text",
+    readonly,
   } = inputprop
 
   return (
     <>
-      <div className="form-group">
+      <div className="form-group m-0">
         <label htmlFor={nameInput}>
           {titleLabel} {required && <span className="text-danger">*</span>}
         </label>
         <input
-          type={type ? "password" : "text"}
+          type={type}
           value={value}
           id={nameInput}
           name={nameInput}
           onBlur={handleBlur}
           onChange={handleChange}
-          className={`form-control ${Boolean(classInvalid) && "is-invalid"}`}
+          readOnly={Boolean(readonly)}
+          className={`form-control form-control-sm ${
+            Boolean(classInvalid) && "is-invalid"
+          }`}
         />
         {Boolean(classInvalid) && (
           <small className="text-danger">{classInvalid}</small>

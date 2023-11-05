@@ -18,10 +18,23 @@ const AppSidebar = () => {
     return () => {
       dispatch(clean_sidebar())
     }
-  }, [])
+  }, [dispatch])
+
+  const handleOverEnter = () => {
+    document.getElementsByTagName("body")[0]?.classList.toggle("expand-menu")
+  }
+
+  const handleOverOut = () => {
+    document.getElementsByTagName("body")[0]?.classList.toggle("expand-menu")
+  }
 
   return (
-    <div className="sidebar" id="sidebar">
+    <div
+      className="sidebar"
+      id="sidebar"
+      onMouseEnter={handleOverEnter}
+      onMouseLeave={handleOverOut}
+    >
       <SimpleBar
         className="sidebar-menu"
         style={{ maxHeight: "100%", width: "100%" }}
