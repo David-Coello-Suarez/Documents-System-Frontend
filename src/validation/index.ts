@@ -117,12 +117,11 @@ export const IngcajSchema = yup.object<iingcaj>().shape({
     .positive("Solo valores positivos")
     .min(1, "Debe ser mayor que cero"),
 
-  ingcaj_codrif: yup.string().required("Código RFID es requerido"),
-  ingcaj_genau: yup.boolean(),
-  tipser_tipser: yup.string().required("Campo requerido"),
-  ingcaj_codcaj: yup.string().when("ingcaj_genau", {
+  ingcaj_codrfi: yup.string().required("Código RFID es requerido"),
+  ingcaj_genaut: yup.boolean(),
+  ingcaj_tipser: yup.string().required("Campo requerido"),
+  ingcaj_codcaj: yup.string().when("ingcaj_genaut", {
     is: false,
     otherwise: (schema) => schema.required("Código es requerido"),
   }),
-
 })

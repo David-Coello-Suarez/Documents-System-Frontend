@@ -1,9 +1,13 @@
 import { useEffect } from "react"
-import { useAppDispatch } from "../../../hooks"
+import { useFormik } from "formik"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { IngcajSchema } from "../../../validation"
+import { clean_form_ingcaj } from "../../../reducers/ingcaj"
+import { post_ingcaj, put_ingcaj } from "../../../controllers/ingcaj"
 import ForDeIt from "./ForDeIt"
 import ForInCaj from "./ForInCaj"
-import { clean_form_ingcaj } from "../../../reducers/ingcaj"
 import InCaDe from "./InCaDe"
+import { iingcaj } from "../../../interfaces"
 
 const Form = () => {
   const dispatch = useAppDispatch()
@@ -14,17 +18,48 @@ const Form = () => {
     }
   }, [dispatch])
 
+  const { incaj_ingcaj } = useAppSelector((state) => state.ingcaj)
+
+  const handleSave = (body: iingcaj) => {
+    console.log(body)
+    if (body.ingcaj_ingcaj === 0) {
+      dispatch(post_ingcaj({ body }))
+    } else {
+      dispatch(put_ingcaj({ body }))
+    }
+  }
+
+  const { errors, values, setFieldValue, handleSubmit, handleChange } =
+    useFormik({
+      enableReinitialize: true,
+      initialValues: incaj_ingcaj,
+      validationSchema: IngcajSchema,
+      onSubmit: handleSave,
+    })
+    
   return (
     <>
-      <div className="row">
-        <div className="col-md-3">
-          <ForInCaj />
-        </div>
+      <form onSubmit={handleSubmit}>
+        <div className="row">
+          <div className="col-md-3">
+            <ForInCaj
+              errors={errors}
+              values={values}
+              handleChange={handleChange}
+            />
+          </div>
 
-        <div className="col-md">
-          <ForDeIt />
+          <div className="col-md">
+            <ForDeIt
+              errors={errors}
+              values={values}
+              handleChange={handleChange}
+              setFieldValue={setFieldValue}
+              handleSubmit={handleSubmit}
+            />
+          </div>
         </div>
-      </div>
+      </form>
 
       <div className="row">
         <div className="col-md-12">

@@ -58,10 +58,42 @@ export const post_ingcaj = createAsyncThunk(
 
 export const put_ingcaj = createAsyncThunk(
   `${file}/put_ingcaj`,
-  async ({ body }: iicsaup) => {
+  async ({ body }: iicsaup, thunk) => {
     const { data } = await instanciaAxios.put<irespue>(`/${rute}`, body, {
       params: { ingcaj_ingcaj: body.ingcaj_ingcaj },
     })
+
+    if (data.estado === 1) thunk.dispatch(get_incade(body.ingcaj_ingcaj))
+
+    return data
+  },
+)
+
+export const delete_ingcaj = createAsyncThunk(
+  `${file}/delete_ingcaj`,
+  async ({ body, navigate }: iicsaup, thunk) => {
+    const { data } = await instanciaAxios.delete<irespue>(`/${rute}`, {
+      params: { ingcaj_ingcaj: body.ingcaj_ingcaj },
+    })
+
+    if (data.estado === 1 && navigate) navigate(-1)
+    else thunk.dispatch(get_ingcajs())
+  
+    return data
+  },
+)
+
+export const delete_incade = createAsyncThunk(
+  `${file}/delete_incade`,
+  async ({ body }: iicsaup, thunk) => {
+    const { data } = await instanciaAxios.delete<irespue>(`/${rute}/detalle`, {
+      params: {
+        ingcaj_ingcaj: body.ingcaj_ingcaj,
+        ingcaj_numsec: body.ingcaj_numsec,
+      },
+    })
+
+    if (data.estado === 1) thunk.dispatch(get_incade(body.ingcaj_ingcaj))
 
     return data
   },

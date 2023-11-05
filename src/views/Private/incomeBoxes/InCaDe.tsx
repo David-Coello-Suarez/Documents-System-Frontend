@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { get_incade } from "../../../controllers/ingcaj"
+import { delete_incade, get_incade } from "../../../controllers/ingcaj"
 import { clean_ingcajs, set_form_ingcaj } from "../../../reducers/ingcaj"
 import { iingcaj } from "../../../interfaces"
 import { ColumnsType, Table } from "../../../components/iu"
@@ -26,6 +26,10 @@ const InCaDe = () => {
     dispatch(set_form_ingcaj(ingcaj))
   }
 
+  const handleDelete = (body: iingcaj) => {
+    dispatch(delete_incade({ body }))
+  }
+
   const columns: ColumnsType<iingcaj> = [
     {
       className: "py-1",
@@ -42,14 +46,14 @@ const InCaDe = () => {
     {
       className: "py-1",
       title: "Cod. RFID",
-      dataIndex: "ingcaj_codrif",
-      sorter: (a, b) => a.ingcaj_codrif.length - b.ingcaj_codrif.length,
+      dataIndex: "ingcaj_codrfi",
+      sorter: (a, b) => a.ingcaj_codrfi.length - b.ingcaj_codrfi.length,
     },
     {
       title: "AÑO",
       className: "text-center py-1",
-      dataIndex: "ingcaj_aniing",
-      sorter: (a, b) => a.ingcaj_aniing - b.ingcaj_aniing,
+      dataIndex: "ingcaj_anioxx",
+      sorter: (a, b) => a.ingcaj_anioxx - b.ingcaj_anioxx,
     },
     {
       title: "Sub Serie",
@@ -67,7 +71,7 @@ const InCaDe = () => {
       title: "División",
       className: "text-center py-1",
       dataIndex: "ingcaj_numdiv",
-      sorter: (a, b) => a.ingcaj_numdiv - b.ingcaj_numdiv,
+      sorter: (a, b) => a.ingcaj_numdiv.length - b.ingcaj_numdiv.length,
     },
     {
       title: "Serie",
@@ -86,6 +90,12 @@ const InCaDe = () => {
             onClick={() => handleEdita(record)}
           >
             <i className="fa fa-edit" />
+          </button>
+          <button
+            className="btn btn-sm btn-outline-danger m-r-5"
+            onClick={() => handleDelete(record)}
+          >
+            <i className="fa fa-trash" />
           </button>
         </>
       ),

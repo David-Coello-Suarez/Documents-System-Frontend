@@ -1,7 +1,13 @@
 import { PayloadAction, createSlice, isRejected } from "@reduxjs/toolkit"
 import { toast, Id } from "react-toastify"
 import { iingcaj } from "../interfaces"
-import { get_incade, get_ingcajs, post_ingcaj } from "../controllers/ingcaj"
+import {
+  delete_incade,
+  get_incade,
+  get_ingcajs,
+  post_ingcaj,
+  put_ingcaj,
+} from "../controllers/ingcaj"
 import moment from "moment"
 
 const initialState = {
@@ -10,45 +16,55 @@ const initialState = {
   ingcaj_pagina: { pagina: 0, limite: 0, totalItems: 0, totalPaginas: 0 },
   incaj_ingcaj: {
     ingcaj_ingcaj: 0,
+
     ingcaj_fecing: moment().format("YYYY-MM-DD"),
-    ingcaj_refere: "",
-    ingcaj_tiptra: "n",
+    ingcaj_tiptra: "",
     ingcaj_titrde: "",
     ingcaj_numegr: 0,
-    tipdoc_tipdoc: 0,
-    ingcaj_codcaj: "",
-    ingcaj_codrif: "",
-    ingcaj_aniing: Number(moment().format("YYYY")),
+    ingcaj_status: "",
+    ingcaj_colsta: "",
+    ingcaj_desref: "",
+
+    ingcaj_usucre: "",
+    ingcaj_feccre: "",
+    ingcaj_usuact: "",
+    ingcaj_fecact: "",
+
+    // DETALLE INGRESO CAJA
+    ingcaj_numsec: 0,
     fondoc_fondoc: 0,
     seccio_seccio: 0,
     subsec_subsec: 0,
     seriex_seriex: 0,
     subser_subser: 0,
+    subser_nombre: "",
+    tipdoc_tipdoc: 0,
+    tipdoc_descri: "",
     locali_locali: 0,
     sector_sector: 0,
     subsct_subsct: 0,
     ubicac_ubicac: 0,
-    tipser_tipser: "n",
-
-    tipdoc_descri: "",
-    ingcaj_numdiv: 0,
-    subsec_nombre: "",
-    subser_nombre: "",
     ubicac_descri: "",
-    ubicac_numdiv: "",
-    ingcaj_numser: "",
-    ingcaj_serref: "",
+
+    ingcaj_numdiv: "",
+    ingcaj_codcaj: "",
+    ingcaj_codrfi: "",
+    ingcaj_tipser: "",
 
     ingcaj_desden: 0,
     ingcaj_hastan: 0,
-    ingcaj_desdet: "",
-    ingcaj_hastat: "",
+
     ingcaj_desdef: "",
     ingcaj_hastaf: "",
 
-    ingcaj_status: "",
-    ingcaj_colsta: "",
-    ingcaj_genau: false,
+    ingcaj_desdet: "",
+    ingcaj_hastat: "",
+
+    ingcaj_anioxx: Number(moment().format("YYYY")),
+    ingcaj_serref: "",
+
+    // AUXILIAR
+    ingcaj_genaut: false,
   },
 }
 
@@ -66,7 +82,6 @@ const IngcajSlice = createSlice({
       state.incaj_ingcaj = {
         ...state.incaj_ingcaj,
         ...payload,
-        // ingcaj_tiptra: payload.ingcaj_tiptra?.charAt(0).toLowerCase(),
       }
     },
     clean_form_ingcaj: (state) => {
@@ -107,14 +122,62 @@ const IngcajSlice = createSlice({
         }
       })
 
+      .addCase(post_ingcaj.pending, () => {
+        toastId = toast.loading("Creando item....")
+      })
       .addCase(post_ingcaj.fulfilled, (state, { payload }) => {
-        const { estado, data } = payload
+        const { estado, mensaje, data } = payload
 
         if (estado === 1) {
+          toast.update(toastId, {
+            render: mensaje,
+            type: "success",
+            isLoading: false,
+            autoClose: 3000,
+          })
           state.incaj_ingcaj = {
             ...initialState.incaj_ingcaj,
-            ingcaj_genau: false,
             ingcaj_ingcaj: data.ingcaj_ingcaj,
+          }
+        }
+      })
+
+      .addCase(put_ingcaj.pending, () => {
+        toastId = toast.loading("Actualizando item....")
+      })
+      .addCase(put_ingcaj.fulfilled, (state, { payload }) => {
+        const { estado, mensaje } = payload
+
+        if (estado === 1) {
+          toast.update(toastId, {
+            render: mensaje,
+            type: "success",
+            isLoading: false,
+            autoClose: 3000,
+          })
+          state.incaj_ingcaj = {
+            ...initialState.incaj_ingcaj,
+            ingcaj_ingcaj: state.incaj_ingcaj.ingcaj_ingcaj,
+          }
+        }
+      })
+
+      .addCase(delete_incade.pending, () => {
+        toastId = toast.loading("Eliminando item....")
+      })
+      .addCase(delete_incade.fulfilled, (state, { payload }) => {
+        const { estado, mensaje } = payload
+
+        if (estado === 1) {
+          toast.update(toastId, {
+            render: mensaje,
+            type: "success",
+            isLoading: false,
+            autoClose: 3000,
+          })
+          state.incaj_ingcaj = {
+            ...initialState.incaj_ingcaj,
+            ingcaj_ingcaj: state.incaj_ingcaj.ingcaj_ingcaj,
           }
         }
       })

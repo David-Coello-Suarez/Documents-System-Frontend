@@ -1,6 +1,6 @@
-import { ChangeEvent, useEffect } from "react"
+import { ChangeEvent } from "react"
 import { useNavigate } from "react-router-dom"
-import { useFormik } from "formik"
+import { FormikErrors } from "formik"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   FondocActive,
@@ -15,42 +15,29 @@ import {
   UbicacActive,
 } from "../../../components/uiBoxSelect"
 import { InputControl } from "../../../components/views"
-import { clean_form_ingcaj } from "../../../reducers/ingcaj"
-import { IngcajSchema } from "../../../validation"
 import { iingcaj } from "../../../interfaces"
-import { post_ingcaj, put_ingcaj } from "../../../controllers/ingcaj"
+import { clean_form_ingcaj } from "../../../reducers/ingcaj"
 
-const ForDeIt = () => {
-  const navigate = useNavigate()
+interface iforingdet {
+  errors: FormikErrors<iingcaj>
+  values: iingcaj
+  setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void
+  handleSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void
+  handleChange: (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => void
+}
+
+const ForDeIt = (propiesties: iforingdet) => {
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    return () => {
-      dispatch(clean_form_ingcaj())
-    }
-  }, [dispatch])
+  const { errors, values, handleChange, setFieldValue } = propiesties
 
-  const { incaj_ingcaj } = useAppSelector((state) => state.ingcaj)
+  const navigate = useNavigate()
 
   const { ubicacs_ubicacs } = useAppSelector((state) => state.ubicac)
-
-  const handleSave = (body: iingcaj) => {
-    console.log(body)
-    if (body.ingcaj_ingcaj === 0) {
-      dispatch(post_ingcaj({ body }))
-    } else {
-      dispatch(put_ingcaj({ body }))
-    }
-  }
-
-  const { errors, values, setFieldValue, handleSubmit, handleChange } =
-    useFormik({
-      enableReinitialize: true,
-      initialValues: incaj_ingcaj,
-      validateOnChange: false,
-      validationSchema: IngcajSchema,
-      onSubmit: handleSave,
-    })
 
   const num_div = ubicacs_ubicacs.find(
     (ub) => ub.ubicac_ubicac === values.ubicac_ubicac,
@@ -59,14 +46,16 @@ const ForDeIt = () => {
   const handleCheck = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       setFieldValue("ingcaj_codcaj", "AUTO")
-      setFieldValue("ingcaj_genau", false)
+      setFieldValue("ingcaj_genaut", false)
     } else {
       setFieldValue("ingcaj_codcaj", "")
-      setFieldValue("ingcaj_genau", true)
+      setFieldValue("ingcaj_genaut", true)
     }
   }
 
   const handleBack = () => navigate(-1)
+
+  const handleClean = () => dispatch(clean_form_ingcaj())
 
   return (
     <div className="card-box">
@@ -79,21 +68,21 @@ const ForDeIt = () => {
             value={values.tipdoc_tipdoc}
             displayLabel="Tipo Documento"
             classInvalid={errors.tipdoc_tipdoc}
-            handleChange={(x) => setFieldValue("tipdoc_tipdoc", x)}
+            handleChange={(x) => propiesties.setFieldValue("tipdoc_tipdoc", x)}
           />
         </div>
         <div className="col-md-1">
           <div className="form-group m-0">
-            <label htmlFor="ingcaj_genau">Generar Auto.</label>
+            <label htmlFor="ingcaj_genaut">Generar Auto.</label>
             <input
               type="checkbox"
-              name="ingcaj_genau"
-              id="ingcaj_genau"
+              name="ingcaj_genaut"
+              id="ingcaj_genaut"
               onChange={handleCheck}
               checked={values.ingcaj_codcaj === "AUTO"}
             />
-            {Boolean(errors.ingcaj_genau) && (
-              <small className="text-danger">{errors.ingcaj_genau}</small>
+            {Boolean(errors.ingcaj_genaut) && (
+              <small className="text-danger">{errors.ingcaj_genaut}</small>
             )}
           </div>
         </div>
@@ -110,10 +99,10 @@ const ForDeIt = () => {
         <div className="col-md">
           <InputControl
             titleLabel={"Cod. RFID"}
-            nameInput={"ingcaj_codrif"}
-            value={values.ingcaj_codrif}
+            nameInput={"ingcaj_codrfi"}
+            value={values.ingcaj_codrfi}
             handleChange={handleChange}
-            classInvalid={errors.ingcaj_codrif}
+            classInvalid={errors.ingcaj_codrfi}
           />
         </div>
       </div>
@@ -122,10 +111,10 @@ const ForDeIt = () => {
         <div className="col-md">
           <InputControl
             titleLabel={"AÑO"}
-            nameInput={"ingcaj_aniing"}
-            value={values.ingcaj_aniing}
+            nameInput={"ingcaj_anioxx"}
+            value={values.ingcaj_anioxx}
             handleChange={handleChange}
-            classInvalid={errors.ingcaj_aniing}
+            classInvalid={errors.ingcaj_anioxx}
           />
         </div>
         <div className="col-md">
@@ -134,7 +123,7 @@ const ForDeIt = () => {
             nameSelect={"fondoc_fondoc"}
             value={values.fondoc_fondoc}
             classInvalid={errors.fondoc_fondoc}
-            handleChange={(x) => setFieldValue("fondoc_fondoc", x)}
+            handleChange={(x) => propiesties.setFieldValue("fondoc_fondoc", x)}
           />
         </div>
         <div className="col-md">
@@ -144,7 +133,7 @@ const ForDeIt = () => {
             value={values.seccio_seccio}
             classInvalid={errors.seccio_seccio}
             refreshValue={values.fondoc_fondoc}
-            handleChange={(x) => setFieldValue("seccio_seccio", x)}
+            handleChange={(x) => propiesties.setFieldValue("seccio_seccio", x)}
           />
         </div>
       </div>
@@ -157,7 +146,7 @@ const ForDeIt = () => {
             value={values.subsec_subsec}
             classInvalid={errors.subsec_subsec}
             refreshValue={values.seccio_seccio}
-            handleChange={(x) => setFieldValue("subsec_subsec", x)}
+            handleChange={(x) => propiesties.setFieldValue("subsec_subsec", x)}
           />
         </div>
         <div className="col-md">
@@ -167,7 +156,7 @@ const ForDeIt = () => {
             value={values.seriex_seriex}
             classInvalid={errors.seriex_seriex}
             refreshValue={values.subsec_subsec}
-            handleChange={(x) => setFieldValue("seriex_seriex", x)}
+            handleChange={(x) => propiesties.setFieldValue("seriex_seriex", x)}
           />
         </div>
         <div className="col-md">
@@ -177,7 +166,7 @@ const ForDeIt = () => {
             value={values.subser_subser}
             classInvalid={errors.subser_subser}
             refreshValue={values.seriex_seriex}
-            handleChange={(x) => setFieldValue("subser_subser", x)}
+            handleChange={(x) => propiesties.setFieldValue("subser_subser", x)}
           />
         </div>
       </div>
@@ -195,7 +184,7 @@ const ForDeIt = () => {
             nameSelect={"locali_locali"}
             value={values.locali_locali}
             classInvalid={errors.locali_locali}
-            handleChange={(x) => setFieldValue("locali_locali", x)}
+            handleChange={(x) => propiesties.setFieldValue("locali_locali", x)}
           />
         </div>
         <div className="col-md">
@@ -205,7 +194,7 @@ const ForDeIt = () => {
             value={values.sector_sector}
             classInvalid={errors.sector_sector}
             refreshValue={values.locali_locali}
-            handleChange={(x) => setFieldValue("sector_sector", x)}
+            handleChange={(x) => propiesties.setFieldValue("sector_sector", x)}
           />
         </div>
         <div className="col-md">
@@ -215,7 +204,7 @@ const ForDeIt = () => {
             value={values.subsct_subsct}
             classInvalid={errors.subsct_subsct}
             refreshValue={values.sector_sector}
-            handleChange={(x) => setFieldValue("subsct_subsct", x)}
+            handleChange={(x) => propiesties.setFieldValue("subsct_subsct", x)}
           />
         </div>
         <div className="col-md">
@@ -225,19 +214,19 @@ const ForDeIt = () => {
             value={values.ubicac_ubicac}
             classInvalid={errors.ubicac_ubicac}
             refreshValue={values.subsct_subsct}
-            handleChange={(x) => setFieldValue("ubicac_ubicac", x)}
+            handleChange={(x) => propiesties.setFieldValue("ubicac_ubicac", x)}
           />
         </div>
       </div>
 
       <div className="form-group row mb-2">
         <div className="col-md">
-          <label htmlFor="tipser_tipser">Tipo Serie </label>
+          <label htmlFor="ingcaj_tipser">Tipo Serie </label>
           <select
-            id="tipser_tipser"
-            name="tipser_tipser"
+            id="ingcaj_tipser"
+            name="ingcaj_tipser"
             onChange={handleChange}
-            value={values.tipser_tipser}
+            value={values.ingcaj_tipser}
             className="form-control form-control-sm"
           >
             <option value={"n"}>Númerico</option>
@@ -247,36 +236,36 @@ const ForDeIt = () => {
         </div>
 
         <div className="col-md">
-          <label htmlFor={`ingcaj_desde${values.tipser_tipser}`}>Desde</label>
+          <label htmlFor={`ingcaj_desde${values.ingcaj_tipser}`}>Desde</label>
           <input
             type={`${
-              values.tipser_tipser === "t"
+              values.ingcaj_tipser === "t"
                 ? "text"
-                : values.tipser_tipser === "n"
+                : values.ingcaj_tipser === "n"
                 ? "number"
                 : "date"
             }`}
             min={"1"}
             required
             className="form-control form-control-sm"
-            id={`ingcaj_desde${values.tipser_tipser}`}
-            name={`ingcaj_desde${values.tipser_tipser}`}
+            id={`ingcaj_desde${values.ingcaj_tipser}`}
+            name={`ingcaj_desde${values.ingcaj_tipser}`}
             onChange={handleChange}
             value={String(
               values[
-                `ingcaj_desde${values.tipser_tipser}` as keyof typeof errors
+                `ingcaj_desde${values.ingcaj_tipser}` as keyof typeof errors
               ],
             )}
           />
           {Boolean(
             errors[
-              `ingcaj_desde${values.tipser_tipser}` as keyof typeof errors
+              `ingcaj_desde${values.ingcaj_tipser}` as keyof typeof errors
             ],
           ) && (
             <small className="text-danger">
               {
                 errors[
-                  `ingcaj_desde${values.tipser_tipser}` as keyof typeof errors
+                  `ingcaj_desde${values.ingcaj_tipser}` as keyof typeof errors
                 ]
               }
             </small>
@@ -284,12 +273,12 @@ const ForDeIt = () => {
         </div>
 
         <div className="col-md">
-          <label htmlFor={`ingcaj_desde${values.tipser_tipser}`}>Hasta</label>
+          <label htmlFor={`ingcaj_desde${values.ingcaj_tipser}`}>Hasta</label>
           <input
             type={`${
-              values.tipser_tipser === "t"
+              values.ingcaj_tipser === "t"
                 ? "text"
-                : values.tipser_tipser === "n"
+                : values.ingcaj_tipser === "n"
                 ? "number"
                 : "date"
             }`}
@@ -297,23 +286,23 @@ const ForDeIt = () => {
             required
             onChange={handleChange}
             className="form-control form-control-sm"
-            id={`ingcaj_hasta${values.tipser_tipser}`}
-            name={`ingcaj_hasta${values.tipser_tipser}`}
+            id={`ingcaj_hasta${values.ingcaj_tipser}`}
+            name={`ingcaj_hasta${values.ingcaj_tipser}`}
             value={String(
               values[
-                `ingcaj_hasta${values.tipser_tipser}` as keyof typeof errors
+                `ingcaj_hasta${values.ingcaj_tipser}` as keyof typeof errors
               ],
             )}
           />
           {Boolean(
             errors[
-              `ingcaj_desde${values.tipser_tipser}` as keyof typeof errors
+              `ingcaj_desde${values.ingcaj_tipser}` as keyof typeof errors
             ],
           ) && (
             <small className="text-danger">
               {
                 errors[
-                  `ingcaj_desde${values.tipser_tipser}` as keyof typeof errors
+                  `ingcaj_desde${values.ingcaj_tipser}` as keyof typeof errors
                 ]
               }
             </small>
@@ -353,15 +342,15 @@ const ForDeIt = () => {
               <i className="fa fa-reply m-r-5" aria-hidden="true"></i>
               Regresar
             </button>
+            <button type="submit" className="btn btn-sm btn-primary">
+              <i className="fa fa-plus-circle m-r-5" aria-hidden="true"></i>
+              {values.ingcaj_numsec === 0 ? "Añadir" : "Actualizar"} Item
+            </button>
             <button
               type="button"
-              className="btn btn-sm btn-primary"
-              onClick={() => handleSubmit()}
+              className="btn btn-sm btn-danger"
+              onClick={handleClean}
             >
-              <i className="fa fa-plus-circle m-r-5" aria-hidden="true"></i>
-              Añadir Item
-            </button>
-            <button type="button" className="btn btn-sm btn-danger">
               <i className="fa fa-eraser m-r-5" aria-hidden="true"></i>
               Limpiar
             </button>

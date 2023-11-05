@@ -1,15 +1,25 @@
-import { useFormik } from "formik"
-import { useAppSelector } from "../../../hooks"
+import { FormikErrors } from "formik"
 import { InputControl } from "../../../components/views"
+import { iingcaj } from "../../../interfaces"
+import { useAppDispatch } from "../../../hooks"
+import { delete_ingcaj } from "../../../controllers/ingcaj"
+import { useNavigate } from "react-router-dom"
 
-const ForInCaj = () => {
-  const { incaj_ingcaj } = useAppSelector((state) => state.ingcaj)
+interface iforingcaj {
+  errors: FormikErrors<iingcaj>
+  values: iingcaj
+  handleChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void
+}
 
-  const { errors, values, handleChange } = useFormik({
-    enableReinitialize: true,
-    initialValues: incaj_ingcaj,
-    onSubmit: console.log,
-  })
+const ForInCaj = (propeties: iforingcaj) => {
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  const { errors, values, handleChange } = propeties
+
+  const deleteItems = () => dispatch(delete_ingcaj({ body: values, navigate }))
 
   return (
     <div className="card-box">
@@ -40,13 +50,13 @@ const ForInCaj = () => {
 
       <div className="form-group row mb-0">
         <div className="col-md-12 mb-2">
-          <label htmlFor="ingcaj_refere">Referencia</label>
+          <label htmlFor="ingcaj_desref">Referencia</label>
           <textarea
             rows={2}
-            id="ingcaj_refere"
-            name="ingcaj_refere"
+            id="ingcaj_desref"
+            name="ingcaj_desref"
             className="form-control form-control-sm"
-            value={values.ingcaj_refere}
+            value={values.ingcaj_desref}
             onChange={handleChange}
           />
         </div>
@@ -61,8 +71,8 @@ const ForInCaj = () => {
               type="radio"
               name="ingcaj_tiptra"
               id="ingcaj_tiptra_n"
-              value="n"
-              checked={values.ingcaj_tiptra === "n"}
+              value="N"
+              checked={values.ingcaj_tiptra === "N"}
               onChange={handleChange}
             />
             <label className="form-check-label" htmlFor="ingcaj_tiptra_n">
@@ -75,8 +85,8 @@ const ForInCaj = () => {
               type="radio"
               name="ingcaj_tiptra"
               id="ingcaj_tiptra_s"
-              value="s"
-              checked={values.ingcaj_tiptra === "s"}
+              value="S"
+              checked={values.ingcaj_tiptra === "S"}
               onChange={handleChange}
             />
             <label className="form-check-label" htmlFor="ingcaj_tiptra_s">
@@ -89,11 +99,20 @@ const ForInCaj = () => {
       <div className="row">
         <div className="col-md">
           <div className="d-flex justify-content-between">
-            <button type="button" className="btn btn-sm btn-primary">
+            <button
+              type="button"
+              className="btn btn-sm btn-primary"
+              disabled={values.ingcaj_ingcaj === 0}
+            >
               <i className="fa fa-floppy-o m-r-5" aria-hidden="true"></i>
               Terminar
             </button>
-            <button type="button" className="btn btn-sm btn-danger">
+            <button
+              type="button"
+              className="btn btn-sm btn-danger"
+              disabled={values.ingcaj_ingcaj === 0}
+              onClick={deleteItems}
+            >
               <i className="fa fa-trash m-r-5" aria-hidden="true"></i>
               Borrar todo
             </button>

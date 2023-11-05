@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { set_form_ingcaj } from "../../../reducers/ingcaj"
-import { get_ingcajs } from "../../../controllers/ingcaj"
+import { delete_ingcaj, get_ingcajs } from "../../../controllers/ingcaj"
 import { ColumnsType, Pagination, Table } from "../../../components/iu"
 import { NotData } from "../../../components/views"
 import { iingcaj } from "../../../interfaces"
@@ -22,6 +22,10 @@ const IngCaj = ({ handleClickAdd, btnMsg }: iincaco) => {
   const handleEdita = (ingcaj: iingcaj) => {
     dispatch(set_form_ingcaj(ingcaj))
     navigate(`edit/${ingcaj.ingcaj_ingcaj}`)
+  }
+
+  const handleDelete = (body: iingcaj) => {
+    dispatch(delete_ingcaj({ body }))
   }
 
   const { limite, pagina, totalItems } = ingcaj_pagina
@@ -72,6 +76,12 @@ const IngCaj = ({ handleClickAdd, btnMsg }: iincaco) => {
             onClick={() => handleEdita(record)}
           >
             <i className="fa fa-edit" />
+          </button>
+          <button
+            className="btn btn-sm btn-outline-danger m-r-5"
+            onClick={() => handleDelete(record)}
+          >
+            <i className="fa fa-trash" />
           </button>
         </>
       ),
