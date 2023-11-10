@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
+    "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": ["ES2021", "DOM", "DOM.Iterable"],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -18,19 +18,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "types": ["jquery", "bootstrap"]
-
-    // "baseUrl": "./",
-    // "paths": {
-    //   "@/hooks/*": ["src/hooks/*"],
-    //   "@/components/*": ["src/components/*"],
-    //   "@/interfaces/*": ["src/interfaces/*"],
-    //   "@/controllers/*": ["src/controllers/*"],
-    //   "@/reducers/*": ["src/reducers/*"],
-    //   "@/validation/*": ["src/validation/*"],
-    //   "@/api/*": ["src/api/*"],
-    // }
+    "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
