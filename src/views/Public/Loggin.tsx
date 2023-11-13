@@ -52,7 +52,6 @@ const Loggin = () => {
           <div className="col-md-12 m-b-20">
             <InputControl
               required
-              // type={}
               nameInput="contrasena"
               titleLabel="Contraseña"
               handleBlur={formik.handleBlur}
